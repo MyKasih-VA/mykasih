@@ -1,0 +1,86 @@
+{
+  "version": "1.0",
+  "timestamp": "2026-04-11T10:03:50.526Z",
+  "phase": "01",
+  "phase_name": "scaffold-db-auth-dashboard-shell",
+  "phase_dir": ".planning/phases/01-scaffold-db-auth-dashboard-shell",
+  "plan": 7,
+  "task": 2,
+  "total_tasks": 2,
+  "status": "paused",
+  "completed_tasks": [
+    {"id": 1, "name": "01-00: Test framework setup", "status": "done", "commit": "prior session"},
+    {"id": 2, "name": "01-01: SARA prompt patch doc", "status": "done", "commit": "prior session"},
+    {"id": 3, "name": "01-02: CSS design system, fonts, Supabase clients", "status": "done", "commit": "prior session"},
+    {"id": 4, "name": "01-03: Auth proxy, login page, translations, language toggle", "status": "done", "commit": "d7d4881"},
+    {"id": 5, "name": "01-04: Dashboard layout shell (Sidebar, Topbar, LanguageToggle, ChannelBadge)", "status": "done", "commit": "e6e6d90"},
+    {"id": 6, "name": "01-05: Merchant seed endpoint, integrations page", "status": "done", "commit": "prior session"},
+    {"id": 7, "name": "01-06: Analytics API, StatCard, CallVolumeChart, CategoryDonut", "status": "done", "commit": "f7ad21a"},
+    {"id": 8, "name": "01-07 Task 1: Demo seed data API endpoint (/api/seed/data)", "status": "done", "commit": "cb90de1"},
+    {"id": 9, "name": "01-08: RecentInteractions table, TranscriptModal stub, dashboard home page", "status": "done", "commit": "c051ea2"}
+  ],
+  "remaining_tasks": [
+    {"id": 10, "name": "01-07 Task 2: Human runs Supabase migrations, fills .env.local, creates auth users, seeds data, verifies dashboard", "status": "blocked_on_human_action"}
+  ],
+  "blockers": [
+    {
+      "description": "Plan 01-07 Task 2 is a blocking checkpoint — Supabase migrations must be run before seed data can be inserted",
+      "type": "human_action",
+      "workaround": "Once user runs migrations and seeds data, resume /gsd-execute-phase 1 and the phase can proceed to verification"
+    },
+    {
+      "description": "Login page routes to '/dashboard' but the actual dashboard home is at '/' (app/(dashboard)/page.tsx). May cause redirect loop.",
+      "type": "technical",
+      "workaround": "Review login page redirect: should be router.push('/') not router.push('/dashboard')"
+    }
+  ],
+  "human_actions_pending": [
+    {
+      "action": "Run supabase_migrations.sql in Supabase SQL Editor",
+      "context": "Creates all 6 tables with RLS. File is at project root.",
+      "blocking": true
+    },
+    {
+      "action": "Fill in mykasih-crm/.env.local with Supabase credentials",
+      "context": "NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY",
+      "blocking": true
+    },
+    {
+      "action": "Create 4 auth users in Supabase Auth dashboard",
+      "context": "admin@mykasih.com, staff@mykasih.com, qmedia@mykasih.com, supervisor@mykasih.com",
+      "blocking": false
+    },
+    {
+      "action": "Trigger POST /api/seed/data to insert demo data",
+      "context": "Must be logged in as admin. Inserts ~120 calls, transcripts, 15 tickets, 5 KB entries, 4 users",
+      "blocking": false
+    },
+    {
+      "action": "Verify dashboard shows populated data (stat cards, charts, recent interactions)",
+      "context": "Type 'seeded' to complete the checkpoint and proceed to phase verification",
+      "blocking": false
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "Login page routes to '/dashboard' — needs to be changed back to '/'",
+      "rationale": "The dashboard home is at app/(dashboard)/page.tsx which maps to route '/', not '/dashboard'",
+      "phase": "01"
+    },
+    {
+      "decision": "outcome badges in RecentInteractions use color-mix() instead of Tailwind opacity utilities",
+      "rationale": "CSS custom properties (vars) don't work with Tailwind opacity modifiers like bg-[var(...)]/15; color-mix() is the correct approach",
+      "phase": "01"
+    }
+  ],
+  "uncommitted_files": [
+    "mykasih-crm/app/(auth)/login/page.tsx (router.push('/dashboard') bug — should be '/')",
+    ".planning/STATE.md (needs update after plan completions)",
+    ".planning/phases/01-scaffold-db-auth-dashboard-shell/01-03-SUMMARY.md (untracked, from prior session)",
+    ".planning/phases/01-scaffold-db-auth-dashboard-shell/01-06-SUMMARY.md (untracked, from prior session)",
+    "mykasih-crm/components/ui/ (untracked Shadcn components — should be committed)",
+    "mykasih-crm/components.json (untracked Shadcn config — should be committed)"
+  ],
+  "next_action": "1. Fix login page router.push('/dashboard') → router.push('/'). 2. Stage and commit remaining untracked files (components/ui/, components.json, SUMMARY.md files). 3. Wait for user to complete Supabase migrations checkpoint (plan 01-07 Task 2). Once user types 'seeded', run /gsd-execute-phase 1 to proceed to phase verification.",
+  "context_notes": "Phase 01 is ~95% complete. All 9 plans have code implemented. The only remaining work is: (1) fix minor login redirect bug, (2) commit a few untracked files, (3) complete the human checkpoint for Supabase seeding, then run phase verification. The dashboard is fully assembled — sidebar, topbar, all charts, stat cards, recent interactions table with modal, auth flow, translations, merchant seed. Should look impressive once connected to real Supabase data."
+}
