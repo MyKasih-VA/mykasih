@@ -135,24 +135,86 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| AGENT-01, AGENT-02 | Phase 1 | Pending |
-| INFRA-01 – INFRA-08 | Phase 1 | Pending |
-| AUTH-01 – AUTH-04 | Phase 1 | Pending |
-| MERCH-01 – MERCH-03 | Phase 1 | Pending |
-| DASH-01 – DASH-09 | Phase 1 | Pending |
-| VOICE-01 – VOICE-06 | Phase 2 | Pending |
-| CHAT-01 – CHAT-10 | Phase 3 | Pending |
-| PAGE-01 – PAGE-05 | Phase 4 | Pending |
-| PAGE-06 – PAGE-10 | Phase 5 | Pending |
-| TEST-01 – TEST-06 | Phase 6 | Pending |
-| EXPORT-01 – EXPORT-02 | Phase 2 | Pending |
-| SEC-01 – SEC-05 | Phase 1–6 (cross-cutting) | Pending |
+| AGENT-01 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| AGENT-02 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| INFRA-01 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| INFRA-02 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| INFRA-03 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| INFRA-04 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| INFRA-05 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| INFRA-06 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| INFRA-07 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| INFRA-08 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| AUTH-01 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| AUTH-02 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| AUTH-03 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| AUTH-04 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| MERCH-01 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| MERCH-02 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| MERCH-03 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| DASH-01 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| DASH-02 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| DASH-03 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| DASH-04 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| DASH-05 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| DASH-06 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| DASH-07 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| DASH-08 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| DASH-09 | Phase 1 — Scaffold, DB, Auth & Dashboard Shell | Pending |
+| VOICE-01 | Phase 2 — Voice Webhook, Ticket System & Excel Export | Pending |
+| VOICE-02 | Phase 2 — Voice Webhook, Ticket System & Excel Export | Pending |
+| VOICE-03 | Phase 2 — Voice Webhook, Ticket System & Excel Export | Pending |
+| VOICE-04 | Phase 2 — Voice Webhook, Ticket System & Excel Export | Pending |
+| VOICE-05 | Phase 2 — Voice Webhook, Ticket System & Excel Export | Pending |
+| VOICE-06 | Phase 2 — Voice Webhook, Ticket System & Excel Export | Pending |
+| EXPORT-01 | Phase 2 — Voice Webhook, Ticket System & Excel Export | Pending |
+| EXPORT-02 | Phase 2 — Voice Webhook, Ticket System & Excel Export | Pending |
+| CHAT-01 | Phase 3 — Kasih WhatsApp Chatbot | Pending |
+| CHAT-02 | Phase 3 — Kasih WhatsApp Chatbot | Pending |
+| CHAT-03 | Phase 3 — Kasih WhatsApp Chatbot | Pending |
+| CHAT-04 | Phase 3 — Kasih WhatsApp Chatbot | Pending |
+| CHAT-05 | Phase 3 — Kasih WhatsApp Chatbot | Pending |
+| CHAT-06 | Phase 3 — Kasih WhatsApp Chatbot | Pending |
+| CHAT-07 | Phase 3 — Kasih WhatsApp Chatbot | Pending |
+| CHAT-08 | Phase 3 — Kasih WhatsApp Chatbot | Pending |
+| CHAT-09 | Phase 3 — Kasih WhatsApp Chatbot | Pending |
+| CHAT-10 | Phase 3 — Kasih WhatsApp Chatbot | Pending |
+| PAGE-01 | Phase 4 — Core Dashboard Pages | Pending |
+| PAGE-02 | Phase 4 — Core Dashboard Pages | Pending |
+| PAGE-03 | Phase 4 — Core Dashboard Pages | Pending |
+| PAGE-04 | Phase 4 — Core Dashboard Pages | Pending |
+| PAGE-05 | Phase 4 — Core Dashboard Pages | Pending |
+| PAGE-06 | Phase 5 — Intelligence & System Pages | Pending |
+| PAGE-07 | Phase 5 — Intelligence & System Pages | Pending |
+| PAGE-08 | Phase 5 — Intelligence & System Pages | Pending |
+| PAGE-09 | Phase 5 — Intelligence & System Pages | Pending |
+| PAGE-10 | Phase 5 — Intelligence & System Pages | Pending |
+| TEST-01 | Phase 6 — Testing Console, AI Demo, Settings & Polish | Pending |
+| TEST-02 | Phase 6 — Testing Console, AI Demo, Settings & Polish | Pending |
+| TEST-03 | Phase 6 — Testing Console, AI Demo, Settings & Polish | Pending |
+| TEST-04 | Phase 6 — Testing Console, AI Demo, Settings & Polish | Pending |
+| TEST-05 | Phase 6 — Testing Console, AI Demo, Settings & Polish | Pending |
+| TEST-06 | Phase 6 — Testing Console, AI Demo, Settings & Polish | Pending |
+| SEC-01 | Phase 7 — UAT Fixes, PDPA Audit & Final QA | Pending |
+| SEC-02 | Phase 7 — UAT Fixes, PDPA Audit & Final QA | Pending |
+| SEC-03 | Phase 7 — UAT Fixes, PDPA Audit & Final QA | Pending |
+| SEC-04 | Phase 7 — UAT Fixes, PDPA Audit & Final QA | Pending |
+| SEC-05 | Phase 7 — UAT Fixes, PDPA Audit & Final QA | Pending |
 
 **Coverage:**
 - v1 requirements: 57 total
-- Mapped to phases: 57
+- Mapped to phases: 57/57
 - Unmapped: 0 ✓
+
+**Phase Mapping Summary:**
+- Phase 1: 26 requirements (AGENT-01–02, INFRA-01–08, AUTH-01–04, MERCH-01–03, DASH-01–09)
+- Phase 2: 8 requirements (VOICE-01–06, EXPORT-01–02)
+- Phase 3: 10 requirements (CHAT-01–10)
+- Phase 4: 5 requirements (PAGE-01–05)
+- Phase 5: 5 requirements (PAGE-06–10)
+- Phase 6: 6 requirements (TEST-01–06)
+- Phase 7: 5 requirements (SEC-01–05)
 
 ---
 *Requirements defined: 2026-04-11*
-*Last updated: 2026-04-11 after initial definition*
+*Last updated: 2026-04-11 after roadmap creation — traceability expanded to per-requirement rows*
