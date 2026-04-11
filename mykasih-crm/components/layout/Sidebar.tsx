@@ -84,7 +84,7 @@ export function Sidebar({ language }: SidebarProps) {
   }
 
   return (
-    <aside className="fixed top-0 left-0 h-screen w-[260px] bg-[var(--bg-surface)] border-r-2 border-[var(--bg-border)] z-40 flex flex-col">
+    <aside className="fixed top-0 left-0 h-screen w-[260px] bg-[var(--bg-surface)] border-r border-[var(--bg-border)] z-40 flex flex-col">
       {/* Logo area */}
       <div className="p-4 flex flex-row items-center gap-2 border-b border-[var(--bg-border)]">
         {/* eslint-disable-next-line @next/next/no-img-element */}

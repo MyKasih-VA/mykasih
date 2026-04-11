@@ -1,25 +1,9 @@
-'use client'
-
-import { Sidebar } from '@/components/layout/Sidebar'
-import { Topbar } from '@/components/layout/Topbar'
-import { useLanguage } from '@/hooks/useLanguage'
+import { DashboardShell } from '@/components/layout/DashboardShell'
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const { language, toggleLanguage } = useLanguage()
-
-  return (
-    <div className="min-h-screen">
-      <Sidebar language={language} />
-      <div className="ml-[260px] min-h-screen">
-        <Topbar language={language} onToggleLanguage={toggleLanguage} />
-        <main className="p-6">
-          {children}
-        </main>
-      </div>
-    </div>
-  )
+  return <DashboardShell>{children}</DashboardShell>
 }
