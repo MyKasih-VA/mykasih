@@ -94,9 +94,8 @@ export async function POST(request: Request): Promise<Response> {
           break
         }
         case 'balance_check': {
-          // @ts-expect-error — balance-handler created in Plan 04; dynamic import prevents build failure
           const { balanceHandler } = await import('@/lib/chatbot/balance-handler')
-          responseText = await (balanceHandler as (m: string, s: typeof session, wamid?: string) => Promise<string>)(message, session, wamid)
+          responseText = await balanceHandler(message, session, wamid)
           break
         }
         case 'merchant_lookup': {
