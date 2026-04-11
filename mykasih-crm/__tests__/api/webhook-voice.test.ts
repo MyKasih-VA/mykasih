@@ -1,0 +1,12 @@
+describe('POST /api/webhook/voice', () => {
+  it.todo('returns 401 when ElevenLabs-Signature header is missing')
+  it.todo('returns 401 when ElevenLabs-Signature header has invalid HMAC')
+  it.todo('returns 200 with call_id on valid payload')
+  it.todo('inserts call record with channel=voice')
+  it.todo('inserts transcript turns linked to call_id')
+  it.todo('creates ticket when category=complaint')
+  it.todo('does not create ticket when category=faq')
+  it.todo('returns 200 even when Supabase insert fails')
+  it.todo('applies keyword fallback when data_collection category is null')
+  it.todo('stores category=null when keyword fallback also fails')
+})

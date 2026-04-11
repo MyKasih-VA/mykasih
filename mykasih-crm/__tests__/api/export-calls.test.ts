@@ -1,0 +1,11 @@
+describe('GET /api/export/calls', () => {
+  it.todo('returns 401 when not authenticated')
+  it.todo('returns 403 for mykasih role')
+  it.todo('returns 403 for supervisor role')
+  it.todo('returns 200 with XLSX content-type for admin role')
+  it.todo('returns 200 with XLSX content-type for qmedia role')
+  it.todo('excludes is_test=true rows by default')
+  it.todo('includes is_test=true rows when include_test=true param is set')
+  it.todo('filters by date range when from and to params are provided')
+  it.todo('generates 3 sheets: Semua Interaksi, Tiket, Ringkasan')
+})
