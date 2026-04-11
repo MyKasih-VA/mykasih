@@ -104,9 +104,8 @@ export async function POST(request: Request): Promise<Response> {
           break
         }
         case 'complaint': {
-          // @ts-expect-error — complaint-handler created in Plan 06; dynamic import prevents build failure
           const { complaintHandler } = await import('@/lib/chatbot/complaint-handler')
-          responseText = await (complaintHandler as (m: string, s: typeof session, t: boolean, wamid?: string) => Promise<string>)(message, session, isTest, wamid)
+          responseText = await complaintHandler(message, session, isTest, wamid)
           break
         }
         default:
