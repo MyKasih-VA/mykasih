@@ -32,7 +32,15 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. The sidebar shows all 14 nav items grouped into 5 sections; the topbar shows page title, language toggle, search, and bell
   4. The dashboard home displays 4 stat cards, a stacked bar chart, a donut chart, and a recent interactions table with loading skeletons when data is loading
   5. SARA voice agent refuses IC transfer attempts and maintains English once the user switches language
-**Plans**: TBD
+**Plans**: 7 plans
+Plans:
+- [ ] 01-01-PLAN.md — SARA voice agent prompt fixes (non-transferability + language lock)
+- [ ] 01-02-PLAN.md — Foundation: globals.css, fonts, Supabase clients, env vars
+- [ ] 01-03-PLAN.md — Auth proxy, login page, translations, language hook
+- [ ] 01-04-PLAN.md — Dashboard layout shell: sidebar, topbar, language toggle
+- [ ] 01-05-PLAN.md — Merchant seed endpoint + lookup utilities
+- [ ] 01-06-PLAN.md — Dashboard home: stat cards, charts, recent interactions table
+- [ ] 01-07-PLAN.md — Demo data seed + Supabase schema migration
 **UI hint**: yes
 
 ### Phase 2: Voice Webhook, Ticket System & Excel Export
@@ -45,7 +53,15 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. If the call category is complaint, a ticket is automatically created with a unique TKT-2026-NNNNN reference number
   4. IC numbers written to the DB are always in masked format (880512-**-****)
   5. Admin and qmedia users can download a 3-sheet Excel file covering all interactions, tickets, and a summary
-**Plans**: TBD
+**Plans**: 7 plans
+Plans:
+- [ ] 01-01-PLAN.md — SARA voice agent prompt fixes (non-transferability + language lock)
+- [ ] 01-02-PLAN.md — Foundation: globals.css, fonts, Supabase clients, env vars
+- [ ] 01-03-PLAN.md — Auth proxy, login page, translations, language hook
+- [ ] 01-04-PLAN.md — Dashboard layout shell: sidebar, topbar, language toggle
+- [ ] 01-05-PLAN.md — Merchant seed endpoint + lookup utilities
+- [ ] 01-06-PLAN.md — Dashboard home: stat cards, charts, recent interactions table
+- [ ] 01-07-PLAN.md — Demo data seed + Supabase schema migration
 
 ### Phase 3: Kasih WhatsApp Chatbot
 **Goal**: Beneficiaries can send a WhatsApp message and receive instant bilingual responses for FAQs, balance checks, merchant lookups, and complaint filing — all interactions saved to Supabase
@@ -57,7 +73,15 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. A beneficiary asking about balance receives a mock balance response with expiry date and nearest merchant — IC is never stored in plain text
   4. A beneficiary asking for nearby shops receives 3-5 merchants from Supabase filtered by their postcode or state
   5. A complaint conversation completes and creates a ticket in Supabase with a reference number the beneficiary can quote
-**Plans**: TBD
+**Plans**: 7 plans
+Plans:
+- [ ] 01-01-PLAN.md — SARA voice agent prompt fixes (non-transferability + language lock)
+- [ ] 01-02-PLAN.md — Foundation: globals.css, fonts, Supabase clients, env vars
+- [ ] 01-03-PLAN.md — Auth proxy, login page, translations, language hook
+- [ ] 01-04-PLAN.md — Dashboard layout shell: sidebar, topbar, language toggle
+- [ ] 01-05-PLAN.md — Merchant seed endpoint + lookup utilities
+- [ ] 01-06-PLAN.md — Dashboard home: stat cards, charts, recent interactions table
+- [ ] 01-07-PLAN.md — Demo data seed + Supabase schema migration
 
 ### Phase 4: Core Dashboard Pages
 **Goal**: MyKasih staff can browse, search, and manage all voice calls, chat sessions, tickets, and beneficiary records through dedicated, filterable pages
@@ -69,7 +93,15 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Staff can view All Interactions in one table and toggle between All, Voice-only, and Chat-only views
   4. Staff can move a ticket between open, in-progress, and resolved columns on the Tickets kanban board; masked IC and reference number are always visible
   5. Staff can search beneficiaries by WA number or name and see their full interaction and ticket history
-**Plans**: TBD
+**Plans**: 7 plans
+Plans:
+- [ ] 01-01-PLAN.md — SARA voice agent prompt fixes (non-transferability + language lock)
+- [ ] 01-02-PLAN.md — Foundation: globals.css, fonts, Supabase clients, env vars
+- [ ] 01-03-PLAN.md — Auth proxy, login page, translations, language hook
+- [ ] 01-04-PLAN.md — Dashboard layout shell: sidebar, topbar, language toggle
+- [ ] 01-05-PLAN.md — Merchant seed endpoint + lookup utilities
+- [ ] 01-06-PLAN.md — Dashboard home: stat cards, charts, recent interactions table
+- [ ] 01-07-PLAN.md — Demo data seed + Supabase schema migration
 **UI hint**: yes
 
 ### Phase 5: Intelligence & System Pages
@@ -82,7 +114,15 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Admin can add, edit, or remove staff users and assign roles from the Staff Management page
   4. The Integrations page shows live status for ElevenLabs, Meta WA, n8n, Supabase, and Anam AI with action buttons
   5. The Live Monitor page auto-refreshes every 10 seconds and shows all currently active voice sessions and active WA chats
-**Plans**: TBD
+**Plans**: 7 plans
+Plans:
+- [ ] 01-01-PLAN.md — SARA voice agent prompt fixes (non-transferability + language lock)
+- [ ] 01-02-PLAN.md — Foundation: globals.css, fonts, Supabase clients, env vars
+- [ ] 01-03-PLAN.md — Auth proxy, login page, translations, language hook
+- [ ] 01-04-PLAN.md — Dashboard layout shell: sidebar, topbar, language toggle
+- [ ] 01-05-PLAN.md — Merchant seed endpoint + lookup utilities
+- [ ] 01-06-PLAN.md — Dashboard home: stat cards, charts, recent interactions table
+- [ ] 01-07-PLAN.md — Demo data seed + Supabase schema migration
 **UI hint**: yes
 
 ### Phase 6: Testing Console, AI Demo, Settings & Polish
@@ -95,7 +135,15 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Admin can view the Anam AI persona in Tab 3 of the Testing Console and on the standalone /demo page (no sidebar)
   4. Admin can save agent hours, view webhook URLs, and set notification preferences on the Settings page
   5. Switching the language toggle on any page instantly relabels all sidebar items, page titles, status labels, and table headers to the selected language
-**Plans**: TBD
+**Plans**: 7 plans
+Plans:
+- [ ] 01-01-PLAN.md — SARA voice agent prompt fixes (non-transferability + language lock)
+- [ ] 01-02-PLAN.md — Foundation: globals.css, fonts, Supabase clients, env vars
+- [ ] 01-03-PLAN.md — Auth proxy, login page, translations, language hook
+- [ ] 01-04-PLAN.md — Dashboard layout shell: sidebar, topbar, language toggle
+- [ ] 01-05-PLAN.md — Merchant seed endpoint + lookup utilities
+- [ ] 01-06-PLAN.md — Dashboard home: stat cards, charts, recent interactions table
+- [ ] 01-07-PLAN.md — Demo data seed + Supabase schema migration
 **UI hint**: yes
 
 ### Phase 7: UAT Fixes, PDPA Audit & Final QA
@@ -108,7 +156,15 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. All incoming webhooks (ElevenLabs, Meta WA) reject requests with invalid or missing secrets
   4. All calls and chats triggered from the Testing Console carry is_test=true and are excluded from analytics charts
   5. Admin MFA is enforced at Supabase Auth level and cannot be bypassed on the login flow
-**Plans**: TBD
+**Plans**: 7 plans
+Plans:
+- [ ] 01-01-PLAN.md — SARA voice agent prompt fixes (non-transferability + language lock)
+- [ ] 01-02-PLAN.md — Foundation: globals.css, fonts, Supabase clients, env vars
+- [ ] 01-03-PLAN.md — Auth proxy, login page, translations, language hook
+- [ ] 01-04-PLAN.md — Dashboard layout shell: sidebar, topbar, language toggle
+- [ ] 01-05-PLAN.md — Merchant seed endpoint + lookup utilities
+- [ ] 01-06-PLAN.md — Dashboard home: stat cards, charts, recent interactions table
+- [ ] 01-07-PLAN.md — Demo data seed + Supabase schema migration
 
 ## Progress
 
@@ -117,10 +173,10 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Scaffold, DB, Auth & Dashboard Shell | 0/TBD | Not started | - |
-| 2. Voice Webhook, Ticket System & Excel Export | 0/TBD | Not started | - |
-| 3. Kasih WhatsApp Chatbot | 0/TBD | Not started | - |
-| 4. Core Dashboard Pages | 0/TBD | Not started | - |
-| 5. Intelligence & System Pages | 0/TBD | Not started | - |
-| 6. Testing Console, AI Demo, Settings & Polish | 0/TBD | Not started | - |
-| 7. UAT Fixes, PDPA Audit & Final QA | 0/TBD | Not started | - |
+| 1. Scaffold, DB, Auth & Dashboard Shell | 0/7 | Not started | - |
+| 2. Voice Webhook, Ticket System & Excel Export | 0/7 | Not started | - |
+| 3. Kasih WhatsApp Chatbot | 0/7 | Not started | - |
+| 4. Core Dashboard Pages | 0/7 | Not started | - |
+| 5. Intelligence & System Pages | 0/7 | Not started | - |
+| 6. Testing Console, AI Demo, Settings & Polish | 0/7 | Not started | - |
+| 7. UAT Fixes, PDPA Audit & Final QA | 0/7 | Not started | - |
