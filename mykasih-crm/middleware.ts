@@ -1,8 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server"
 
 export function middleware(request: NextRequest) {
-  const pathname = request.nextUrl.pathname
-
   // Check for Supabase session cookie (format: sb-<project-ref>-auth-token)
   const hasSession = request.cookies.getAll().some(
     (cookie) => cookie.name.startsWith("sb-") && cookie.name.endsWith("-auth-token")
