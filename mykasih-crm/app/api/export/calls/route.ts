@@ -165,7 +165,7 @@ export async function GET(request: NextRequest) {
     const buffer = buildExportWorkbook(exportData)
     const filename = `mykasih-export-${new Date().toISOString().split('T')[0]}.xlsx`
 
-    return new Response(buffer, {
+    return new Response(new Uint8Array(buffer), {
       status: 200,
       headers: {
         'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
