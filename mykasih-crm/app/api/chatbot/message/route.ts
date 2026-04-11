@@ -100,9 +100,8 @@ export async function POST(request: Request): Promise<Response> {
           break
         }
         case 'merchant_lookup': {
-          // @ts-expect-error — merchant-handler created in Plan 05; dynamic import prevents build failure
           const { merchantHandler } = await import('@/lib/chatbot/merchant-handler')
-          responseText = await (merchantHandler as (m: string, s: typeof session, wamid?: string) => Promise<string>)(message, session, wamid)
+          responseText = await merchantHandler(message, session, wamid)
           break
         }
         case 'complaint': {
