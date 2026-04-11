@@ -6,7 +6,7 @@ shadcn_initialized: true
 preset: default (slate base, CSS variables, RSC, TSX)
 created: 2026-04-11
 revised: 2026-04-11
-revision_reason: Fix typography sizes (4 max), fix font weights (2 max), fix badge padding (multiples of 4 only), add notification bell aria-label
+revision_reason: Fix sidebar nav icon margin-right from 10px to 8px (spacing scale compliance); add focal point statements for login page and dashboard home
 ---
 
 # Phase 1 — UI Design Contract
@@ -173,6 +173,8 @@ Accent (`--accent-primary`) is reserved for exactly these elements — no others
 
 ### Login Page (`/login`)
 
+Focal point: the centered sign-in card — the logo, app name, and Sign In button are the only visual elements drawing the eye on an otherwise empty dark background.
+
 - Full-page centered layout on `--bg-primary` background
 - Card container: `--bg-surface`, 1px border `--bg-border`, border-radius 12px, padding 32px, max-width 400px
 - MyKasih logo centered above card: `https://mykasih.com.my/wp-content/uploads/2025/05/MyKasih-logo.png`, width 140px
@@ -192,7 +194,7 @@ Accent (`--accent-primary`) is reserved for exactly these elements — no others
 - Nav item: height 44px, padding 0 16px, 14px Regular, `--text-primary`, border-radius 6px (inside sidebar)
 - Nav item active state: background `--accent-primary` at 15% opacity, left border 3px solid `--accent-primary`, text `--accent-primary`
 - Nav item hover state: background `--bg-border` at 60% opacity
-- Nav icon: 16px Lucide icon, margin-right 10px, color inherits from nav item state
+- Nav icon: 16px Lucide icon, margin-right 8px, color inherits from nav item state
 - Sidebar footer: padding 16px, border-top 1px `--bg-border`
   - User avatar: 32px circle, initials fallback
   - User name: 12px SemiBold, `--text-primary`
@@ -240,6 +242,8 @@ SYSTEM
 - User avatar: 32px circle with initials fallback, dropdown on click (show name, role, logout)
 
 ### Dashboard Home — Stat Cards (DASH-05)
+
+Focal point: the four stat cards row is the primary data surface — large 28px numbers draw the eye before any chart or table on the page.
 
 Four cards in a 4-column grid (responsive: 2-col on tablet, 1-col on mobile).
 
@@ -535,6 +539,8 @@ No third-party registries declared. All components from `mykasih-crm/components/
 | 2026-04-11 | Removed weight 700 (Bold); palette is now 400 + 600 only | Checker: max 2 weights |
 | 2026-04-11 | Badge padding changed from 2px/3px to 4px 8px (all badge types) | Checker: multiples of 4 only |
 | 2026-04-11 | Added aria-label to notification bell in Topbar spec | Checker: icon-only elements require accessible label |
+| 2026-04-11 | Sidebar nav icon margin-right changed from 10px to 8px | Checker: 10px is not on the declared spacing scale (multiples of 4) |
+| 2026-04-11 | Added focal point statements to Login Page and Dashboard Home sections | Checker: non-blocking recommendation — clarifies visual hierarchy intent |
 
 ---
 
