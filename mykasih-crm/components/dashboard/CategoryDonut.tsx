@@ -22,13 +22,14 @@ function formatCategory(name: string): string {
   return CATEGORY_LABELS[name] ?? name.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
 }
 
+// 6 visually distinct colors — no duplicates (--accent-teal and --chart-chat are both #00897B)
 const COLORS = [
-  'var(--accent-primary)',
-  'var(--accent-teal)',
-  'var(--status-green)',
-  'var(--status-yellow)',
-  'var(--chart-voice)',
-  'var(--chart-chat)',
+  'var(--status-green)',    // bright green
+  'var(--accent-teal)',     // teal
+  'var(--status-yellow)',   // golden yellow
+  'var(--accent-primary)',  // dark green
+  'var(--chart-voice)',     // medium green
+  'var(--status-red)',      // coral red — distinct from all others
 ]
 
 interface CategoryDonutProps {

@@ -34,3 +34,19 @@ body {
   color: var(--text-primary);
   font-family: var(--font-sans);
 }
+
+/* Sidebar nav — thin unobtrusive scrollbar */
+.sidebar-nav::-webkit-scrollbar {
+  width: 3px;
+}
+.sidebar-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: var(--bg-border);
+  border-radius: 2px;
+}
+.sidebar-nav {
+  scrollbar-width: thin;
+  scrollbar-color: var(--bg-border) transparent;
+}

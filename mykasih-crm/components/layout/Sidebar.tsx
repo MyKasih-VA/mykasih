@@ -90,9 +90,10 @@ export function Sidebar({ language }: SidebarProps) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="https://mykasih.com.my/wp-content/uploads/2025/05/MyKasih-logo.png"
-          alt=""
+          alt="MyKasih"
           height={32}
           style={{ height: 32, width: 'auto' }}
+          onError={(e) => { e.currentTarget.style.display = 'none' }}
         />
         <span className="text-sm font-semibold text-[var(--text-primary)] leading-tight">
           MyKasih Command Centre
@@ -100,7 +101,7 @@ export function Sidebar({ language }: SidebarProps) {
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 overflow-y-auto px-3 py-2">
+      <nav className="flex-1 overflow-y-auto px-3 py-2 sidebar-nav">
         {NAV_GROUPS.map((group) => (
           <div key={group.label}>
             <p className="text-xs uppercase tracking-[0.08em] text-[var(--text-muted)] px-4 py-2 mt-4">
