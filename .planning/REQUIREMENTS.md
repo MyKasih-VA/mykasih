@@ -57,16 +57,16 @@
 
 ### WhatsApp Chatbot (Session 3)
 
-- [ ] **CHAT-01**: GET /api/webhook/chat handles Meta WA webhook verification (hub.mode + hub.challenge + hub.verify_token)
-- [ ] **CHAT-02**: POST /api/webhook/chat extracts WA message and routes to /api/chatbot/message
-- [ ] **CHAT-03**: POST /api/chatbot/message classifies intent via Claude API (faq | balance_check | merchant_lookup | complaint | unknown)
-- [ ] **CHAT-04**: FAQ handler queries kb_entries and returns answer in detected language (BM or EN)
-- [ ] **CHAT-05**: Balance check handler collects IC, masks it, returns mock balance + expiry + nearest merchant
-- [ ] **CHAT-06**: Merchant lookup handler extracts location entities and returns top 3-5 merchants from Supabase
-- [ ] **CHAT-07**: Complaint handler runs multi-turn conversation, creates ticket with reference number
-- [ ] **CHAT-08**: First contact sends 4 quick reply buttons: Semak baki / Kedai berdekatan / Bantuan SARA / Status aduan
-- [ ] **CHAT-09**: All chat sessions saved to Supabase (channel='chat', calls + transcripts tables)
-- [ ] **CHAT-10**: lib/meta-wa.ts exports sendWhatsAppMessage() and sendWhatsAppButtons()
+- [x] **CHAT-01**: GET /api/webhook/chat handles Meta WA webhook verification (hub.mode + hub.challenge + hub.verify_token)
+- [x] **CHAT-02**: POST /api/webhook/chat extracts WA message and routes to /api/chatbot/message
+- [x] **CHAT-03**: POST /api/chatbot/message classifies intent via Claude API (faq | balance_check | merchant_lookup | complaint | unknown)
+- [x] **CHAT-04**: FAQ handler queries kb_entries and returns answer in detected language (BM or EN)
+- [x] **CHAT-05**: Balance check handler collects IC, masks it, returns mock balance + expiry + nearest merchant
+- [x] **CHAT-06**: Merchant lookup handler extracts location entities and returns top 3-5 merchants from Supabase
+- [x] **CHAT-07**: Complaint handler runs multi-turn conversation, creates ticket with reference number
+- [x] **CHAT-08**: First contact sends 4 quick reply buttons: Semak baki / Kedai berdekatan / Bantuan SARA / Status aduan
+- [x] **CHAT-09**: All chat sessions saved to Supabase (channel='chat', calls + transcripts tables)
+- [x] **CHAT-10**: lib/meta-wa.ts exports sendWhatsAppMessage() and sendWhatsAppButtons()
 
 ### Dashboard Pages (Session 4)
 
@@ -169,16 +169,16 @@
 | VOICE-06 | Phase 2 — Voice Webhook, Ticket System & Excel Export | Pending |
 | EXPORT-01 | Phase 2 — Voice Webhook, Ticket System & Excel Export | Pending |
 | EXPORT-02 | Phase 2 — Voice Webhook, Ticket System & Excel Export | Pending |
-| CHAT-01 | Phase 3 — Kasih WhatsApp Chatbot | Pending |
-| CHAT-02 | Phase 3 — Kasih WhatsApp Chatbot | Pending |
-| CHAT-03 | Phase 3 — Kasih WhatsApp Chatbot | Pending |
-| CHAT-04 | Phase 3 — Kasih WhatsApp Chatbot | Pending |
-| CHAT-05 | Phase 3 — Kasih WhatsApp Chatbot | Pending |
-| CHAT-06 | Phase 3 — Kasih WhatsApp Chatbot | Pending |
-| CHAT-07 | Phase 3 — Kasih WhatsApp Chatbot | Pending |
-| CHAT-08 | Phase 3 — Kasih WhatsApp Chatbot | Pending |
-| CHAT-09 | Phase 3 — Kasih WhatsApp Chatbot | Pending |
-| CHAT-10 | Phase 3 — Kasih WhatsApp Chatbot | Pending |
+| CHAT-01 | Phase 3 — Kasih WhatsApp Chatbot | Complete |
+| CHAT-02 | Phase 3 — Kasih WhatsApp Chatbot | Complete |
+| CHAT-03 | Phase 3 — Kasih WhatsApp Chatbot | Complete |
+| CHAT-04 | Phase 3 — Kasih WhatsApp Chatbot | Complete |
+| CHAT-05 | Phase 3 — Kasih WhatsApp Chatbot | Complete |
+| CHAT-06 | Phase 3 — Kasih WhatsApp Chatbot | Complete |
+| CHAT-07 | Phase 3 — Kasih WhatsApp Chatbot | Complete |
+| CHAT-08 | Phase 3 — Kasih WhatsApp Chatbot | Complete |
+| CHAT-09 | Phase 3 — Kasih WhatsApp Chatbot | Complete |
+| CHAT-10 | Phase 3 — Kasih WhatsApp Chatbot | Complete |
 | PAGE-01 | Phase 4 — Core Dashboard Pages | Pending |
 | PAGE-02 | Phase 4 — Core Dashboard Pages | Pending |
 | PAGE-03 | Phase 4 — Core Dashboard Pages | Pending |

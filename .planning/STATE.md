@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-03-PLAN.md
-last_updated: "2026-04-11T16:10:30.993Z"
+stopped_at: Completed 03-04-PLAN.md
+last_updated: "2026-04-11T16:22:53.764Z"
 last_activity: 2026-04-11
 progress:
   total_phases: 7
   completed_phases: 2
   total_plans: 24
-  completed_plans: 20
-  percent: 83
+  completed_plans: 21
+  percent: 88
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-04-11)
 ## Current Position
 
 Phase: 03 (kasih-whatsapp-chatbot) — EXECUTING
-Plan: 5 of 8
+Plan: 6 of 8
 Status: Ready to execute
 Last activity: 2026-04-11
 
@@ -57,6 +57,7 @@ Progress: [██░░░░░░░░] 29%
 | Phase 03 P01 | 10 | 2 tasks | 5 files |
 | Phase 03 P02 | 3 | 2 tasks | 1 files |
 | Phase 03 P03 | 21 | 2 tasks | 2 files |
+| Phase 03 P04 | 373 | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -80,6 +81,8 @@ Recent decisions affecting current work:
 - [Phase 03]: Dynamic imports with @ts-expect-error for handler modules — avoids stub files before Plans 04-06 exist
 - [Phase 03]: Session intent lock at dispatch time — single classifyIntent call per conversation
 - [Phase 03]: First contact list item IDs match Intent enum values exactly — enables message-as-intent shortcut
+- [Phase 03]: Service-role variants added to merchant-lookup.ts — reuses query logic, avoids cookie context in webhook handlers
+- [Phase 03]: wamid forwarded from dispatcher to all handlers — ensures DB-level dedup via UNIQUE constraint on calls.wa_message_id works uniformly
 
 ### Pending Todos
 
@@ -92,6 +95,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-04-11T16:10:30.989Z
-Stopped at: Completed 03-03-PLAN.md
+Last session: 2026-04-11T16:22:53.761Z
+Stopped at: Completed 03-04-PLAN.md
 Resume file: None
