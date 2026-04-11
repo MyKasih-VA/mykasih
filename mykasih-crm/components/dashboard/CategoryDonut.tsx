@@ -9,6 +9,19 @@ import {
 } from 'recharts'
 import { Skeleton } from '@/components/ui/skeleton'
 
+const CATEGORY_LABELS: Record<string, string> = {
+  eligibility: 'Eligibility',
+  faq: 'FAQ',
+  registration: 'Registration',
+  complaint: 'Complaint',
+  merchant_lookup: 'Merchant Lookup',
+  balance_check: 'Balance Check',
+}
+
+function formatCategory(name: string): string {
+  return CATEGORY_LABELS[name] ?? name.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+}
+
 const COLORS = [
   'var(--accent-primary)',
   'var(--accent-teal)',
@@ -72,7 +85,7 @@ export function CategoryDonut({ data, title, loading }: CategoryDonutProps) {
                   style={{ background: COLORS[index % COLORS.length] }}
                 />
                 <span className="text-xs text-[var(--text-muted)] truncate">
-                  {entry.name}
+                  {formatCategory(entry.name)}
                 </span>
                 <span className="text-xs text-[var(--text-muted)] ml-auto">
                   {entry.value}
