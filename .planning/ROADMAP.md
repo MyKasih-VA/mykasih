@@ -54,16 +54,15 @@ Plans:
   3. If the call category is complaint, a ticket is automatically created with a unique TKT-2026-NNNNN reference number
   4. IC numbers written to the DB are always in masked format (880512-**-****)
   5. Admin and qmedia users can download a 3-sheet Excel file covering all interactions, tickets, and a summary
-**Plans**: 8 plans
+**Plans**: 7 plans
 Plans:
-- [ ] 01-00-PLAN.md — Wave 0: test framework + stub test files
-- [ ] 01-01-PLAN.md — SARA voice agent prompt fixes (non-transferability + language lock)
-- [ ] 01-02-PLAN.md — Foundation: globals.css, fonts, Supabase clients, env vars, CLAUDE.md update (D-08)
-- [ ] 01-03-PLAN.md — Auth proxy, login page, translations, language hook
-- [ ] 01-04-PLAN.md — Dashboard layout shell: sidebar, topbar, language toggle
-- [ ] 01-05-PLAN.md — Merchant seed endpoint + lookup utilities + Integrations page stub (D-15)
-- [ ] 01-06-PLAN.md — Dashboard home: stat cards, charts, recent interactions table
-- [ ] 01-07-PLAN.md — Demo data seed + Supabase schema migration
+- [ ] 02-00-PLAN.md — Wave 0: test stubs for all Phase 2 utilities and routes
+- [ ] 02-01-PLAN.md — IC masking utility + ticket reference generator (lib/ic-mask.ts, lib/ticket-ref.ts)
+- [ ] 02-02-PLAN.md — SheetJS install + XLSX workbook builder helper (lib/export-helpers.ts)
+- [ ] 02-03-PLAN.md — POST /api/webhook/voice (HMAC validation, call/transcript save, complaint ticket)
+- [ ] 02-04-PLAN.md — GET /api/calls + GET /api/calls/[id]/transcript
+- [ ] 02-05-PLAN.md — GET+PATCH /api/tickets + PATCH /api/tickets/[id]
+- [ ] 02-06-PLAN.md — GET /api/export/calls (3-sheet XLSX download, role guard)
 
 ### Phase 3: Kasih WhatsApp Chatbot
 **Goal**: Beneficiaries can send a WhatsApp message and receive instant bilingual responses for FAQs, balance checks, merchant lookups, and complaint filing — all interactions saved to Supabase
