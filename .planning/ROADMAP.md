@@ -34,14 +34,14 @@ Decimal phases appear between their surrounding integers in numeric order.
   5. SARA voice agent refuses IC transfer attempts and maintains English once the user switches language
 **Plans**: 8 plans
 Plans:
-- [ ] 01-00-PLAN.md — Wave 0: test framework + stub test files
-- [ ] 01-01-PLAN.md — SARA voice agent prompt fixes (non-transferability + language lock)
-- [ ] 01-02-PLAN.md — Foundation: globals.css, fonts, Supabase clients, env vars, CLAUDE.md update (D-08)
-- [ ] 01-03-PLAN.md — Auth proxy, login page, translations, language hook
-- [ ] 01-04-PLAN.md — Dashboard layout shell: sidebar, topbar, language toggle
-- [ ] 01-05-PLAN.md — Merchant seed endpoint + lookup utilities + Integrations page stub (D-15)
-- [ ] 01-06-PLAN.md — Dashboard home: stat cards, charts, recent interactions table
-- [ ] 01-07-PLAN.md — Demo data seed + Supabase schema migration
+- [x] 01-00-PLAN.md — Wave 0: test framework + stub test files
+- [x] 01-01-PLAN.md — SARA voice agent prompt fixes (non-transferability + language lock)
+- [x] 01-02-PLAN.md — Foundation: globals.css, fonts, Supabase clients, env vars, CLAUDE.md update (D-08)
+- [x] 01-03-PLAN.md — Auth proxy, login page, translations, language hook
+- [x] 01-04-PLAN.md — Dashboard layout shell: sidebar, topbar, language toggle
+- [x] 01-05-PLAN.md — Merchant seed endpoint + lookup utilities + Integrations page stub (D-15)
+- [x] 01-06-PLAN.md — Dashboard home: stat cards, charts, recent interactions table
+- [x] 01-07-PLAN.md — Demo data seed + Supabase schema migration
 **UI hint**: yes
 
 ### Phase 2: Voice Webhook, Ticket System & Excel Export
