@@ -22,29 +22,33 @@ Beneficiaries can get SARA help (eligibility, balance, merchant lookup, complain
 
 ### Active
 
-**System 1 — SARA Voice Agent (ElevenLabs) — P0 Fixes**
-- [ ] Fix non-transferability guardrail in agent prompt (cannot use another person's MyKad)
-- [ ] Fix language switch logic (maintain EN once switched, never revert to BM)
+**System 1 — SARA Voice Agent (ElevenLabs) — P0 Fixes** ✅ Phase 1
+- [x] Fix non-transferability guardrail in agent prompt (cannot use another person's MyKad)
+- [x] Fix language switch logic (maintain EN once switched, never revert to BM)
 
-**System 2 — Kasih WhatsApp Chatbot — P1**
-- [ ] Intent classification via Claude API (faq | balance_check | merchant_lookup | complaint | unknown)
-- [ ] FAQ handler — query kb_entries, BM/EN response
-- [ ] Balance check handler — IC collection → IC masking → mock API response with nearest merchant
-- [ ] Merchant lookup handler — state/city/postcode → query merchants table → top 3-5 results
-- [ ] Complaint handler — multi-turn → ticket creation with reference number
-- [ ] Quick reply buttons on first contact (Semak baki / Kedai berdekatan / Bantuan SARA / Status aduan)
-- [ ] Save all chats to Supabase (channel='chat', calls + transcripts tables)
-- [ ] Meta Cloud API webhook integration (GET verify + POST receive)
+**System 2 — Kasih WhatsApp Chatbot — P1** ✅ Phase 3
+- [x] Intent classification via Claude Haiku 4.5 (faq | balance_check | merchant_lookup | complaint | unknown) + auto language detect
+- [x] FAQ handler — query kb_entries, BM/EN response
+- [x] Balance check handler — IC collection → IC masking → mock API response with nearest merchant
+- [x] Merchant lookup handler — state/city/postcode → query merchants table → top 3-5 results
+- [x] Complaint handler — multi-turn (sessions table) → ticket creation with reference number
+- [x] Quick reply buttons on first contact (Semak baki / Kedai berdekatan / Bantuan SARA / Status aduan)
+- [x] Save all chats to Supabase (channel='chat', calls + transcripts tables)
+- [x] Meta Cloud API webhook integration (GET verify + POST receive) — stub until WA API approved
+- [x] sessions table (Supabase) — wa_phone, intent, step, collected_data jsonb, language, expires_at
+- [x] lib/meta-wa.ts — sendWhatsAppMessage() + sendWhatsAppButtons()
+- [ ] n8n orchestration: WA → n8n → /api/chatbot/message → Claude → Supabase → n8n → WA reply (pending Meta WA approval)
+- [ ] n8n webhook URL configurable from /integrations page
 
 **System 3 — MyKasih Command Centre Dashboard — P1**
-- [ ] Project scaffold — Next.js 14, TypeScript, Tailwind, Shadcn UI dark theme
-- [ ] globals.css — all 12 CSS color variables + Inter font
-- [ ] Supabase client/server setup + middleware (route protection, role-based redirect)
-- [ ] Merchant seed API — POST /api/seed/merchants → bulk insert 10,194 rows
-- [ ] lib/merchant-lookup.ts — lookupByPostcode() + lookupByState()
-- [ ] Login page — dark card, MyKasih logo, Supabase Auth, role redirect
-- [ ] Dashboard layout — sidebar (260px, all 14 nav items) + topbar (search, lang toggle, bell)
-- [ ] Dashboard home — 4 stat cards + stacked bar chart + donut chart + recent interactions table
+- [x] Project scaffold — Next.js 15/16, TypeScript, Tailwind, Shadcn UI dark theme ✅ Phase 1
+- [x] globals.css — all 12 CSS color variables + Inter font ✅ Phase 1
+- [x] Supabase client/server setup + middleware (route protection, role-based redirect) ✅ Phase 1
+- [x] Merchant seed API — POST /api/seed/merchants → bulk insert 10,194 rows ✅ Phase 1
+- [x] lib/merchant-lookup.ts — lookupByPostcode() + lookupByState() ✅ Phase 1
+- [x] Login page — dark card, MyKasih logo, Supabase Auth, role redirect ✅ Phase 1
+- [x] Dashboard layout — sidebar (260px, all 14 nav items) + topbar (search, lang toggle, bell) ✅ Phase 1
+- [x] Dashboard home — 4 stat cards + stacked bar chart + donut chart + recent interactions table ✅ Phase 1
 - [ ] Voice Calls page — filterable table, transcript modal, Excel export
 - [ ] Chat Messages page — WA thread view, intent badge, linked ticket
 - [ ] All Interactions page — combined table with channel toggle filter
@@ -54,15 +58,15 @@ Beneficiaries can get SARA help (eligibility, balance, merchant lookup, complain
 - [ ] Analytics page — period selector, 4 charts, category breakdown, Excel export
 - [ ] Knowledge Base page — CRUD, BM/EN toggle, active switch, sync to ElevenLabs
 - [ ] Staff Management page — add/edit/remove users, role select
-- [ ] Integrations page — 5 status cards (ElevenLabs, Meta WA, n8n, Supabase, Anam AI)
+- [x] Integrations page stub — 5 status cards (ElevenLabs, Meta WA, n8n, Supabase, Anam AI) ✅ Phase 1
 - [ ] Testing Console — 3 tabs: Voice Agent embed + Kasih chatbot sim + Anam AI persona
 - [ ] AI Demo page — standalone Anam AI persona embed (client-facing)
 - [ ] Settings page — agent hours, webhook URLs, notification prefs
-- [ ] EN/BM language toggle — useLanguage() hook, translations.ts, persisted to users.language
-- [ ] ElevenLabs voice webhook — POST /api/webhook/voice → calls + transcripts + ticket if complaint
-- [ ] IC masking — lib/ic-mask.ts → maskIC() before any DB write
-- [ ] Ticket reference generator — lib/ticket-ref.ts → TKT-2026-NNNNN
-- [ ] Excel export — /api/export/calls → 3-sheet xlsx (calls, tickets, summary)
+- [x] EN/BM language toggle — useLanguage() hook, translations.ts, persisted to users.language ✅ Phase 1
+- [x] ElevenLabs voice webhook — POST /api/webhook/voice → calls + transcripts + ticket if complaint ✅ Phase 2
+- [x] IC masking — lib/ic-mask.ts → maskIC() before any DB write ✅ Phase 2
+- [x] Ticket reference generator — lib/ticket-ref.ts → TKT-2026-NNNNN ✅ Phase 2
+- [x] Excel export — /api/export/calls → 3-sheet xlsx (calls, tickets, summary) ✅ Phase 2
 - [ ] PDPA compliance — zero plain-text ICs, RLS on all tables, webhook secret validation
 
 ### Out of Scope
@@ -96,14 +100,19 @@ Beneficiaries can get SARA help (eligibility, balance, merchant lookup, complain
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Supabase over custom DB | Managed auth + RLS + realtime + storage in one; Singapore region for low latency | — Pending |
-| n8n as orchestration layer | Low-code WA → Claude → Supabase pipeline without custom server | — Pending |
-| Mock balance API for POC | Real MyKasih API integration is out of scope; mock validates UX and flow | — Pending |
-| Single Supabase project for all 3 systems | Unified reporting; no cross-system API calls needed | — Pending |
-| ElevenLabs ConvAI for voice | Already live; WebRTC lower latency than WebSocket for voice | ✓ Good |
+| Supabase over custom DB | Managed auth + RLS + realtime + storage in one; Singapore region for low latency | ✓ Good (Phase 1) |
+| n8n as orchestration layer | Low-code WA → Claude → Supabase pipeline without custom server | ✓ Confirmed (Phase 3) |
+| Mock balance API for POC | Real MyKasih API integration is out of scope; mock validates UX and flow | ✓ Confirmed (Phase 3) |
+| Single Supabase project for all 3 systems | Unified reporting; no cross-system API calls needed | ✓ Good (Phase 1) |
+| ElevenLabs ConvAI for voice | Already live; WebRTC lower latency than WebSocket for voice | ✓ Good (Phase 1) |
 | Anam AI for demo persona | Confirmed agent ID — embed in Testing Console + standalone demo page | ✓ Good |
-| Meta Cloud API direct (no BSP) | Inbound messages free; no intermediary cost | — Pending |
-| merchants table in Supabase | 10,194 rows with postcode + state indexes; enables real-time lookup | — Pending |
+| Meta Cloud API direct (no BSP) | Inbound messages free; no intermediary cost | ✓ Confirmed (Phase 3) |
+| merchants table in Supabase | 10,194 rows with postcode + state indexes; enables real-time lookup | ✓ Good (Phase 1) |
+| Claude Haiku 4.5 for intent classification | Fast (~$0.001/msg) and sufficient for intent + language detection; Sonnet reserved for complex reasoning | ✓ Confirmed (Phase 3) |
+| Supabase sessions table for conversation state | Persistent, auditable, survives restarts; fits Supabase-first pattern from Phase 1–2 | ✓ Confirmed (Phase 3) |
+| Auto language detection per message | Haiku detects BM/EN on first message; language locked to session for entire thread | ✓ Confirmed (Phase 3) |
+| Meta WA approval pending — build stubs first | API approval 3–7 days; build all CHAT-01→10 now, test via Postman, go live on approval | ✓ Confirmed (Phase 3) |
+| n8n webhook URL exposed in /integrations page | Configurable from dashboard; n8n workflow status visible alongside other integrations | ✓ Confirmed (Phase 3) |
 
 ## Evolution
 
