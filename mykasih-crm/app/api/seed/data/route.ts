@@ -353,7 +353,7 @@ export async function POST() {
 
     const ticketRows = ticketCalls.map((call, idx) => {
       const num = String(idx + 1).padStart(5, '0')
-      const icPrefix = [880512, 910823, 950614, 001230, 871105][idx % 5]
+      const icPrefix = [880512, 910823, 950614, 1230, 871105][idx % 5]
       const statusOptions = ['open', 'open', 'open', 'open', 'in_progress', 'in_progress', 'in_progress', 'in_progress', 'in_progress', 'resolved', 'resolved', 'resolved', 'resolved', 'resolved', 'resolved'] as const
 
       return {
