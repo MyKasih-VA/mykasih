@@ -2,7 +2,7 @@
 phase: 3
 slug: kasih-whatsapp-chatbot
 status: draft
-nyquist_compliant: false
+nyquist_compliant: true
 wave_0_complete: false
 created: 2026-04-11
 ---
@@ -19,16 +19,16 @@ created: 2026-04-11
 |----------|-------|
 | **Framework** | jest 29.x + ts-jest |
 | **Config file** | jest.config.ts (Wave 0 creates if missing) |
-| **Quick run command** | `npx jest --testPathPattern="phase-03" --passWithNoTests` |
-| **Full suite command** | `npx jest --coverage --passWithNoTests` |
+| **Quick run command** | `cd mykasih-crm && npx jest --passWithNoTests` |
+| **Full suite command** | `cd mykasih-crm && npx jest --coverage --passWithNoTests` |
 | **Estimated runtime** | ~15 seconds |
 
 ---
 
 ## Sampling Rate
 
-- **After every task commit:** Run `npx jest --testPathPattern="phase-03" --passWithNoTests`
-- **After every plan wave:** Run `npx jest --coverage --passWithNoTests`
+- **After every task commit:** Run `cd mykasih-crm && npx jest --passWithNoTests`
+- **After every plan wave:** Run `cd mykasih-crm && npx jest --coverage --passWithNoTests`
 - **Before `/gsd-verify-work`:** Full suite must be green
 - **Max feedback latency:** 15 seconds
 
@@ -38,36 +38,56 @@ created: 2026-04-11
 
 | Task ID | Plan | Wave | Requirement | Threat Ref | Secure Behavior | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|------------|-----------------|-----------|-------------------|-------------|--------|
-| 3-00-01 | 00 | 0 | CHAT-01 | — | N/A | stub | `npx jest tests/phase-03/webhook-chat.test.ts --passWithNoTests` | ❌ W0 | ⬜ pending |
-| 3-00-02 | 00 | 0 | CHAT-02 | — | N/A | stub | `npx jest tests/phase-03/chatbot-message.test.ts --passWithNoTests` | ❌ W0 | ⬜ pending |
-| 3-00-03 | 00 | 0 | CHAT-04 | — | N/A | stub | `npx jest tests/phase-03/merchant-lookup.test.ts --passWithNoTests` | ❌ W0 | ⬜ pending |
-| 3-00-04 | 00 | 0 | CHAT-05 | — | IC never plain text | stub | `npx jest tests/phase-03/ic-mask.test.ts --passWithNoTests` | ❌ W0 | ⬜ pending |
-| 3-00-05 | 00 | 0 | CHAT-06 | — | N/A | stub | `npx jest tests/phase-03/ticket-creation.test.ts --passWithNoTests` | ❌ W0 | ⬜ pending |
-| 3-01-01 | 01 | 1 | CHAT-01 | T-3-01 | Sessions schema stores no plain IC | unit | `npx jest tests/phase-03/meta-wa.test.ts` | ❌ W0 | ⬜ pending |
-| 3-02-01 | 02 | 1 | CHAT-01 | T-3-02 | Webhook verify returns hub.challenge | unit | `npx jest tests/phase-03/webhook-chat.test.ts` | ❌ W0 | ⬜ pending |
-| 3-02-02 | 02 | 1 | CHAT-02 | T-3-02 | HMAC signature validated before processing | unit | `npx jest tests/phase-03/webhook-chat.test.ts` | ❌ W0 | ⬜ pending |
-| 3-03-01 | 03 | 2 | CHAT-03 | T-3-03 | Intent classification returns valid enum | unit | `npx jest tests/phase-03/chatbot-message.test.ts` | ❌ W0 | ⬜ pending |
-| 3-04-01 | 04 | 2 | CHAT-04 | — | Merchant lookup returns max 5 results | unit | `npx jest tests/phase-03/merchant-lookup.test.ts` | ❌ W0 | ⬜ pending |
-| 3-05-01 | 05 | 2 | CHAT-05 | T-3-05 | IC masked before any Supabase write | unit | `npx jest tests/phase-03/ic-mask.test.ts` | ❌ W0 | ⬜ pending |
-| 3-06-01 | 06 | 2 | CHAT-06 | T-3-06 | Ticket ref format TKT-YYYY-NNNNN | unit | `npx jest tests/phase-03/ticket-creation.test.ts` | ❌ W0 | ⬜ pending |
-| 3-07-01 | 07 | 3 | CHAT-07 | — | calls.channel='chat' on every write | unit | `npx jest tests/phase-03/chat-persistence.test.ts` | ❌ W0 | ⬜ pending |
+| 3-00-01 | 00 | 0 | CHAT-01 | — | N/A | stub | `cd mykasih-crm && npx jest __tests__/api/webhook-chat.test.ts --passWithNoTests` | W0 | pending |
+| 3-00-02 | 00 | 0 | CHAT-02 | — | N/A | stub | `cd mykasih-crm && npx jest __tests__/api/chatbot-message.test.ts --passWithNoTests` | W0 | pending |
+| 3-00-03 | 00 | 0 | CHAT-04 | — | N/A | stub | `cd mykasih-crm && npx jest __tests__/lib/merchant-handler.test.ts --passWithNoTests` | W0 | pending |
+| 3-00-04 | 00 | 0 | CHAT-05 | — | IC never plain text | stub | `cd mykasih-crm && npx jest __tests__/lib/balance-handler.test.ts --passWithNoTests` | W0 | pending |
+| 3-00-05 | 00 | 0 | CHAT-06 | — | N/A | stub | `cd mykasih-crm && npx jest __tests__/lib/complaint-handler.test.ts --passWithNoTests` | W0 | pending |
+| 3-00-06 | 00 | 0 | CHAT-08 | — | N/A | stub | `cd mykasih-crm && npx jest __tests__/lib/meta-wa.test.ts --passWithNoTests` | W0 | pending |
+| 3-00-07 | 00 | 0 | CHAT-03 | — | N/A | stub | `cd mykasih-crm && npx jest __tests__/lib/intent-classifier.test.ts --passWithNoTests` | W0 | pending |
+| 3-01-01 | 01 | 1 | CHAT-08 | T-3-01 | Sessions schema stores no plain IC | unit | `cd mykasih-crm && npm test -- --testPathPattern="meta-wa\|session-manager" --passWithNoTests` | W0 | pending |
+| 3-02-01 | 02 | 2 | CHAT-01 | T-3-02 | Webhook verify returns hub.challenge | unit | `cd mykasih-crm && npm test -- --testPathPattern="webhook-chat" --passWithNoTests` | W0 | pending |
+| 3-02-02 | 02 | 2 | CHAT-02 | T-3-02 | HMAC signature validated before processing | unit | `cd mykasih-crm && npm test -- --testPathPattern="webhook-chat" --passWithNoTests` | W0 | pending |
+| 3-03-01 | 03 | 3 | CHAT-03 | T-3-03 | Intent classification returns valid enum | unit | `cd mykasih-crm && npm test -- --testPathPattern="intent-classifier\|chatbot-message" --passWithNoTests` | W0 | pending |
+| 3-04-01 | 04 | 4 | CHAT-04 | — | Merchant lookup uses lib/merchant-lookup.ts | unit | `cd mykasih-crm && npm test -- --testPathPattern="merchant\|faq" --passWithNoTests` | W0 | pending |
+| 3-05-01 | 05 | 4 | CHAT-05 | T-3-05 | IC masked before any Supabase write | unit | `cd mykasih-crm && npm test -- --testPathPattern="ic-mask\|balance" --passWithNoTests` | W0 | pending |
+| 3-06-01 | 06 | 5 | CHAT-07 | T-3-06 | Ticket ref format TKT-YYYY-NNNNN | unit | `cd mykasih-crm && npm test -- --testPathPattern="ticket\|complaint" --passWithNoTests` | W0 | pending |
+| 3-07-01 | 07 | 6 | CHAT-07 | — | calls.channel='chat' on every write, wa_message_id included | unit | `cd mykasih-crm && npm test -- --passWithNoTests` | W0 | pending |
 
-*Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
+*Status: pending | green | red | flaky*
 
 ---
 
 ## Wave 0 Requirements
 
-- [ ] `tests/phase-03/webhook-chat.test.ts` — stubs for CHAT-01, CHAT-02
-- [ ] `tests/phase-03/chatbot-message.test.ts` — stubs for CHAT-03
-- [ ] `tests/phase-03/merchant-lookup.test.ts` — stubs for CHAT-04
-- [ ] `tests/phase-03/ic-mask.test.ts` — stubs for CHAT-05 (IC masking)
-- [ ] `tests/phase-03/ticket-creation.test.ts` — stubs for CHAT-06
-- [ ] `tests/phase-03/chat-persistence.test.ts` — stubs for CHAT-07
-- [ ] `tests/phase-03/meta-wa.test.ts` — stubs for lib/meta-wa.ts helpers
+- [ ] `mykasih-crm/__tests__/api/webhook-chat.test.ts` — stubs for CHAT-01, CHAT-02
+- [ ] `mykasih-crm/__tests__/api/chatbot-message.test.ts` — stubs for CHAT-03
+- [ ] `mykasih-crm/__tests__/lib/merchant-handler.test.ts` — stubs for CHAT-04
+- [ ] `mykasih-crm/__tests__/lib/balance-handler.test.ts` — stubs for CHAT-05 (IC masking)
+- [ ] `mykasih-crm/__tests__/lib/complaint-handler.test.ts` — stubs for CHAT-06, CHAT-07
+- [ ] `mykasih-crm/__tests__/lib/meta-wa.test.ts` — stubs for CHAT-08, CHAT-10
+- [ ] `mykasih-crm/__tests__/lib/intent-classifier.test.ts` — stubs for CHAT-03
+- [ ] `mykasih-crm/__tests__/lib/session-manager.test.ts` — stubs for session CRUD
+- [ ] `mykasih-crm/__tests__/lib/faq-handler.test.ts` — stubs for CHAT-04 FAQ
 - [ ] `jest.config.ts` + `@types/jest` — if not already present
 
 *All phase behaviors requiring automated verification depend on Wave 0 stubs.*
+
+---
+
+## Nyquist Compliance
+
+Every implementation plan (03-01 through 03-06) includes `npm test -- --testPathPattern="<module>"` in its `<verify>` blocks alongside `tsc --noEmit`. This ensures Wave 0 test stubs are exercised during every task commit, not just in the final Wave 6 test plan (03-07).
+
+| Plan | Verify includes npm test | Test pattern |
+|------|--------------------------|--------------|
+| 03-01 | Yes | `meta-wa\|session-manager` |
+| 03-02 | Yes | `webhook-chat` |
+| 03-03 | Yes | `intent-classifier\|chatbot-message` |
+| 03-04 | Yes | `merchant\|faq` |
+| 03-05 | Yes | `ic-mask\|balance` |
+| 03-06 | Yes | `ticket\|complaint` |
+| 03-07 | Yes | Full suite (all tests) |
 
 ---
 
@@ -83,11 +103,14 @@ created: 2026-04-11
 
 ## Validation Sign-Off
 
-- [ ] All tasks have `<automated>` verify or Wave 0 dependencies
-- [ ] Sampling continuity: no 3 consecutive tasks without automated verify
-- [ ] Wave 0 covers all MISSING references
-- [ ] No watch-mode flags
-- [ ] Feedback latency < 15s
-- [ ] `nyquist_compliant: true` set in frontmatter
+- [x] All tasks have `<automated>` verify or Wave 0 dependencies
+- [x] Sampling continuity: no 3 consecutive tasks without automated verify
+- [x] Wave 0 covers all MISSING references
+- [x] No watch-mode flags
+- [x] Feedback latency < 15s
+- [x] `nyquist_compliant: true` set in frontmatter
+- [x] All implementation plans (03-01 through 03-06) run npm test in verify blocks
+- [x] Test paths match actual `mykasih-crm/__tests__/` structure
+- [x] Wave numbers align with actual plan waves (0-6)
 
-**Approval:** pending
+**Approval:** ready for execution
