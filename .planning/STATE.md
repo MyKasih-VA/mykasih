@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-01-PLAN.md
-last_updated: "2026-04-11T15:22:57.633Z"
+stopped_at: Completed 03-02-PLAN.md
+last_updated: "2026-04-11T15:40:13.338Z"
 last_activity: 2026-04-11
 progress:
   total_phases: 7
   completed_phases: 2
   total_plans: 24
-  completed_plans: 18
-  percent: 75
+  completed_plans: 19
+  percent: 79
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-04-11)
 ## Current Position
 
 Phase: 03 (kasih-whatsapp-chatbot) — EXECUTING
-Plan: 3 of 8
+Plan: 4 of 8
 Status: Ready to execute
 Last activity: 2026-04-11
 
@@ -55,6 +55,7 @@ Progress: [██░░░░░░░░] 29%
 *Updated after each plan completion*
 | Phase 03 P00 | 2 | 2 tasks | 11 files |
 | Phase 03 P01 | 10 | 2 tasks | 5 files |
+| Phase 03 P02 | 3 | 2 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -73,6 +74,8 @@ Recent decisions affecting current work:
 - [Phase 03]: sendWhatsAppButtons uses type:list not type:button — list supports 10 items vs button max 3
 - [Phase 03]: Session manager uses @supabase/supabase-js createClient directly with service role key — avoids cookie context requirement of lib/supabase/server.ts
 - [Phase 03]: wa_message_id UNIQUE on sessions and calls tables — DB-level deduplication for Meta at-least-once delivery
+- [Phase 03]: Return 200 on all POST errors in webhook/chat — Meta retries on non-200 which would cause duplicate processing
+- [Phase 03]: n8n secret check is conditional on env var presence — allows direct Meta hit fallback in development
 
 ### Pending Todos
 
@@ -85,6 +88,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-04-11T15:22:57.630Z
-Stopped at: Completed 03-01-PLAN.md
+Last session: 2026-04-11T15:40:13.333Z
+Stopped at: Completed 03-02-PLAN.md
 Resume file: None
