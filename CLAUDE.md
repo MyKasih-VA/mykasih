@@ -19,7 +19,7 @@ Three integrated systems that share one Supabase database:
 ## 🛠️ Tech Stack
 
 ```
-Frontend:      Next.js 14 (App Router, TypeScript, strict mode)
+Frontend:      Next.js 15/16 (App Router, TypeScript, strict mode)
 Styling:       Tailwind CSS + Shadcn UI (dark theme)
 Font:          Inter (Google Fonts) — primary
                JetBrains Mono — code/monospace only
@@ -405,7 +405,7 @@ mykasih-crm/
 │   └── translations.ts             ← EN/BM strings
 ├── data/
 │   └── merchants.json              ← seeded from MyKasih_Merchant_List.xlsx
-├── middleware.ts                   ← route protection + role redirect
+├── proxy.ts                        ← route protection + role redirect (Next.js 16)
 ├── docs/
 │   ├── PRD.md
 │   ├── SYSTEM_DESIGN.md
@@ -469,7 +469,7 @@ MyKasih Command Centre is an AI-powered helpline CRM built by Iceberg AI Solutio
 
 ### Constraints
 
-- **Tech Stack:** Next.js 14, TypeScript strict (no `any`), Tailwind + Shadcn UI dark, Supabase Pro Singapore, Vercel Pro — locked
+- **Tech Stack:** Next.js 15/16, TypeScript strict (no `any`), Tailwind + Shadcn UI dark, Supabase Pro Singapore, Vercel Pro — locked
 - **Colors:** All from CSS variables — never hardcode hex values
 - **PDPA:** Zero plain-text IC numbers anywhere in DB; masked_ic format: 880512-**-****
 - **Timeline:** 4-week delivery — Phase 0 (today) → Week 1 → Week 2 → Week 3 → Week 4 UAT
