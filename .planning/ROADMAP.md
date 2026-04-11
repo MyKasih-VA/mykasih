@@ -81,7 +81,7 @@ Plans:
 - [x] 03-02-PLAN.md — GET /api/webhook/chat (Meta verify) + POST /api/webhook/chat (receive + extract + forward)
 - [x] 03-03-PLAN.md — Claude Haiku intent classifier + POST /api/chatbot/message dispatcher with first-contact list
 - [x] 03-04-PLAN.md — FAQ handler (kb_entries query) + merchant lookup handler (postcode/state query)
-- [ ] 03-05-PLAN.md — Balance check handler (IC collect, maskIC, mock API, balance + expiry + nearest merchant)
+- [x] 03-05-PLAN.md — Balance check handler (IC collect, maskIC, mock API, balance + expiry + nearest merchant)
 - [ ] 03-06-PLAN.md — Complaint handler (5-step multi-turn, ticket creation with TKT ref, IC masking)
 - [ ] 03-07-PLAN.md — Real unit tests replacing all stubs (meta-wa, intent-classifier, webhook-chat, complaint-handler)
 
@@ -145,7 +145,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 |-------|----------------|--------|-----------|
 | 1. Scaffold, DB, Auth & Dashboard Shell | 9/9 | Complete | 2026-04-11 |
 | 2. Voice Webhook, Ticket System & Excel Export | 7/7 | Complete | 2026-04-11 |
-| 3. Kasih WhatsApp Chatbot | 5/8 | In Progress|  |
+| 3. Kasih WhatsApp Chatbot | 6/8 | In Progress|  |
 | 4. Core Dashboard Pages | 0/? | Not started | - |
 | 5. Intelligence & System Pages | 0/? | Not started | - |
 | 6. Testing Console, AI Demo, Settings & Polish | 0/? | Not started | - |
