@@ -1,30 +1,57 @@
+# Plan 01-08 — Dashboard Shell SSR Fix: Summary
+
+**Date:** 2026-04-12
+**Status:** ✅ Complete
+**Commit:** `dc87596` — `fix(layout): server/client split — dashboard shell SSR-safe, sidebar border fix`
+
 ---
-plan: 01-08
-phase: 01-scaffold-db-auth-dashboard-shell
-status: complete
-completed: 2026-04-11
-commit: c051ea2
+
+## Root Cause
+
+`app/(dashboard)/layout.tsx` was marked `'use client'` and called `useLanguage()` directly. On Vercel's SSR environment, Next.js attempted to render this layout on the server — the component threw (or hydration failed silently), causing Next.js to recover by rendering children bare. The entire layout shell (Sidebar + Topbar) was lost on the deployed site.
+
+Note: `useLanguage.ts` was already SSR-safe (localStorage inside `useEffect` guard) — no regression introduced. The bug was purely the `'use client'` placement on the layout file itself.
+
 ---
 
-## What Was Built
+## What Was Fixed
 
-RecentInteractions table with TranscriptModal stub, and the complete dashboard home page assembling all components.
+### Task 1 — `app/(dashboard)/layout.tsx` → Server Component
+- Removed `'use client'` directive
+- Removed direct imports of Sidebar, Topbar, useLanguage
+- Delegates entirely to `<DashboardShell>`
 
-## Key Files Created
+### Task 2 — `components/layout/DashboardShell.tsx` (new)
+- `'use client'` Client Component
+- Holds `useLanguage()` hook
+- Renders Sidebar + Topbar + main content (ml-[260px], flex-col)
 
-- `mykasih-crm/app/(dashboard)/page.tsx` — Dashboard home ('use client'), fetches /api/analytics/summary, renders 4 StatCards (4-col grid), CallVolumeChart (lg:col-span-2), CategoryDonut, and RecentInteractions with loading skeletons and empty states
-- `mykasih-crm/components/dashboard/RecentInteractions.tsx` — Table with ChannelBadge, outcome badges (color-mix CSS vars), relative timestamps, loading skeletons (aria-busy), empty state (Inbox icon), row-click opens TranscriptModal
-- `mykasih-crm/components/calls/TranscriptModal.tsx` — Stub modal with Shadcn Dialog, shows "Phase 4" placeholder text with call ID
+### Task 3 — `hooks/useLanguage.ts` — No change
+- Already SSR-safe: localStorage only inside useEffect
+- Supabase language sync retained
 
-## Self-Check: PASSED
+### Task 4 — `components/layout/Sidebar.tsx`
+- `border-r-2` → `border-r` (1px per design spec)
 
-- ✓ page.tsx contains 'use client', StatCard (4x), CallVolumeChart, CategoryDonut, RecentInteractions
-- ✓ page.tsx fetches /api/analytics/summary in useEffect
-- ✓ page.tsx uses grid-cols-1 md:grid-cols-2 lg:grid-cols-4 and lg:col-span-2
-- ✓ RecentInteractions: ChannelBadge, TranscriptModal, selectedCallId state, Inbox empty state
-- ✓ RecentInteractions: --status-green/red/yellow outcome badges, TableHead/TableBody, aria-busy, Skeleton, cursor-pointer
-- ✓ TranscriptModal: Dialog, "Phase 4" placeholder, callId prop
+---
 
-## Deviations
+## Verification Results
 
-None — implemented as specified in plan. outcome badge colors use color-mix() instead of Tailwind opacity utilities for better browser compatibility with CSS custom properties.
+| Check | Result |
+|-------|--------|
+| No 'use client' in layout.tsx | PASS |
+| DashboardShell.tsx exists | PASS |
+| ml-[260px] in DashboardShell | PASS |
+| No border-r-2 in Sidebar | PASS |
+| npx next build exits 0 | PASS |
+| git push to main | PASS — Vercel redeploy triggered |
+
+---
+
+## Files Changed
+
+| File | Change |
+|------|--------|
+| app/(dashboard)/layout.tsx | Converted to Server Component |
+| components/layout/DashboardShell.tsx | Created — Client Component shell |
+| components/layout/Sidebar.tsx | border-r-2 → border-r |
