@@ -63,12 +63,13 @@ function makeSession(overrides: Partial<Session> = {}): Session {
   return {
     id: 'session-001',
     wa_phone: '60123456789',
+    wa_message_id: null,
     language: 'bm',
     intent: 'complaint',
     step: 0,
     collected_data: {},
     created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
+    expires_at: new Date(Date.now() + 30 * 60 * 1000).toISOString(),
     ...overrides,
   }
 }
@@ -95,8 +96,8 @@ beforeEach(() => {
       }),
     }),
   })
-  mockInsertTickets.mockResolvedValue({ error: null })
-  mockInsertTranscripts.mockResolvedValue({ error: null })
+  mockInsertTickets.mockImplementation(() => Promise.resolve({ error: null }))
+  mockInsertTranscripts.mockImplementation(() => Promise.resolve({ error: null }))
 })
 
 // ---------------------------------------------------------------------------
