@@ -5,6 +5,8 @@ status: draft
 shadcn_initialized: true
 preset: default (slate base, CSS variables, RSC, TSX)
 created: 2026-04-11
+revised: 2026-04-11
+revision_reason: Fix typography sizes (4 max), fix font weights (2 max), fix badge padding (multiples of 4 only), add notification bell aria-label
 ---
 
 # Phase 1 — UI Design Contract
@@ -22,7 +24,7 @@ created: 2026-04-11
 | Preset | default — slate base, cssVariables: true, RSC: true | mykasih-crm/components.json |
 | Component library | Radix UI (via shadcn) | node_modules present |
 | Icon library | Lucide React | CONTEXT.md — node_modules present |
-| Font — primary | Inter (Google Fonts, weights 400 + 600 + 700) | CLAUDE.md |
+| Font — primary | Inter (Google Fonts, weights 400 + 600) | CLAUDE.md |
 | Font — monospace | JetBrains Mono (Google Fonts, weight 400) | CLAUDE.md — code/numbers only |
 | Theme mode | Dark only — no light mode toggle | CLAUDE.md |
 | Tailwind version | 4 (`@import "tailwindcss"` syntax) | globals.css confirmed |
@@ -102,16 +104,20 @@ Exceptions:
 
 All text uses Inter. JetBrains Mono is used exclusively for IC numbers displayed in masked format.
 
+Font weight palette: 400 (Regular) and 600 (SemiBold) only. No other weights.
+
 | Role | Size | Weight | Line Height | CSS Class Pattern | Usage |
 |------|------|--------|-------------|-------------------|-------|
-| Display | 28px | 700 (Bold) | 1.2 | text-[28px] font-bold | Stat card numbers |
-| Heading | 20px | 600 (SemiBold) | 1.2 | text-xl font-semibold | Page title in topbar, card titles |
-| Subheading | 16px | 600 (SemiBold) | 1.3 | text-base font-semibold | Section labels, nav group headers |
+| Display | 28px | 600 (SemiBold) | 1.2 | text-[28px] font-semibold | Stat card numbers |
+| Heading | 16px | 600 (SemiBold) | 1.3 | text-base font-semibold | Page title in topbar, card titles, section labels, nav group headers |
 | Body | 14px | 400 (Regular) | 1.5 | text-sm font-normal | Table rows, sidebar nav items, form labels |
-| Caption | 12px | 400 (Regular) | 1.4 | text-xs font-normal | Metadata, timestamps, muted descriptions |
-| Code/IC | 13px | 400 (Regular) | 1.4 | text-[13px] font-mono | Masked IC display only |
+| Caption | 12px | 400 (Regular) | 1.4 | text-xs font-normal | Metadata, timestamps, muted descriptions, code labels, nav group labels, badge text, axis labels |
 
-Font weight palette: 400 (Regular) and 600 (SemiBold) for all UI text. 700 (Bold) for stat card numbers only. No other weights.
+Size consolidation notes:
+- 20px merged into 16px SemiBold — 16px at SemiBold weight provides sufficient visual hierarchy for page headings and card titles
+- 13px merged into 12px — captions, code labels, and user name/logout text all use 12px Regular
+- 11px merged into 12px — nav group labels, badge text, and chart axis labels all use 12px Regular (or 12px SemiBold for active badge text)
+- 700 Bold removed — 28px SemiBold (600) provides sufficient visual weight for stat card numbers; no Bold needed
 
 ---
 
@@ -170,8 +176,8 @@ Accent (`--accent-primary`) is reserved for exactly these elements — no others
 - Full-page centered layout on `--bg-primary` background
 - Card container: `--bg-surface`, 1px border `--bg-border`, border-radius 12px, padding 32px, max-width 400px
 - MyKasih logo centered above card: `https://mykasih.com.my/wp-content/uploads/2025/05/MyKasih-logo.png`, width 140px
-- App name: "MyKasih Command Centre" — 20px SemiBold, `--text-primary`, centered, below logo, margin-top 16px
-- Subtitle: "AI Helpline CRM v1.0" — 13px Regular, `--text-muted`, centered, margin-top 4px
+- App name: "MyKasih Command Centre" — 16px SemiBold, `--text-primary`, centered, below logo, margin-top 16px
+- Subtitle: "AI Helpline CRM v1.0" — 12px Regular, `--text-muted`, centered, margin-top 4px
 - Email input: full width, height 44px, `--bg-border` border, `--bg-primary` background, `--text-primary`, placeholder `--text-muted`
 - Password input: same spec as email input
 - Sign In button: full width, height 44px, `--accent-primary` background, `--text-primary`, 14px SemiBold
@@ -182,17 +188,17 @@ Accent (`--accent-primary`) is reserved for exactly these elements — no others
 
 - Fixed position, width 260px, height 100vh, background `--bg-surface`, right border 1px `--bg-border`
 - Logo area: top 16px padding, MyKasih logo 32px height + "MyKasih Command Centre" 14px SemiBold beside it
-- Nav group label: 11px uppercase, `--text-muted`, letter-spacing 0.08em, padding 8px 16px, margin-top 16px
+- Nav group label: 12px uppercase, `--text-muted`, letter-spacing 0.08em, padding 8px 16px, margin-top 16px
 - Nav item: height 44px, padding 0 16px, 14px Regular, `--text-primary`, border-radius 6px (inside sidebar)
 - Nav item active state: background `--accent-primary` at 15% opacity, left border 3px solid `--accent-primary`, text `--accent-primary`
 - Nav item hover state: background `--bg-border` at 60% opacity
 - Nav icon: 16px Lucide icon, margin-right 10px, color inherits from nav item state
 - Sidebar footer: padding 16px, border-top 1px `--bg-border`
   - User avatar: 32px circle, initials fallback
-  - User name: 13px SemiBold, `--text-primary`
-  - Role badge: 11px, background `--bg-border`, `--text-muted`, border-radius 4px, padding 2px 6px
+  - User name: 12px SemiBold, `--text-primary`
+  - Role badge: 12px, background `--bg-border`, `--text-muted`, border-radius 4px, padding 4px 8px
   - "AI Connected" indicator: 8px dot `--status-green` + "AI Connected" 12px `--text-muted`, margin-top 4px
-  - Logout: 13px `--text-muted`, hover `--status-red`, margin-top 8px
+  - Logout: 12px `--text-muted`, hover `--status-red`, margin-top 8px
 
 #### Navigation Structure (all 14 items, 5 groups — DASH-01)
 
@@ -225,12 +231,12 @@ SYSTEM
 ### Topbar (`/components/layout/Topbar.tsx`)
 
 - Height 64px, background `--bg-surface`, border-bottom 1px `--bg-border`, padding 0 24px
-- Left: dynamic page title — 20px SemiBold, `--text-primary`
+- Left: dynamic page title — 16px SemiBold, `--text-primary`
 - Left (below title): date display — 12px Regular, `--text-muted` (format: "Friday, 11 April 2026" in EN / "Jumaat, 11 April 2026" in BM)
 - Right group (left to right): EN/BM language toggle | search input | notification bell | user avatar dropdown
 - Language toggle: pill toggle, "EN" / "BM", active side has `--accent-primary` background, 12px SemiBold
-- Search input: width 220px, height 36px, `--bg-primary` background, `--bg-border` border, 13px placeholder "Search..."
-- Notification bell: 20px Lucide `Bell` icon, `--text-muted`, hover `--text-primary`, 44px tap target
+- Search input: width 220px, height 36px, `--bg-primary` background, `--bg-border` border, 12px placeholder "Search..."
+- Notification bell: 20px Lucide `Bell` icon, `--text-muted`, hover `--text-primary`, 44px tap target, `aria-label="Notifications"` (EN) / `aria-label="Pemberitahuan"` (BM)
 - User avatar: 32px circle with initials fallback, dropdown on click (show name, role, logout)
 
 ### Dashboard Home — Stat Cards (DASH-05)
@@ -246,8 +252,8 @@ Four cards in a 4-column grid (responsive: 2-col on tablet, 1-col on mobile).
 
 Stat card anatomy:
 - Background: `--bg-surface`, border 1px `--bg-border`, border-radius 8px, padding 20px
-- Label: 13px Regular, `--text-muted`, margin-bottom 8px
-- Primary metric: 28px Bold, `--text-primary`
+- Label: 12px Regular, `--text-muted`, margin-bottom 8px
+- Primary metric: 28px SemiBold, `--text-primary`
 - Sub-info: 12px Regular, `--text-muted`, margin-top 4px
 - Loading state: Shadcn `Skeleton` — 16px height for label, 36px height for metric, 12px height for sub-info
 
@@ -260,8 +266,8 @@ Stat card anatomy:
 - Background: `--bg-surface`, border 1px `--bg-border`, border-radius 8px, padding 20px
 - Chart title: "Call Volume — Last 7 Days" (EN) / "Jumlah Panggilan — 7 Hari Lepas" (BM), 16px SemiBold
 - Legend: inline below title, voice dot + label, chat dot + label, 12px Regular `--text-muted`
-- X-axis: day labels (Mon, Tue...), 11px `--text-muted`
-- Y-axis: count labels, 11px `--text-muted`
+- X-axis: day labels (Mon, Tue...), 12px `--text-muted`
+- Y-axis: count labels, 12px `--text-muted`
 - Tooltip: `--bg-surface` background, `--bg-border` border, 12px text
 - Loading state: Shadcn `Skeleton` full chart area height (240px)
 
@@ -283,7 +289,7 @@ Columns: Channel | Caller | Category | Outcome | Time | Duration/Messages
 |--------|-------|---------|
 | Channel | 72px | Badge: voice (Phone icon, `--chart-voice` bg) or chat (MessageSquare icon, `--chart-chat` bg) |
 | Caller | auto | `caller_name` — 14px Regular |
-| Category | 140px | Category label — 13px, `--text-muted` |
+| Category | 140px | Category label — 12px, `--text-muted` |
 | Outcome | 100px | Status badge — resolved (`--status-green`), escalated (`--status-red`), pending (`--status-yellow`) |
 | Time | 100px | Relative timestamp — "2h ago" — 12px `--text-muted` |
 | Duration/Msgs | 90px | Voice: seconds (e.g. "142s") / Chat: message count (e.g. "6 msgs") — 12px |
@@ -302,20 +308,20 @@ Used in Recent Interactions table and all future pages:
 
 ```
 Voice badge: background --chart-voice at 15% opacity, border 1px --chart-voice at 40% opacity,
-             text --chart-voice, Phone icon 12px + "Voice" text, 11px SemiBold, padding 3px 8px, border-radius 4px
+             text --chart-voice, Phone icon 12px + "Voice" text, 12px SemiBold, padding 4px 8px, border-radius 4px
 
 Chat badge:  background --chart-chat at 15% opacity, border 1px --chart-chat at 40% opacity,
-             text --chart-chat, MessageSquare icon 12px + "Chat" text, 11px SemiBold, padding 3px 8px, border-radius 4px
+             text --chart-chat, MessageSquare icon 12px + "Chat" text, 12px SemiBold, padding 4px 8px, border-radius 4px
 ```
 
 ### Outcome Badge
 
 ```
-resolved:   background --status-green at 12% opacity, text --status-green, 11px SemiBold
-escalated:  background --status-red at 12% opacity, text --status-red, 11px SemiBold
-pending:    background --status-yellow at 12% opacity, text --status-yellow, 11px SemiBold
-callback:   background --accent-teal at 12% opacity, text --accent-teal, 11px SemiBold
-abandoned:  background --text-muted at 12% opacity, text --text-muted, 11px SemiBold
+resolved:   background --status-green at 12% opacity, text --status-green, 12px SemiBold, padding 4px 8px
+escalated:  background --status-red at 12% opacity, text --status-red, 12px SemiBold, padding 4px 8px
+pending:    background --status-yellow at 12% opacity, text --status-yellow, 12px SemiBold, padding 4px 8px
+callback:   background --accent-teal at 12% opacity, text --accent-teal, 12px SemiBold, padding 4px 8px
+abandoned:  background --text-muted at 12% opacity, text --text-muted, 12px SemiBold, padding 4px 8px
 ```
 
 ### Loading Skeletons (DASH-09)
@@ -480,6 +486,7 @@ Bar chart takes 2fr width. Donut chart takes 1fr.
 - Focus rings: visible on all keyboard-navigable elements (`--accent-teal`, 2px, offset 2px)
 - Screen reader: sidebar nav items use `aria-current="page"` on active item
 - Language toggle: `aria-label="Switch language"`, `role="switch"`
+- Notification bell: `aria-label="Notifications"` (EN) / `aria-label="Pemberitahuan"` (BM)
 - Images: MyKasih logo has `alt="MyKasih Foundation"` on login, `alt=""` (decorative) in sidebar
 - Stat cards: `role="region"` with `aria-label` matching the card label
 - Tables: `<table>` with proper `<thead>`, `<tbody>`, `<th scope="col">` for each column header
@@ -520,6 +527,17 @@ No third-party registries declared. All components from `mykasih-crm/components/
 
 ---
 
+## Revision Log
+
+| Date | Change | Reason |
+|------|--------|--------|
+| 2026-04-11 | Collapsed 7 font sizes to 4 (28px, 16px, 14px, 12px) | Checker: max 4 sizes |
+| 2026-04-11 | Removed weight 700 (Bold); palette is now 400 + 600 only | Checker: max 2 weights |
+| 2026-04-11 | Badge padding changed from 2px/3px to 4px 8px (all badge types) | Checker: multiples of 4 only |
+| 2026-04-11 | Added aria-label to notification bell in Topbar spec | Checker: icon-only elements require accessible label |
+
+---
+
 ## Checker Sign-Off
 
 - [ ] Dimension 1 Copywriting: PASS
@@ -535,4 +553,5 @@ No third-party registries declared. All components from `mykasih-crm/components/
 
 *Phase: 01-scaffold-db-auth-dashboard-shell*
 *UI-SPEC created: 2026-04-11*
+*UI-SPEC revised: 2026-04-11*
 *Consumed by: gsd-ui-checker, gsd-planner, gsd-executor, gsd-ui-auditor*
