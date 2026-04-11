@@ -89,27 +89,26 @@ export async function POST(request: Request): Promise<Response> {
     try {
       switch (intent) {
         case 'faq': {
-          // @ts-expect-error — faq-handler created in Plan 04; dynamic import prevents build failure
           const { faqHandler } = await import('@/lib/chatbot/faq-handler')
-          responseText = await (faqHandler as (m: string, s: typeof session) => Promise<string>)(message, session)
+          responseText = await faqHandler(message, session, wamid)
           break
         }
         case 'balance_check': {
           // @ts-expect-error — balance-handler created in Plan 04; dynamic import prevents build failure
           const { balanceHandler } = await import('@/lib/chatbot/balance-handler')
-          responseText = await (balanceHandler as (m: string, s: typeof session) => Promise<string>)(message, session)
+          responseText = await (balanceHandler as (m: string, s: typeof session, wamid?: string) => Promise<string>)(message, session, wamid)
           break
         }
         case 'merchant_lookup': {
           // @ts-expect-error — merchant-handler created in Plan 05; dynamic import prevents build failure
           const { merchantHandler } = await import('@/lib/chatbot/merchant-handler')
-          responseText = await (merchantHandler as (m: string, s: typeof session) => Promise<string>)(message, session)
+          responseText = await (merchantHandler as (m: string, s: typeof session, wamid?: string) => Promise<string>)(message, session, wamid)
           break
         }
         case 'complaint': {
           // @ts-expect-error — complaint-handler created in Plan 06; dynamic import prevents build failure
           const { complaintHandler } = await import('@/lib/chatbot/complaint-handler')
-          responseText = await (complaintHandler as (m: string, s: typeof session, t: boolean) => Promise<string>)(message, session, isTest)
+          responseText = await (complaintHandler as (m: string, s: typeof session, t: boolean, wamid?: string) => Promise<string>)(message, session, isTest, wamid)
           break
         }
         default:
@@ -123,8 +122,7 @@ export async function POST(request: Request): Promise<Response> {
     // 5. Send reply via WA
     await sendWhatsAppMessage(waPhone, responseText)
 
-    // Satisfy strict mode: wamid and contactName are present in request; log for traceability
-    void wamid
+    // Satisfy strict mode: contactName is received but not yet used in call record (future feature)
     void contactName
 
     return Response.json({ status: 'ok', intent, language: session.language })
