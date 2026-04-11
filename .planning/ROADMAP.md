@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Scaffold, DB, Auth & Dashboard Shell** - Project foundation, Supabase schema, login, sidebar, and dashboard home
 - [x] **Phase 2: Voice Webhook, Ticket System & Excel Export** - ElevenLabs webhook processing, IC masking, ticket generation, and export API
-- [ ] **Phase 3: Kasih WhatsApp Chatbot** - Meta WA webhook, Claude intent classification, all handlers, and chat storage
+- [x] **Phase 3: Kasih WhatsApp Chatbot** - Meta WA webhook, Claude intent classification, all handlers, and chat storage (completed 2026-04-11)
 - [ ] **Phase 4: Core Dashboard Pages** - Voice Calls, Chat Messages, All Interactions, Tickets, and Beneficiaries pages
 - [ ] **Phase 5: Intelligence & System Pages** - Analytics, Knowledge Base, Staff, Integrations, and Live Monitor pages
 - [ ] **Phase 6: Testing Console, AI Demo, Settings & Polish** - Three-tab testing console, standalone demo page, settings, and full BM/EN coverage
@@ -83,7 +83,7 @@ Plans:
 - [x] 03-04-PLAN.md — FAQ handler (kb_entries query) + merchant lookup handler (postcode/state query)
 - [x] 03-05-PLAN.md — Balance check handler (IC collect, maskIC, mock API, balance + expiry + nearest merchant)
 - [x] 03-06-PLAN.md — Complaint handler (5-step multi-turn, ticket creation with TKT ref, IC masking)
-- [ ] 03-07-PLAN.md — Real unit tests replacing all stubs (meta-wa, intent-classifier, webhook-chat, complaint-handler)
+- [x] 03-07-PLAN.md — Real unit tests replacing all stubs (meta-wa, intent-classifier, webhook-chat, complaint-handler)
 
 ### Phase 4: Core Dashboard Pages
 **Goal**: MyKasih staff can browse, search, and manage all voice calls, chat sessions, tickets, and beneficiary records through dedicated, filterable pages
@@ -145,7 +145,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 |-------|----------------|--------|-----------|
 | 1. Scaffold, DB, Auth & Dashboard Shell | 9/9 | Complete | 2026-04-11 |
 | 2. Voice Webhook, Ticket System & Excel Export | 7/7 | Complete | 2026-04-11 |
-| 3. Kasih WhatsApp Chatbot | 7/8 | In Progress|  |
+| 3. Kasih WhatsApp Chatbot | 8/8 | Complete   | 2026-04-11 |
 | 4. Core Dashboard Pages | 0/? | Not started | - |
 | 5. Intelligence & System Pages | 0/? | Not started | - |
 | 6. Testing Console, AI Demo, Settings & Polish | 0/? | Not started | - |

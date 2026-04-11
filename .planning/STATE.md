@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: Completed 03-06-PLAN.md
-last_updated: "2026-04-11T16:33:21.151Z"
+status: verifying
+stopped_at: Completed 03-07-PLAN.md
+last_updated: "2026-04-11T16:43:07.653Z"
 last_activity: 2026-04-11
 progress:
   total_phases: 7
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 24
-  completed_plans: 23
-  percent: 96
+  completed_plans: 24
+  percent: 100
 ---
 
 # Project State
@@ -27,7 +27,7 @@ See: .planning/PROJECT.md (updated 2026-04-11)
 
 Phase: 03 (kasih-whatsapp-chatbot) — EXECUTING
 Plan: 8 of 8
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-04-11
 
 Progress: [██░░░░░░░░] 29%
@@ -60,6 +60,7 @@ Progress: [██░░░░░░░░] 29%
 | Phase 03 P04 | 373 | 2 tasks | 4 files |
 | Phase 03 P05 | 4 | 1 tasks | 3 files |
 | Phase 03 P06 | 4 | 1 tasks | 2 files |
+| Phase 03 P07 | 12 | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -89,6 +90,8 @@ Recent decisions affecting current work:
 - [Phase 03]: Mock balance API parameter renamed to _maskedIC — fixture is static, underscore prefix satisfies TypeScript strict no-unused-vars without suppression comments
 - [Phase 03]: maskIC() called as first expression in case 2 of complaint handler — raw IC never persists beyond local scope (PDPA)
 - [Phase 03]: ticket insert failure only logs in complaint handler — call record is primary audit trail; ticket is secondary
+- [Phase 03]: jest.mock() factories must be self-contained — TDZ causes ReferenceError; fix is to create fn inside factory and expose via side-channel property on exported value
+- [Phase 03]: @jest-environment node required for API route test files — Next.js route handlers need Web Fetch API globals not present in jsdom; Node 18+ provides natively
 
 ### Pending Todos
 
@@ -101,6 +104,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-04-11T16:33:21.148Z
-Stopped at: Completed 03-06-PLAN.md
+Last session: 2026-04-11T16:43:07.650Z
+Stopped at: Completed 03-07-PLAN.md
 Resume file: None
