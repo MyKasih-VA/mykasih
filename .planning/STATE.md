@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-00-PLAN.md
-last_updated: "2026-04-11T15:18:58.206Z"
+stopped_at: Completed 03-01-PLAN.md
+last_updated: "2026-04-11T15:22:57.633Z"
 last_activity: 2026-04-11
 progress:
   total_phases: 7
   completed_phases: 2
   total_plans: 24
-  completed_plans: 17
-  percent: 71
+  completed_plans: 18
+  percent: 75
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-04-11)
 ## Current Position
 
 Phase: 03 (kasih-whatsapp-chatbot) — EXECUTING
-Plan: 2 of 8
+Plan: 3 of 8
 Status: Ready to execute
 Last activity: 2026-04-11
 
@@ -54,6 +54,7 @@ Progress: [██░░░░░░░░] 29%
 
 *Updated after each plan completion*
 | Phase 03 P00 | 2 | 2 tasks | 11 files |
+| Phase 03 P01 | 10 | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -69,6 +70,9 @@ Recent decisions affecting current work:
 - [Phase 02]: ElevenLabs webhook, IC masking, ticket generator, XLSX export, calls/tickets API — complete
 - [Phase 03]: @anthropic-ai/sdk@^0.88.0 installed as production dependency — chatbot routes need it at runtime
 - [Phase 03]: test.todo() stubs chosen over empty describe blocks — show up in Jest output for easy tracking
+- [Phase 03]: sendWhatsAppButtons uses type:list not type:button — list supports 10 items vs button max 3
+- [Phase 03]: Session manager uses @supabase/supabase-js createClient directly with service role key — avoids cookie context requirement of lib/supabase/server.ts
+- [Phase 03]: wa_message_id UNIQUE on sessions and calls tables — DB-level deduplication for Meta at-least-once delivery
 
 ### Pending Todos
 
@@ -81,6 +85,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-04-11T15:18:58.203Z
-Stopped at: Completed 03-00-PLAN.md
+Last session: 2026-04-11T15:22:57.630Z
+Stopped at: Completed 03-01-PLAN.md
 Resume file: None

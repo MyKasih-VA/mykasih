@@ -77,7 +77,7 @@ Plans:
 **Plans**: 8 plans
 Plans:
 - [x] 03-00-PLAN.md — Wave 0: install @anthropic-ai/sdk + test stubs for all Phase 3 routes and utils
-- [ ] 03-01-PLAN.md — Sessions table migration + shared types + lib/meta-wa.ts + session-manager.ts + [BLOCKING] schema push
+- [x] 03-01-PLAN.md — Sessions table migration + shared types + lib/meta-wa.ts + session-manager.ts + [BLOCKING] schema push
 - [ ] 03-02-PLAN.md — GET /api/webhook/chat (Meta verify) + POST /api/webhook/chat (receive + extract + forward)
 - [ ] 03-03-PLAN.md — Claude Haiku intent classifier + POST /api/chatbot/message dispatcher with first-contact list
 - [ ] 03-04-PLAN.md — FAQ handler (kb_entries query) + merchant lookup handler (postcode/state query)
@@ -145,7 +145,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 |-------|----------------|--------|-----------|
 | 1. Scaffold, DB, Auth & Dashboard Shell | 9/9 | Complete | 2026-04-11 |
 | 2. Voice Webhook, Ticket System & Excel Export | 7/7 | Complete | 2026-04-11 |
-| 3. Kasih WhatsApp Chatbot | 1/8 | In Progress|  |
+| 3. Kasih WhatsApp Chatbot | 2/8 | In Progress|  |
 | 4. Core Dashboard Pages | 0/? | Not started | - |
 | 5. Intelligence & System Pages | 0/? | Not started | - |
 | 6. Testing Console, AI Demo, Settings & Polish | 0/? | Not started | - |
