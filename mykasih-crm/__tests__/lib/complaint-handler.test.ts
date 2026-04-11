@@ -1,0 +1,10 @@
+describe('complaintHandler', () => {
+  test.todo('step 0 asks for name')
+  test.todo('step 1 asks for IC')
+  test.todo('step 2 masks IC immediately')
+  test.todo('step 3 asks to confirm details')
+  test.todo('step 4 creates ticket with TKT ref on confirmation')
+  test.todo('step 4 saves call with channel chat')
+  test.todo('step 4 cancels on rejection')
+  test.todo('inserts call with channel=chat and category=complaint')
+})
