@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { Phone, Percent, Ticket, Clock } from 'lucide-react'
 import { useLanguage } from '@/hooks/useLanguage'
 import { t } from '@/lib/translations'
 import { StatCard } from '@/components/dashboard/StatCard'
@@ -62,11 +63,13 @@ export default function DashboardPage() {
               ? `${stats.todayVoice} voice / ${stats.todayChat} chat`
               : undefined
           }
+          icon={Phone}
           loading={loading}
         />
         <StatCard
           label={t('dashboard.resolutionRate', language)}
           value={stats ? `${stats.resolutionRate}%` : '—'}
+          icon={Percent}
           loading={loading}
         />
         <StatCard
@@ -75,6 +78,7 @@ export default function DashboardPage() {
           subInfo={
             stats ? `${stats.inProgressTickets} in progress` : undefined
           }
+          icon={Ticket}
           loading={loading}
         />
         <StatCard
@@ -83,6 +87,7 @@ export default function DashboardPage() {
           subInfo={
             stats ? `${stats.avgMessages} avg msgs (chat)` : undefined
           }
+          icon={Clock}
           loading={loading}
         />
       </div>

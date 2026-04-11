@@ -63,14 +63,32 @@ function getOutcomeBadgeStyle(outcome: string | null): React.CSSProperties {
   }
 }
 
+const CATEGORY_LABELS: Record<string, string> = {
+  eligibility: 'Eligibility',
+  faq: 'FAQ',
+  registration: 'Registration',
+  complaint: 'Complaint',
+  merchant_lookup: 'Merchant Lookup',
+  balance_check: 'Balance Check',
+}
+
+function formatCategory(raw: string | null): string {
+  if (!raw) return '--'
+  return CATEGORY_LABELS[raw] ?? raw
+}
+
 function formatRelativeTime(timestamp: string): string {
   const now = Date.now()
   const then = new Date(timestamp).getTime()
   const diffMs = now - then
+
+  if (diffMs < 0) return 'just now'
+
   const diffMins = Math.floor(diffMs / 60000)
   const diffHours = Math.floor(diffMs / 3600000)
   const diffDays = Math.floor(diffMs / 86400000)
 
+  if (diffMins < 1) return 'just now'
   if (diffMins < 60) return `${diffMins}m ago`
   if (diffHours < 24) return `${diffHours}h ago`
   return `${diffDays}d ago`
@@ -145,7 +163,7 @@ export function RecentInteractions({ data, language, loading }: RecentInteractio
                 scope="col"
                 className="w-[90px] text-xs text-[var(--text-muted)]"
               >
-                {t('table.duration', language)}
+                {language === 'en' ? 'Dur / Msgs' : 'Tempoh / Mesej'}
               </TableHead>
             </TableRow>
           </TableHeader>
@@ -171,7 +189,7 @@ export function RecentInteractions({ data, language, loading }: RecentInteractio
                   {row.caller_name ?? 'Unknown'}
                 </TableCell>
                 <TableCell className="py-0 text-xs text-[var(--text-muted)]">
-                  {row.category ?? '--'}
+                  {formatCategory(row.category)}
                 </TableCell>
                 <TableCell className="py-0">
                   {row.outcome ? (
