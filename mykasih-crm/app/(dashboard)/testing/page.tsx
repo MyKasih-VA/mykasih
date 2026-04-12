@@ -1,24 +1,57 @@
 'use client'
 
-import { FlaskConical } from 'lucide-react'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
+import { VoiceAgentTab } from '@/components/testing/VoiceAgentTab'
+import { ChatbotSimTab } from '@/components/testing/ChatbotSimTab'
 import { useLanguage } from '@/hooks/useLanguage'
+import { t } from '@/lib/translations'
+
+// AnamAITab is built in Plan 03 — inline placeholder for now
+function AnamAIPlaceholder() {
+  const { language } = useLanguage()
+  return (
+    <div className="flex items-center justify-center py-12">
+      <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
+        {t('testing.chat.anamLabel', language)}
+      </p>
+    </div>
+  )
+}
 
 export default function Page() {
   const { language } = useLanguage()
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
-      <div className="w-14 h-14 rounded-full bg-[var(--bg-surface)] border border-[var(--bg-border)] flex items-center justify-center mb-4">
-        <FlaskConical className="w-6 h-6 text-[var(--text-muted)]" />
-      </div>
-      <h2 className="text-base font-semibold text-[var(--text-primary)] mb-1">
-        {language === 'en' ? 'Testing Console' : 'Konsol Ujian'}
+    <div className="flex flex-col">
+      <h2 className="text-xl font-semibold mb-6 text-[var(--text-primary)]">
+        {t('testing.title', language)}
       </h2>
-      <p className="text-sm text-[var(--text-muted)] max-w-xs">
-        {language === 'en'
-          ? 'This page is being built in Phase 5.'
-          : 'Halaman ini sedang dibina dalam Phase 5.'}
-      </p>
+
+      <Tabs defaultValue="voice" className="w-full">
+        <TabsList className="mb-4">
+          <TabsTrigger value="voice">
+            {t('testing.tab.voiceAgent', language)}
+          </TabsTrigger>
+          <TabsTrigger value="chatbot">
+            {t('testing.tab.kasihChatbot', language)}
+          </TabsTrigger>
+          <TabsTrigger value="anam">
+            {t('testing.tab.anamAI', language)}
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="voice">
+          <VoiceAgentTab />
+        </TabsContent>
+
+        <TabsContent value="chatbot">
+          <ChatbotSimTab />
+        </TabsContent>
+
+        <TabsContent value="anam">
+          <AnamAIPlaceholder />
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }
