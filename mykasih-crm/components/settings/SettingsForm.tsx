@@ -86,9 +86,14 @@ export function SettingsForm() {
     }
   }
 
+  const [copiedUrl, setCopiedUrl] = useState<string | null>(null)
+
   function copyToClipboard(url: string) {
-    void navigator.clipboard.writeText(url)
-    toast.success(t('settings.copyUrl', language))
+    void navigator.clipboard.writeText(url).then(() => {
+      toast.success('Copied!', { description: 'Webhook URL copied to clipboard.', duration: 2000 })
+      setCopiedUrl(url)
+      setTimeout(() => setCopiedUrl(null), 1500)
+    })
   }
 
   if (loading) {
@@ -219,7 +224,7 @@ export function SettingsForm() {
                   onClick={() => copyToClipboard(voiceWebhookUrl)}
                   type="button"
                 >
-                  {t('settings.copyUrl', language)}
+                  {copiedUrl === voiceWebhookUrl ? 'Copied \u2713' : t('settings.copyUrl', language)}
                 </Button>
               </div>
             </div>
@@ -243,7 +248,7 @@ export function SettingsForm() {
                   onClick={() => copyToClipboard(chatWebhookUrl)}
                   type="button"
                 >
-                  {t('settings.copyUrl', language)}
+                  {copiedUrl === chatWebhookUrl ? 'Copied \u2713' : t('settings.copyUrl', language)}
                 </Button>
               </div>
             </div>

@@ -14,7 +14,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
         <Topbar language={language} onToggleLanguage={toggleLanguage} />
         <main
           className="p-6 flex-1"
-          style={{ background: 'var(--bg-primary)' }}
+          style={{ background: 'var(--bg-primary)', animation: 'fadeIn 0.15s ease-in' }}
         >
           {children}
         </main>

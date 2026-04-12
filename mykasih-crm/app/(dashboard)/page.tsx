@@ -60,7 +60,9 @@ export default function DashboardPage() {
           value={stats?.todayTotal ?? 0}
           subInfo={
             stats
-              ? `${stats.todayVoice} voice / ${stats.todayChat} chat`
+              ? t('dashboard.stat.voiceChat', language)
+                  .replace('{v}', String(stats.todayVoice))
+                  .replace('{c}', String(stats.todayChat))
               : undefined
           }
           icon={Phone}
@@ -76,7 +78,9 @@ export default function DashboardPage() {
           label={t('dashboard.openTickets', language)}
           value={stats?.openTickets ?? 0}
           subInfo={
-            stats ? `${stats.inProgressTickets} in progress` : undefined
+            stats
+              ? t('dashboard.stat.inProgress', language).replace('{n}', String(stats.inProgressTickets))
+              : undefined
           }
           icon={Ticket}
           loading={loading}
@@ -85,7 +89,9 @@ export default function DashboardPage() {
           label={t('dashboard.avgDuration', language)}
           value={stats ? `${stats.avgDuration}s` : '—'}
           subInfo={
-            stats ? `${stats.avgMessages} avg msgs (chat)` : undefined
+            stats
+              ? t('dashboard.stat.avgMsgs', language).replace('{n}', String(stats.avgMessages))
+              : undefined
           }
           icon={Clock}
           loading={loading}

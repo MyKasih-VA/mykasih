@@ -35,6 +35,12 @@ body {
   font-family: var(--font-sans);
 }
 
+/* Page transition fade-in */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 /* Sidebar nav — thin unobtrusive scrollbar */
 .sidebar-nav::-webkit-scrollbar {
   width: 3px;

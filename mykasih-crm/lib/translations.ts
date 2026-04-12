@@ -42,6 +42,24 @@ export const translations = {
   'dashboard.callVolume': { en: 'Call Volume \u2014 Last 7 Days', bm: 'Jumlah Panggilan \u2014 7 Hari Lepas' },
   'dashboard.byCategory': { en: 'Interactions by Category', bm: 'Interaksi Mengikut Kategori' },
 
+  // Dashboard stat sub-labels
+  'dashboard.stat.voiceChat': { en: '{v} voice / {c} chat', bm: '{v} suara / {c} chat' },
+  'dashboard.stat.inProgress': { en: '{n} in progress', bm: '{n} dalam proses' },
+  'dashboard.stat.avgMsgs': { en: '{n} avg msgs (chat)', bm: '{n} purata mesej (chat)' },
+
+  // Dashboard table columns
+  'dashboard.recent.title': { en: 'Recent Interactions', bm: 'Interaksi Terkini' },
+  'dashboard.recent.channel': { en: 'Channel', bm: 'Saluran' },
+  'dashboard.recent.caller': { en: 'Caller', bm: 'Pemanggil' },
+  'dashboard.recent.category': { en: 'Category', bm: 'Kategori' },
+  'dashboard.recent.outcome': { en: 'Outcome', bm: 'Hasil' },
+  'dashboard.recent.time': { en: 'Time', bm: 'Masa' },
+  'dashboard.recent.duration': { en: 'Dur / Msgs', bm: 'Dur / Mesej' },
+
+  // Chart legends
+  'dashboard.chart.voice': { en: 'Voice', bm: 'Suara' },
+  'dashboard.chart.chat': { en: 'Chat', bm: 'Chat' },
+
   // Empty states
   'empty.noInteractions.heading': { en: 'No interactions yet', bm: 'Tiada interaksi lagi' },
   'empty.noInteractions.body': { en: 'Interactions will appear here once calls or chats are received.', bm: 'Interaksi akan dipaparkan di sini setelah panggilan atau sembang diterima.' },
@@ -269,7 +287,7 @@ export const translations = {
   'testing.title': { en: 'Testing Console', bm: 'Konsol Ujian' },
   'testing.tab.voiceAgent': { en: 'Voice Agent', bm: 'Ejen Suara' },
   'testing.tab.kasihChatbot': { en: 'Kasih Chatbot', bm: 'Chatbot Kasih' },
-  'testing.tab.anamAI': { en: 'Anam AI', bm: 'Anam AI' },
+  'testing.tab.anamAI': { en: 'Kasih Avatar', bm: 'Avatar Kasih' },
   'testing.voice.startSession': { en: 'Start Session', bm: 'Mulakan Sesi' },
   'testing.voice.endSession': { en: 'End Session', bm: 'Tamatkan Sesi' },
   'testing.voice.status.ready': { en: 'Ready', bm: 'Sedia' },
@@ -283,7 +301,7 @@ export const translations = {
   'testing.chat.inputPlaceholder': { en: 'Type a message as a beneficiary...', bm: 'Taip mesej sebagai penerima manfaat...' },
   'testing.chat.send': { en: 'Send', bm: 'Hantar' },
   'testing.chat.clearConversation': { en: 'Clear Conversation', bm: 'Kosongkan Perbualan' },
-  'testing.chat.anamLabel': { en: 'Anam AI Persona — client-facing demo', bm: 'Persona Anam AI — demo untuk pelanggan' },
+  'testing.chat.anamLabel': { en: 'Kasih — MyKasih AI Avatar (Beta)', bm: 'Kasih — Avatar AI MyKasih (Beta)' },
   'testing.chat.emptyState': { en: 'Start a conversation to test the Kasih chatbot.', bm: 'Mulakan perbualan untuk menguji chatbot Kasih.' },
   'testing.chat.firstContact.en': { en: 'Welcome to MyKasih. Please select a service: Semak baki | Kedai berdekatan | Bantuan SARA | Status aduan', bm: 'Welcome to MyKasih. Please select a service: Semak baki | Kedai berdekatan | Bantuan SARA | Status aduan' },
   'testing.chat.firstContact.bm': { en: 'Selamat datang ke MyKasih. Sila pilih perkhidmatan: Semak baki | Kedai berdekatan | Bantuan SARA | Status aduan', bm: 'Selamat datang ke MyKasih. Sila pilih perkhidmatan: Semak baki | Kedai berdekatan | Bantuan SARA | Status aduan' },
