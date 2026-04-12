@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Voice Webhook, Ticket System & Excel Export** - ElevenLabs webhook processing, IC masking, ticket generation, and export API
 - [x] **Phase 3: Kasih WhatsApp Chatbot** - Meta WA webhook, Claude intent classification, all handlers, and chat storage (completed 2026-04-11)
 - [ ] **Phase 4: Core Dashboard Pages** - Voice Calls, Chat Messages, All Interactions, Tickets, and Beneficiaries pages
-- [ ] **Phase 5: Intelligence & System Pages** - Analytics, Knowledge Base, Staff, Integrations, and Live Monitor pages
+- [x] **Phase 5: Intelligence & System Pages** - Analytics, Knowledge Base, Staff, Integrations, and Live Monitor pages (completed 2026-04-12)
 - [ ] **Phase 6: Testing Console, AI Demo, Settings & Polish** - Three-tab testing console, standalone demo page, settings, and full BM/EN coverage
 - [ ] **Phase 7: UAT Fixes, PDPA Audit & Final QA** - User acceptance testing, compliance audit, security hardening, and production sign-off
 
@@ -119,7 +119,7 @@ Plans:
 - [x] 05-02-PLAN.md — Knowledge Base page (CRUD API, table with BM/EN toggle, add/edit modal, ElevenLabs sync)
 - [x] 05-03-PLAN.md — Staff Management page (invite API, role edit, remove, admin-only enforcement)
 - [x] 05-04-PLAN.md — Integrations page (health check API, 5 status cards, action buttons, merchant seed preserved)
-- [ ] 05-05-PLAN.md — Live Monitor page (ElevenLabs + sessions API, auto-refresh 10s, visibility-aware polling)
+- [x] 05-05-PLAN.md — Live Monitor page (ElevenLabs + sessions API, auto-refresh 10s, visibility-aware polling)
 **UI hint**: yes
 
 ### Phase 6: Testing Console, AI Demo, Settings & Polish
@@ -158,6 +158,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 2. Voice Webhook, Ticket System & Excel Export | 7/7 | Complete | 2026-04-11 |
 | 3. Kasih WhatsApp Chatbot | 8/8 | Complete   | 2026-04-11 |
 | 4. Core Dashboard Pages | 3/4 | In Progress|  |
-| 5. Intelligence & System Pages | 4/5 | In Progress|  |
+| 5. Intelligence & System Pages | 5/5 | Complete   | 2026-04-12 |
 | 6. Testing Console, AI Demo, Settings & Polish | 0/? | Not started | - |
 | 7. UAT Fixes, PDPA Audit & Final QA | 0/? | Not started | - |

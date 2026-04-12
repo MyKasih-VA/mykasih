@@ -82,7 +82,7 @@
 - [x] **PAGE-07**: Knowledge Base page — CRUD table, BM/EN toggle, active/inactive switch, Sync to ElevenLabs button
 - [x] **PAGE-08**: Staff Management page — user table, add/edit/remove, role select, last login display
 - [x] **PAGE-09**: Integrations page — 5 status cards (ElevenLabs, Meta WA, n8n, Supabase, Anam AI) with live status and action buttons
-- [ ] **PAGE-10**: Live Monitor page — active voice sessions (ElevenLabs API), active WA chats, auto-refresh every 10s
+- [x] **PAGE-10**: Live Monitor page — active voice sessions (ElevenLabs API), active WA chats, auto-refresh every 10s
 
 ### Testing & Demo (Session 6)
 
@@ -188,7 +188,7 @@
 | PAGE-07 | Phase 5 — Intelligence & System Pages | Complete |
 | PAGE-08 | Phase 5 — Intelligence & System Pages | Complete |
 | PAGE-09 | Phase 5 — Intelligence & System Pages | Complete |
-| PAGE-10 | Phase 5 — Intelligence & System Pages | Pending |
+| PAGE-10 | Phase 5 — Intelligence & System Pages | Complete |
 | TEST-01 | Phase 6 — Testing Console, AI Demo, Settings & Polish | Pending |
 | TEST-02 | Phase 6 — Testing Console, AI Demo, Settings & Polish | Pending |
 | TEST-03 | Phase 6 — Testing Console, AI Demo, Settings & Polish | Pending |
