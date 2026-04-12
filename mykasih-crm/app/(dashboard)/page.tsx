@@ -104,12 +104,14 @@ export default function DashboardPage() {
           <CallVolumeChart
             data={data?.dailyVolume ?? []}
             title={t('dashboard.callVolume', language)}
+            language={language}
             loading={loading}
           />
         </div>
         <CategoryDonut
           data={data?.categories ?? []}
           title={t('dashboard.byCategory', language)}
+          language={language}
           loading={loading}
         />
       </div>

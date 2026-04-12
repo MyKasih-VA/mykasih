@@ -60,6 +60,14 @@ export const translations = {
   'dashboard.chart.voice': { en: 'Voice', bm: 'Suara' },
   'dashboard.chart.chat': { en: 'Chat', bm: 'Chat' },
 
+  // Category labels
+  'category.eligibility': { en: 'Eligibility', bm: 'Kelayakan' },
+  'category.faq': { en: 'FAQ', bm: 'Soalan Lazim' },
+  'category.registration': { en: 'Registration', bm: 'Pendaftaran' },
+  'category.complaint': { en: 'Complaint', bm: 'Aduan' },
+  'category.merchantLookup': { en: 'Merchant Lookup', bm: 'Carian Kedai' },
+  'category.balanceCheck': { en: 'Balance Check', bm: 'Semakan Baki' },
+
   // Empty states
   'empty.noInteractions.heading': { en: 'No interactions yet', bm: 'Tiada interaksi lagi' },
   'empty.noInteractions.body': { en: 'Interactions will appear here once calls or chats are received.', bm: 'Interaksi akan dipaparkan di sini setelah panggilan atau sembang diterima.' },

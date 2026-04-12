@@ -1,26 +1,17 @@
 'use client'
 
-import { useEffect } from 'react'
 import { useLanguage } from '@/hooks/useLanguage'
 import { t } from '@/lib/translations'
+
+const ANAM_SHARE_URL = 'https://lab.anam.ai/share/ABLTOrY3iUovduzq_wplu'
 
 export function AnamAITab() {
   const { language } = useLanguage()
 
-  useEffect(() => {
-    const existing = document.querySelector('script[src*="@anam-ai/agent-widget"]')
-    if (existing) return // already loaded (tab re-mount guard)
-    const script = document.createElement('script')
-    script.src = 'https://unpkg.com/@anam-ai/agent-widget'
-    script.async = true
-    document.body.appendChild(script)
-    // Do NOT remove script on unmount — custom element registry is global
-  }, [])
-
   return (
     <div className="relative w-full flex flex-col items-center gap-4 pt-2">
       {/* Header */}
-      <div className="flex items-center gap-3 w-full max-w-lg">
+      <div className="flex items-center gap-3 w-full max-w-2xl">
         <div
           className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm"
           style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-teal))' }}
@@ -46,30 +37,20 @@ export function AnamAITab() {
         </span>
       </div>
 
-      {/* Embed container — force inline positioning */}
+      {/* Embed container — iframe approach for proper centering */}
       <div
-        className="w-full max-w-lg rounded-xl overflow-hidden"
+        className="w-full max-w-2xl rounded-xl overflow-hidden"
         style={{
-          minHeight: '480px',
+          height: '540px',
           border: '1px solid var(--bg-border)',
-          position: 'relative',
         }}
       >
-        <style>{`
-          anam-agent {
-            position: static !important;
-            width: 100% !important;
-            height: 480px !important;
-            display: block !important;
-            border-radius: 12px !important;
-          }
-          anam-agent > * {
-            position: static !important;
-          }
-        `}</style>
-        <anam-agent
-          agent-id={process.env.NEXT_PUBLIC_ANAM_AGENT_ID}
-          style={{ width: '100%', height: '480px', display: 'block' }}
+        <iframe
+          src={ANAM_SHARE_URL}
+          title="Kasih AI Avatar"
+          allow="camera; microphone; autoplay"
+          className="w-full h-full border-0"
+          style={{ borderRadius: '12px' }}
         />
       </div>
     </div>

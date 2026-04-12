@@ -8,18 +8,21 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 import { Skeleton } from '@/components/ui/skeleton'
+import { t, type Language, type TranslationKey } from '@/lib/translations'
 
-const CATEGORY_LABELS: Record<string, string> = {
-  eligibility: 'Eligibility',
-  faq: 'FAQ',
-  registration: 'Registration',
-  complaint: 'Complaint',
-  merchant_lookup: 'Merchant Lookup',
-  balance_check: 'Balance Check',
+const CATEGORY_KEYS: Record<string, TranslationKey> = {
+  eligibility: 'category.eligibility',
+  faq: 'category.faq',
+  registration: 'category.registration',
+  complaint: 'category.complaint',
+  merchant_lookup: 'category.merchantLookup',
+  balance_check: 'category.balanceCheck',
 }
 
-function formatCategory(name: string): string {
-  return CATEGORY_LABELS[name] ?? name.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+function formatCategory(name: string, language: Language): string {
+  const key = CATEGORY_KEYS[name]
+  if (key) return t(key, language)
+  return name.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
 }
 
 // 6 visually distinct colors — no duplicates (--accent-teal and --chart-chat are both #00897B)
@@ -35,10 +38,11 @@ const COLORS = [
 interface CategoryDonutProps {
   data: Array<{ name: string; value: number }>
   title: string
+  language: Language
   loading?: boolean
 }
 
-export function CategoryDonut({ data, title, loading }: CategoryDonutProps) {
+export function CategoryDonut({ data, title, language, loading }: CategoryDonutProps) {
   const total = data.reduce((sum, entry) => sum + entry.value, 0)
 
   return (
@@ -86,7 +90,7 @@ export function CategoryDonut({ data, title, loading }: CategoryDonutProps) {
                   style={{ background: COLORS[index % COLORS.length] }}
                 />
                 <span className="text-xs text-[var(--text-muted)] truncate">
-                  {formatCategory(entry.name)}
+                  {formatCategory(entry.name, language)}
                 </span>
                 <span className="text-xs text-[var(--text-muted)] ml-auto">
                   {entry.value}

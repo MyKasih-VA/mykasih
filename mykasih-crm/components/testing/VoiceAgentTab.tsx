@@ -14,6 +14,14 @@ interface TranscriptLine {
 
 type DisplayStatus = 'ready' | 'connecting' | 'active' | 'ended'
 
+const CATEGORY_CHIPS = [
+  'Semak Baki',
+  'Kelayakan',
+  'Aduan / Complaints',
+  'Kedai / Merchants',
+  'Soalan Lazim / FAQ',
+]
+
 // --- VoiceAgentInner ---
 function VoiceAgentInner() {
   const { language } = useLanguage()
@@ -107,30 +115,59 @@ function VoiceAgentInner() {
     endSession()
   }
 
-  // Derive status badge config
-  const statusConfig: Record<DisplayStatus, { label: string; dotColor: string }> = {
-    ready: {
-      label: t('testing.voice.status.ready', language),
-      dotColor: 'var(--status-green)',
-    },
-    connecting: {
-      label: t('testing.voice.status.connecting', language),
-      dotColor: 'var(--status-yellow)',
-    },
-    active: {
-      label: t('testing.voice.status.active', language),
-      dotColor: 'var(--status-green)',
-    },
-    ended: {
-      label: t('testing.voice.status.ended', language),
-      dotColor: 'var(--text-muted)',
-    },
+  // Derive bilingual status label
+  const statusLabels: Record<DisplayStatus, string> = {
+    ready: 'SEDIA / READY',
+    connecting: 'MENYAMBUNG... / CONNECTING',
+    active: 'AKTIF / ACTIVE',
+    ended: 'TAMAT / ENDED',
   }
 
-  const currentStatus = statusConfig[displayStatus]
+  const statusDotColors: Record<DisplayStatus, string> = {
+    ready: 'var(--status-green)',
+    connecting: 'var(--status-yellow)',
+    active: 'var(--status-green)',
+    ended: 'var(--text-muted)',
+  }
 
   return (
-    <div className="max-w-lg mx-auto py-8 flex flex-col gap-6 items-center">
+    <div className="flex flex-col gap-4">
+      {/* Orb keyframe animations */}
+      <style>{`
+        @keyframes orbGlow {
+          0%, 100% { box-shadow: 0 0 40px 8px rgba(255, 213, 79, 0.25); }
+          50% { box-shadow: 0 0 50px 12px rgba(255, 213, 79, 0.35); }
+        }
+        @keyframes orbPulseConnect {
+          0%, 100% { transform: scale(1); opacity: 0.3; }
+          50% { transform: scale(1.25); opacity: 0.6; }
+        }
+        @keyframes orbBreathe {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.06); }
+        }
+        @keyframes orbRing1 {
+          0% { transform: scale(1); opacity: 0.35; }
+          75%, 100% { transform: scale(1.6); opacity: 0; }
+        }
+        @keyframes orbRing2 {
+          0% { transform: scale(1); opacity: 0.2; }
+          75%, 100% { transform: scale(1.85); opacity: 0; }
+        }
+        @keyframes orbRing3 {
+          0% { transform: scale(1); opacity: 0.1; }
+          75%, 100% { transform: scale(2.1); opacity: 0; }
+        }
+        @keyframes audioLevelDash {
+          0%, 100% { border-color: rgba(255, 213, 79, 0.2); }
+          50% { border-color: rgba(255, 213, 79, 0.5); }
+        }
+        @keyframes audioLevelDashActive {
+          0%, 100% { border-color: color-mix(in srgb, var(--accent-primary) 30%, transparent); }
+          50% { border-color: color-mix(in srgb, var(--accent-primary) 70%, transparent); }
+        }
+      `}</style>
+
       {/* Agent ID missing warning */}
       {!agentId && (
         <div
@@ -145,172 +182,304 @@ function VoiceAgentInner() {
         </div>
       )}
 
-      {/* Status Badge */}
-      <div className="flex items-center gap-2">
-        <span
-          className={`w-2 h-2 rounded-full flex-shrink-0${displayStatus === 'active' ? ' animate-pulse' : ''}`}
-          style={{ backgroundColor: currentStatus.dotColor }}
-        />
-        <span className="text-sm" style={{ color: currentStatus.dotColor }}>
-          {currentStatus.label}
-        </span>
-      </div>
-
-      {/* Animated Orb */}
-      <div className="relative w-32 h-32 flex items-center justify-center mt-4">
-        {/* Orb CSS */}
-        <style>{`
-          @keyframes orbPing1 {
-            0% { transform: scale(1); opacity: 0.4; }
-            75%, 100% { transform: scale(1.6); opacity: 0; }
-          }
-          @keyframes orbPing2 {
-            0% { transform: scale(1); opacity: 0.25; }
-            75%, 100% { transform: scale(1.8); opacity: 0; }
-          }
-          @keyframes orbPing3 {
-            0% { transform: scale(1); opacity: 0.15; }
-            75%, 100% { transform: scale(2.0); opacity: 0; }
-          }
-          @keyframes orbBreathe {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-          }
-          @keyframes orbPulseConnect {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.3); }
-          }
-        `}</style>
-
-        {/* Active state — 3 concentric animated rings */}
-        {displayStatus === 'active' && (
-          <>
-            <span
-              className="absolute inset-0 rounded-full"
-              style={{
-                backgroundColor: 'var(--accent-primary)',
-                opacity: 0.4,
-                animation: 'orbPing1 2s cubic-bezier(0, 0, 0.2, 1) infinite',
-              }}
-            />
-            <span
-              className="absolute inset-0 rounded-full"
-              style={{
-                backgroundColor: 'var(--accent-primary)',
-                opacity: 0.25,
-                animation: 'orbPing2 2s cubic-bezier(0, 0, 0.2, 1) infinite 300ms',
-              }}
-            />
-            <span
-              className="absolute inset-0 rounded-full"
-              style={{
-                backgroundColor: 'var(--accent-primary)',
-                opacity: 0.15,
-                animation: 'orbPing3 2s cubic-bezier(0, 0, 0.2, 1) infinite 600ms',
-              }}
-            />
-          </>
-        )}
-
-        {/* Connecting state — single pulsing amber ring */}
-        {displayStatus === 'connecting' && (
-          <span
-            className="absolute inset-0 rounded-full"
-            style={{
-              backgroundColor: 'var(--status-yellow)',
-              animation: 'orbPulseConnect 1.5s ease-in-out infinite',
-            }}
-          />
-        )}
-
-        {/* Orb core */}
-        <button
-          onClick={isConnected ? handleEndSession : () => void handleStartSession()}
-          disabled={isConnecting || !agentId}
-          className="relative z-10 w-24 h-24 rounded-full flex items-center justify-center cursor-pointer disabled:cursor-not-allowed transition-all duration-300"
-          style={{
-            background:
-              displayStatus === 'ended'
-                ? 'var(--bg-border)'
-                : displayStatus === 'active'
-                  ? 'linear-gradient(135deg, var(--accent-primary), var(--accent-teal))'
-                  : displayStatus === 'connecting'
-                    ? 'linear-gradient(135deg, var(--status-yellow), #B8860B)'
-                    : 'linear-gradient(135deg, var(--accent-primary), var(--accent-teal))',
-            boxShadow:
-              displayStatus === 'active'
-                ? '0 0 30px color-mix(in srgb, var(--accent-primary) 40%, transparent), inset 0 0 20px rgba(255,255,255,0.1)'
-                : displayStatus === 'connecting'
-                  ? '0 0 20px color-mix(in srgb, var(--status-yellow) 30%, transparent)'
-                  : 'inset 0 0 20px rgba(255,255,255,0.05)',
-            animation: displayStatus === 'active' ? 'orbBreathe 3s ease-in-out infinite' : undefined,
-            opacity: displayStatus === 'ended' ? 0.5 : 1,
-          }}
-        >
-          {/* Mic icon */}
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            style={{ color: displayStatus === 'ended' ? 'var(--text-muted)' : '#fff' }}
-          >
-            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
-            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-            <line x1="12" x2="12" y1="19" y2="22" />
-          </svg>
-        </button>
-      </div>
-
-      {/* Label below orb */}
-      <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
-        {isConnected
-          ? t('testing.voice.endSession', language)
-          : displayStatus === 'ended'
-            ? (language === 'bm' ? 'Sesi Tamat' : 'Session Ended')
-            : t('testing.voice.startSession', language)}
-      </p>
-
-      {/* Helper text */}
-      {displayStatus === 'ready' && (
-        <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
-          {language === 'bm' ? 'Akses mikrofon diperlukan' : 'Microphone access required'}
-        </p>
-      )}
-
-      {/* Test tag caption */}
-      <p className="text-xs text-center" style={{ color: 'var(--text-muted)' }}>
-        {t('testing.voice.testTagged', language)}
-      </p>
-
-      {/* Live Transcript Panel */}
-      <div className="w-full">
-        <h3 className="text-sm font-semibold text-[var(--text-primary)] mb-2">
-          {t('testing.voice.liveTranscript', language)}
-        </h3>
+      {/* Split panel layout */}
+      <div className="flex flex-col lg:flex-row gap-4" style={{ minHeight: '520px' }}>
+        {/* LEFT PANEL — Voice Agent Controls (~55%) */}
         <div
-          className="rounded p-4 overflow-y-auto min-h-[200px] max-h-[320px]"
+          className="flex-[55] flex flex-col items-center rounded-lg px-6 py-6"
           style={{ backgroundColor: 'var(--bg-surface)' }}
         >
-          {transcript.length === 0 ? (
-            <p className="text-sm text-center" style={{ color: 'var(--text-muted)' }}>
-              {t('testing.voice.transcriptEmpty', language)}
-            </p>
-          ) : (
-            transcript.map((line, idx) => (
-              <div key={idx} className="mb-2">
-                <span className="text-xs mr-1 capitalize" style={{ color: 'var(--text-muted)' }}>
-                  {line.speaker}:
+          {/* Category chips — horizontal scrollable */}
+          <div className="w-full overflow-x-auto pb-2 mb-4 flex-shrink-0">
+            <div className="flex gap-2 min-w-max">
+              {CATEGORY_CHIPS.map((chip) => (
+                <span
+                  key={chip}
+                  className="px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap select-none"
+                  style={{
+                    backgroundColor: 'var(--bg-primary)',
+                    border: '1px solid var(--bg-border)',
+                    color: 'var(--text-muted)',
+                  }}
+                >
+                  {chip}
                 </span>
-                <span className="text-sm text-[var(--text-primary)]">{line.text}</span>
+              ))}
+            </div>
+          </div>
+
+          {/* Status indicator */}
+          <div className="flex items-center gap-2 mb-6">
+            <span
+              className={`w-2 h-2 rounded-full flex-shrink-0${displayStatus === 'active' ? ' animate-pulse' : ''}`}
+              style={{ backgroundColor: statusDotColors[displayStatus] }}
+            />
+            <span
+              className="text-xs font-semibold tracking-wider uppercase"
+              style={{ color: statusDotColors[displayStatus] }}
+            >
+              {statusLabels[displayStatus]}
+            </span>
+          </div>
+
+          {/* Orb area — centered with flex grow */}
+          <div className="flex-1 flex flex-col items-center justify-center w-full">
+            {/* Orb container */}
+            <div className="relative flex items-center justify-center" style={{ width: 180, height: 180 }}>
+              {/* Active state — expanding green glow rings */}
+              {displayStatus === 'active' && (
+                <>
+                  <span
+                    className="absolute rounded-full"
+                    style={{
+                      width: 150,
+                      height: 150,
+                      left: 15,
+                      top: 15,
+                      backgroundColor: 'var(--accent-primary)',
+                      animation: 'orbRing1 2s cubic-bezier(0, 0, 0.2, 1) infinite',
+                    }}
+                  />
+                  <span
+                    className="absolute rounded-full"
+                    style={{
+                      width: 150,
+                      height: 150,
+                      left: 15,
+                      top: 15,
+                      backgroundColor: 'var(--accent-primary)',
+                      animation: 'orbRing2 2s cubic-bezier(0, 0, 0.2, 1) infinite 250ms',
+                    }}
+                  />
+                  <span
+                    className="absolute rounded-full"
+                    style={{
+                      width: 150,
+                      height: 150,
+                      left: 15,
+                      top: 15,
+                      backgroundColor: 'var(--accent-primary)',
+                      animation: 'orbRing3 2s cubic-bezier(0, 0, 0.2, 1) infinite 500ms',
+                    }}
+                  />
+                </>
+              )}
+
+              {/* Connecting state — pulsing amber ring */}
+              {displayStatus === 'connecting' && (
+                <span
+                  className="absolute rounded-full"
+                  style={{
+                    width: 150,
+                    height: 150,
+                    left: 15,
+                    top: 15,
+                    backgroundColor: '#FF8F00',
+                    animation: 'orbPulseConnect 1.5s ease-in-out infinite',
+                  }}
+                />
+              )}
+
+              {/* Orb core — amber/golden gradient */}
+              <div
+                className="relative z-10 rounded-full flex items-center justify-center"
+                style={{
+                  width: 150,
+                  height: 150,
+                  background:
+                    displayStatus === 'ended'
+                      ? 'var(--bg-border)'
+                      : displayStatus === 'active'
+                        ? 'radial-gradient(circle at 40% 35%, var(--accent-primary), var(--accent-teal))'
+                        : 'radial-gradient(circle at 40% 35%, #FFD54F, #FF8F00)',
+                  boxShadow:
+                    displayStatus === 'ended'
+                      ? 'none'
+                      : displayStatus === 'active'
+                        ? '0 0 40px 10px color-mix(in srgb, var(--accent-primary) 40%, transparent)'
+                        : '0 0 40px 8px rgba(255, 213, 79, 0.25)',
+                  animation:
+                    displayStatus === 'active'
+                      ? 'orbBreathe 3s ease-in-out infinite'
+                      : displayStatus === 'ready'
+                        ? 'orbGlow 4s ease-in-out infinite'
+                        : undefined,
+                  opacity: displayStatus === 'ended' ? 0.4 : 1,
+                  transition: 'opacity 0.5s ease',
+                }}
+              >
+                {/* Mic icon */}
+                <svg
+                  width="40"
+                  height="40"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  style={{
+                    color: displayStatus === 'ended' ? 'var(--text-muted)' : '#1A1A1A',
+                  }}
+                >
+                  <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                  <line x1="12" x2="12" y1="19" y2="22" />
+                </svg>
               </div>
-            ))
-          )}
-          <div ref={transcriptEndRef} />
+            </div>
+
+            {/* Dashed audio level indicator ring */}
+            <div
+              className="mt-3 rounded-full"
+              style={{
+                width: 80,
+                height: 4,
+                border: '1px dashed',
+                borderColor:
+                  displayStatus === 'active'
+                    ? 'color-mix(in srgb, var(--accent-primary) 50%, transparent)'
+                    : 'rgba(255, 213, 79, 0.25)',
+                animation:
+                  displayStatus === 'active'
+                    ? 'audioLevelDashActive 1.5s ease-in-out infinite'
+                    : displayStatus === 'connecting'
+                      ? 'audioLevelDash 1.5s ease-in-out infinite'
+                      : undefined,
+              }}
+            />
+          </div>
+
+          {/* Button + hints — bottom area */}
+          <div className="flex flex-col items-center gap-3 mt-6 flex-shrink-0">
+            {/* Start / End button */}
+            <button
+              onClick={isConnected ? handleEndSession : () => void handleStartSession()}
+              disabled={isConnecting || !agentId}
+              className="flex items-center gap-2 px-8 py-3 rounded-full text-sm font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer hover:brightness-110 active:scale-95"
+              style={{
+                backgroundColor: isConnected ? 'var(--status-red)' : '#FFD54F',
+                color: isConnected ? '#fff' : '#1A1A1A',
+              }}
+            >
+              {/* Mic / Stop icon */}
+              {isConnected ? (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <rect x="4" y="4" width="16" height="16" rx="2" />
+                </svg>
+              ) : (
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                  <line x1="12" x2="12" y1="19" y2="22" />
+                </svg>
+              )}
+              {isConnected
+                ? 'Tamatkan / End Session'
+                : displayStatus === 'ended'
+                  ? 'Mula Semula / Restart'
+                  : 'Mula Perbualan / Start Conversation'}
+            </button>
+
+            {/* Language hint */}
+            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+              Bercakap dalam BM atau EN / Speak in BM or English
+            </p>
+
+            {/* Test tag caption */}
+            <p className="text-xs" style={{ color: 'var(--text-muted)', opacity: 0.7 }}>
+              {t('testing.voice.testTagged', language)}
+            </p>
+          </div>
+        </div>
+
+        {/* RIGHT PANEL — Transcript (~45%) */}
+        <div
+          className="flex-[45] flex flex-col rounded-lg px-5 py-5"
+          style={{ backgroundColor: 'var(--bg-surface)' }}
+        >
+          {/* Transcript header */}
+          <div className="flex items-center gap-2 mb-4 flex-shrink-0">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+            <h3
+              className="text-xs font-semibold tracking-wider uppercase"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              TRANSCRIPT
+            </h3>
+          </div>
+
+          {/* Transcript body — scrollable */}
+          <div className="flex-1 overflow-y-auto min-h-0">
+            {transcript.length === 0 ? (
+              <div className="h-full flex items-center justify-center px-4">
+                <p
+                  className="text-sm text-center leading-relaxed"
+                  style={{ color: 'var(--text-muted)' }}
+                >
+                  {language === 'bm'
+                    ? 'Mulakan perbualan untuk mendapatkan bantuan perkhidmatan MyKasih.'
+                    : 'Start a conversation to get help with MyKasih services.'}
+                </p>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-3">
+                {transcript.map((line, idx) => (
+                  <div
+                    key={idx}
+                    className={`flex flex-col ${line.speaker === 'user' ? 'items-end' : 'items-start'}`}
+                  >
+                    <span
+                      className="text-[10px] font-medium uppercase tracking-wide mb-1 px-1"
+                      style={{ color: 'var(--text-muted)' }}
+                    >
+                      {line.speaker === 'user'
+                        ? (language === 'bm' ? 'Anda' : 'You')
+                        : 'SARA'}
+                    </span>
+                    <div
+                      className="rounded-lg px-3 py-2 text-sm max-w-[85%]"
+                      style={{
+                        backgroundColor:
+                          line.speaker === 'user'
+                            ? 'color-mix(in srgb, var(--accent-primary) 15%, transparent)'
+                            : 'var(--bg-primary)',
+                        color: 'var(--text-primary)',
+                        border:
+                          line.speaker === 'user'
+                            ? '1px solid color-mix(in srgb, var(--accent-primary) 25%, transparent)'
+                            : '1px solid var(--bg-border)',
+                      }}
+                    >
+                      {line.text}
+                    </div>
+                  </div>
+                ))}
+                <div ref={transcriptEndRef} />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

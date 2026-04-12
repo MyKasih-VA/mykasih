@@ -13,7 +13,7 @@ import {
 import { Skeleton } from '@/components/ui/skeleton'
 import { ChannelBadge } from '@/components/calls/ChannelBadge'
 import { TranscriptModal } from '@/components/calls/TranscriptModal'
-import { t, type Language } from '@/lib/translations'
+import { t, type Language, type TranslationKey } from '@/lib/translations'
 
 interface RecentInteraction {
   id: string
@@ -63,18 +63,20 @@ function getOutcomeBadgeStyle(outcome: string | null): React.CSSProperties {
   }
 }
 
-const CATEGORY_LABELS: Record<string, string> = {
-  eligibility: 'Eligibility',
-  faq: 'FAQ',
-  registration: 'Registration',
-  complaint: 'Complaint',
-  merchant_lookup: 'Merchant Lookup',
-  balance_check: 'Balance Check',
+const CATEGORY_KEYS: Record<string, TranslationKey> = {
+  eligibility: 'category.eligibility',
+  faq: 'category.faq',
+  registration: 'category.registration',
+  complaint: 'category.complaint',
+  merchant_lookup: 'category.merchantLookup',
+  balance_check: 'category.balanceCheck',
 }
 
-function formatCategory(raw: string | null): string {
+function formatCategory(raw: string | null, language: Language): string {
   if (!raw) return '--'
-  return CATEGORY_LABELS[raw] ?? raw
+  const key = CATEGORY_KEYS[raw]
+  if (key) return t(key, language)
+  return raw
 }
 
 function formatRelativeTime(timestamp: string): string {
@@ -189,7 +191,7 @@ export function RecentInteractions({ data, language, loading }: RecentInteractio
                   {row.caller_name ?? 'Unknown'}
                 </TableCell>
                 <TableCell className="py-0 text-xs text-[var(--text-muted)]">
-                  {formatCategory(row.category)}
+                  {formatCategory(row.category, language)}
                 </TableCell>
                 <TableCell className="py-0">
                   {row.outcome ? (

@@ -1,20 +1,11 @@
 'use client'
 
-import { useEffect } from 'react'
+const ANAM_SHARE_URL = 'https://lab.anam.ai/share/ABLTOrY3iUovduzq_wplu'
 
 export default function DemoPage() {
-  useEffect(() => {
-    const existing = document.querySelector('script[src*="@anam-ai/agent-widget"]')
-    if (existing) return
-    const script = document.createElement('script')
-    script.src = 'https://unpkg.com/@anam-ai/agent-widget'
-    script.async = true
-    document.body.appendChild(script)
-  }, [])
-
   return (
     <div
-      className="min-h-screen flex flex-col items-center py-16"
+      className="min-h-screen flex flex-col items-center py-16 px-4"
       style={{ backgroundColor: 'var(--bg-primary)' }}
     >
       {/* MyKasih Logo */}
@@ -55,29 +46,20 @@ export default function DemoPage() {
           </span>
         </div>
 
-        {/* Embed with positioning override */}
+        {/* Embed with iframe — avoids shadow DOM positioning issues */}
         <div
           className="w-full rounded-2xl overflow-hidden"
           style={{
-            minHeight: '520px',
-            position: 'relative',
+            height: '580px',
             border: '1px solid var(--bg-border)',
           }}
         >
-          <style>{`
-            anam-agent {
-              position: static !important;
-              width: 100% !important;
-              height: 520px !important;
-              display: block !important;
-            }
-            anam-agent > * {
-              position: static !important;
-            }
-          `}</style>
-          <anam-agent
-            agent-id={process.env.NEXT_PUBLIC_ANAM_AGENT_ID}
-            style={{ width: '100%', height: '520px', display: 'block' }}
+          <iframe
+            src={ANAM_SHARE_URL}
+            title="Kasih AI Avatar Demo"
+            allow="camera; microphone; autoplay"
+            className="w-full h-full border-0"
+            style={{ borderRadius: '16px' }}
           />
         </div>
       </div>

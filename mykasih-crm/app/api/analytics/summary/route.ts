@@ -13,89 +13,60 @@ export async function GET() {
     today.setHours(0, 0, 0, 0)
     const todayISO = today.toISOString()
 
-    // Today's interactions (voice + chat count)
-    const { count: todayTotal } = await supabase
-      .from('calls')
-      .select('*', { count: 'exact', head: true })
-      .eq('is_test', false)
-      .gte('timestamp', todayISO)
-
-    const { count: todayVoice } = await supabase
-      .from('calls')
-      .select('*', { count: 'exact', head: true })
-      .eq('is_test', false)
-      .eq('channel', 'voice')
-      .gte('timestamp', todayISO)
-
-    const { count: todayChat } = await supabase
-      .from('calls')
-      .select('*', { count: 'exact', head: true })
-      .eq('is_test', false)
-      .eq('channel', 'chat')
-      .gte('timestamp', todayISO)
-
-    // Resolution rate (resolved / total non-test calls)
-    const { count: totalCalls } = await supabase
-      .from('calls')
-      .select('*', { count: 'exact', head: true })
-      .eq('is_test', false)
-
-    const { count: resolvedCalls } = await supabase
-      .from('calls')
-      .select('*', { count: 'exact', head: true })
-      .eq('is_test', false)
-      .eq('outcome', 'resolved')
-
-    const resolutionRate = totalCalls && totalCalls > 0
-      ? Math.round((resolvedCalls ?? 0) / totalCalls * 100)
-      : 0
-
-    // Open tickets count
-    const { count: openTickets } = await supabase
-      .from('tickets')
-      .select('*', { count: 'exact', head: true })
-      .eq('status', 'open')
-
-    const { count: inProgressTickets } = await supabase
-      .from('tickets')
-      .select('*', { count: 'exact', head: true })
-      .eq('status', 'in_progress')
-
-    // Average duration (voice calls only)
-    const { data: voiceCalls } = await supabase
-      .from('calls')
-      .select('duration')
-      .eq('is_test', false)
-      .eq('channel', 'voice')
-      .not('duration', 'is', null)
-
-    const avgDuration = voiceCalls && voiceCalls.length > 0
-      ? Math.round(voiceCalls.reduce((sum, c) => sum + (c.duration ?? 0), 0) / voiceCalls.length)
-      : 0
-
-    // Average message count (chat only)
-    const { data: chatCalls } = await supabase
-      .from('calls')
-      .select('message_count')
-      .eq('is_test', false)
-      .eq('channel', 'chat')
-      .not('message_count', 'is', null)
-
-    const avgMessages = chatCalls && chatCalls.length > 0
-      ? Math.round(chatCalls.reduce((sum, c) => sum + (c.message_count ?? 0), 0) / chatCalls.length)
-      : 0
-
-    // Last 7 days volume (for bar chart)
     const sevenDaysAgo = new Date()
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7)
     sevenDaysAgo.setHours(0, 0, 0, 0)
 
-    const { data: recentCalls } = await supabase
-      .from('calls')
-      .select('channel, timestamp')
-      .eq('is_test', false)
-      .gte('timestamp', sevenDaysAgo.toISOString())
-      .order('timestamp', { ascending: true })
+    // Run ALL queries in parallel for speed
+    const [
+      todayTotalResult,
+      todayVoiceResult,
+      todayChatResult,
+      totalCallsResult,
+      resolvedCallsResult,
+      openTicketsResult,
+      inProgressTicketsResult,
+      voiceCallsResult,
+      chatCallsResult,
+      recentCallsResult,
+      categoryCountsResult,
+      recentResult,
+    ] = await Promise.all([
+      supabase.from('calls').select('*', { count: 'exact', head: true }).eq('is_test', false).gte('timestamp', todayISO),
+      supabase.from('calls').select('*', { count: 'exact', head: true }).eq('is_test', false).eq('channel', 'voice').gte('timestamp', todayISO),
+      supabase.from('calls').select('*', { count: 'exact', head: true }).eq('is_test', false).eq('channel', 'chat').gte('timestamp', todayISO),
+      supabase.from('calls').select('*', { count: 'exact', head: true }).eq('is_test', false),
+      supabase.from('calls').select('*', { count: 'exact', head: true }).eq('is_test', false).eq('outcome', 'resolved'),
+      supabase.from('tickets').select('*', { count: 'exact', head: true }).eq('status', 'open'),
+      supabase.from('tickets').select('*', { count: 'exact', head: true }).eq('status', 'in_progress'),
+      supabase.from('calls').select('duration').eq('is_test', false).eq('channel', 'voice').not('duration', 'is', null),
+      supabase.from('calls').select('message_count').eq('is_test', false).eq('channel', 'chat').not('message_count', 'is', null),
+      supabase.from('calls').select('channel, timestamp').eq('is_test', false).gte('timestamp', sevenDaysAgo.toISOString()).order('timestamp', { ascending: true }),
+      supabase.from('calls').select('category').eq('is_test', false),
+      supabase.from('calls').select('id, channel, caller_name, category, outcome, timestamp, duration, message_count').eq('is_test', false).order('timestamp', { ascending: false }).limit(10),
+    ])
+
+    const todayTotal = todayTotalResult.count ?? 0
+    const todayVoice = todayVoiceResult.count ?? 0
+    const todayChat = todayChatResult.count ?? 0
+    const totalCalls = totalCallsResult.count ?? 0
+    const resolvedCalls = resolvedCallsResult.count ?? 0
+    const openTickets = openTicketsResult.count ?? 0
+    const inProgressTickets = inProgressTicketsResult.count ?? 0
+
+    const resolutionRate = totalCalls > 0
+      ? Math.round(resolvedCalls / totalCalls * 100)
+      : 0
+
+    const voiceCalls = voiceCallsResult.data ?? []
+    const avgDuration = voiceCalls.length > 0
+      ? Math.round(voiceCalls.reduce((sum, c) => sum + (c.duration ?? 0), 0) / voiceCalls.length)
+      : 0
+
+    const chatCalls = chatCallsResult.data ?? []
+    const avgMessages = chatCalls.length > 0
+      ? Math.round(chatCalls.reduce((sum, c) => sum + (c.message_count ?? 0), 0) / chatCalls.length)
+      : 0
 
     // Group by day
     const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
@@ -106,7 +77,7 @@ export async function GET() {
       const key = dayNames[d.getDay()]
       volumeByDay[key] = { voice: 0, chat: 0 }
     }
-    for (const call of recentCalls ?? []) {
+    for (const call of recentCallsResult.data ?? []) {
       const d = new Date(call.timestamp)
       const key = dayNames[d.getDay()]
       if (volumeByDay[key]) {
@@ -119,42 +90,29 @@ export async function GET() {
       ...counts,
     }))
 
-    // Category breakdown (for donut chart)
-    const { data: categoryCounts } = await supabase
-      .from('calls')
-      .select('category')
-      .eq('is_test', false)
-
+    // Category breakdown
     const categoryMap: Record<string, number> = {}
-    for (const c of categoryCounts ?? []) {
+    for (const c of categoryCountsResult.data ?? []) {
       if (c.category) {
         categoryMap[c.category] = (categoryMap[c.category] ?? 0) + 1
       }
     }
     const categories = Object.entries(categoryMap).map(([name, value]) => ({ name, value }))
 
-    // Recent 10 interactions
-    const { data: recent } = await supabase
-      .from('calls')
-      .select('id, channel, caller_name, category, outcome, timestamp, duration, message_count')
-      .eq('is_test', false)
-      .order('timestamp', { ascending: false })
-      .limit(10)
-
     return NextResponse.json({
       stats: {
-        todayTotal: todayTotal ?? 0,
-        todayVoice: todayVoice ?? 0,
-        todayChat: todayChat ?? 0,
+        todayTotal,
+        todayVoice,
+        todayChat,
         resolutionRate,
-        openTickets: openTickets ?? 0,
-        inProgressTickets: inProgressTickets ?? 0,
+        openTickets,
+        inProgressTickets,
         avgDuration,
         avgMessages,
       },
       dailyVolume,
       categories,
-      recent: recent ?? [],
+      recent: recentResult.data ?? [],
     })
   } catch (error) {
     console.error('[analytics/summary] Error:', error)

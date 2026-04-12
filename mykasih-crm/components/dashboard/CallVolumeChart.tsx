@@ -9,14 +9,16 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 import { Skeleton } from '@/components/ui/skeleton'
+import { t, type Language } from '@/lib/translations'
 
 interface CallVolumeChartProps {
   data: Array<{ day: string; voice: number; chat: number }>
   title: string
+  language: Language
   loading?: boolean
 }
 
-export function CallVolumeChart({ data, title, loading }: CallVolumeChartProps) {
+export function CallVolumeChart({ data, title, language, loading }: CallVolumeChartProps) {
   return (
     <div className="bg-[var(--bg-surface)] border border-[var(--bg-border)] rounded-lg p-5">
       <p className="text-base font-semibold text-[var(--text-primary)]">{title}</p>
@@ -26,14 +28,14 @@ export function CallVolumeChart({ data, title, loading }: CallVolumeChartProps) 
             className="inline-block w-3 h-3 rounded-sm"
             style={{ background: 'var(--chart-voice)' }}
           />
-          Voice
+          {t('dashboard.chart.voice', language)}
         </span>
         <span className="flex items-center gap-1 text-xs text-[var(--text-muted)]">
           <span
             className="inline-block w-3 h-3 rounded-sm"
             style={{ background: 'var(--chart-chat)' }}
           />
-          Chat
+          {t('dashboard.chart.chat', language)}
         </span>
       </div>
       {loading ? (
@@ -64,13 +66,13 @@ export function CallVolumeChart({ data, title, loading }: CallVolumeChartProps) 
               dataKey="voice"
               stackId="a"
               fill="var(--chart-voice)"
-              name="Voice"
+              name={t('dashboard.chart.voice', language)}
             />
             <Bar
               dataKey="chat"
               stackId="a"
               fill="var(--chart-chat)"
-              name="Chat"
+              name={t('dashboard.chart.chat', language)}
               radius={[4, 4, 0, 0]}
             />
           </BarChart>

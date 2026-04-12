@@ -106,43 +106,28 @@ export function ChatbotSimTab() {
 
     try {
       const history = messages.slice(-6).map((m) => ({ role: m.role, content: m.content }))
-      const res = await fetch('/api/chatbot/message', {
+      const res = await fetch('/api/chatbot/simulate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          waPhone: 'simulator-001',
           message: trimmed,
+          senderId: 'simulator-001',
           isTest: true,
           history,
         }),
       })
 
       const data: ChatbotApiResponse = await res.json()
-
-      if (data.status === 'first_contact') {
-        const firstContactKey =
-          language === 'bm' ? 'testing.chat.firstContact.bm' : 'testing.chat.firstContact.en'
-        msgIdRef.current += 1
-        const botMsg: SimMessage = {
-          id: `bot-${msgIdRef.current}`,
-          role: 'bot',
-          content: t(firstContactKey, language),
-          intent: null,
-          timestamp: new Date(),
-        }
-        setMessages((prev) => [...prev, botMsg])
-      } else {
-        const replyText = data.reply ?? data.message ?? ''
-        msgIdRef.current += 1
-        const botMsg: SimMessage = {
-          id: `bot-${msgIdRef.current}`,
-          role: 'bot',
-          content: replyText,
-          intent: data.intent ?? null,
-          timestamp: new Date(),
-        }
-        setMessages((prev) => [...prev, botMsg])
+      const replyText = data.reply ?? data.message ?? ''
+      msgIdRef.current += 1
+      const botMsg: SimMessage = {
+        id: `bot-${msgIdRef.current}`,
+        role: 'bot',
+        content: replyText,
+        intent: data.intent ?? null,
+        timestamp: new Date(),
       }
+      setMessages((prev) => [...prev, botMsg])
     } catch {
       msgIdRef.current += 1
       const errorMsg: SimMessage = {
