@@ -92,7 +92,7 @@ export function BeneficiaryProfile({
   const waNumber = calls[0]?.wa_number ?? '--'
   const lastSeen = calls[0]?.timestamp
   const initial = name !== '?' ? name.charAt(0).toUpperCase() : '?'
-  const lastSeenLabel = language === 'en' ? 'Last seen' : 'Terakhir dilihat'
+  const lastSeenLabel = t('beneficiaries.lastSeen', language)
 
   return (
     <div>
@@ -109,7 +109,7 @@ export function BeneficiaryProfile({
           {/* Info */}
           <div className="flex flex-col gap-0.5">
             <p className="text-base font-semibold text-[var(--text-primary)]">
-              {name !== '?' ? name : (language === 'en' ? 'Unknown' : 'Tidak diketahui')}
+              {name !== '?' ? name : t('common.unknown', language)}
             </p>
             <p className="text-sm text-[var(--text-muted)]">{waNumber}</p>
             {lastSeen && (
@@ -132,7 +132,7 @@ export function BeneficiaryProfile({
           <div className="bg-[var(--bg-surface)] border border-[var(--bg-border)] rounded-lg flex flex-col items-center justify-center py-8">
             <Inbox className="w-6 h-6 text-[var(--text-muted)] mb-2" />
             <p className="text-xs text-[var(--text-muted)]">
-              {language === 'en' ? 'No interactions' : 'Tiada interaksi'}
+              {t('beneficiaries.noInteractions', language)}
             </p>
           </div>
         ) : (
@@ -222,7 +222,7 @@ export function BeneficiaryProfile({
           <div className="bg-[var(--bg-surface)] border border-[var(--bg-border)] rounded-lg flex flex-col items-center justify-center py-8">
             <Inbox className="w-6 h-6 text-[var(--text-muted)] mb-2" />
             <p className="text-xs text-[var(--text-muted)]">
-              {language === 'en' ? 'No tickets' : 'Tiada tiket'}
+              {t('empty.noTickets', language)}
             </p>
           </div>
         ) : (

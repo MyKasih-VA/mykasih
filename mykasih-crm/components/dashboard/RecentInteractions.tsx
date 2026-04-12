@@ -103,7 +103,7 @@ export function RecentInteractions({ data, language, loading }: RecentInteractio
     setModalOpen(true)
   }
 
-  const title = language === 'en' ? 'Recent Interactions' : 'Interaksi Terkini'
+  const title = t('dashboard.recentInteractions', language)
 
   return (
     <div className="bg-[var(--bg-surface)] border border-[var(--bg-border)] rounded-lg">
@@ -163,7 +163,7 @@ export function RecentInteractions({ data, language, loading }: RecentInteractio
                 scope="col"
                 className="w-[90px] text-xs text-[var(--text-muted)]"
               >
-                {language === 'en' ? 'Dur / Msgs' : 'Tempoh / Mesej'}
+                {t('table.durationMsgs', language)}
               </TableHead>
             </TableRow>
           </TableHeader>

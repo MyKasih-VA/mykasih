@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/dialog'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Star } from 'lucide-react'
-import { type Language } from '@/lib/translations'
+import { type Language, t } from '@/lib/translations'
 
 interface TranscriptModalProps {
   callId: string | null
@@ -26,14 +26,9 @@ interface TranscriptTurn {
 }
 
 function getSpeakerLabel(speaker: TranscriptTurn['speaker'], language: Language): string {
-  if (language === 'bm') {
-    if (speaker === 'user') return 'Pengguna'
-    if (speaker === 'bot') return 'Bot'
-    return 'Ejen'
-  }
-  if (speaker === 'user') return 'User'
-  if (speaker === 'bot') return 'Bot'
-  return 'Agent'
+  if (speaker === 'user') return t('transcript.speaker.user', language)
+  if (speaker === 'bot') return t('transcript.speaker.bot', language)
+  return t('transcript.speaker.agent', language)
 }
 
 function getSpeakerColor(speaker: TranscriptTurn['speaker']): string {
@@ -48,7 +43,7 @@ export function TranscriptModal({
   onOpenChange,
   language,
 }: TranscriptModalProps) {
-  const title = language === 'en' ? 'Transcript' : 'Transkrip'
+  const title = t('modal.transcript', language)
 
   const [turns, setTurns] = useState<TranscriptTurn[]>([])
   const [loading, setLoading] = useState(false)
@@ -114,17 +109,13 @@ export function TranscriptModal({
         ) : error ? (
           <div className="flex items-center justify-center py-8">
             <p className="text-sm text-[var(--text-muted)] text-center">
-              {language === 'en'
-                ? 'Unable to load transcript.'
-                : 'Tidak dapat memuatkan transkrip.'}
+              {t('error.loadTranscript', language)}
             </p>
           </div>
         ) : turns.length === 0 ? (
           <div className="flex items-center justify-center py-8">
             <p className="text-sm text-[var(--text-muted)] text-center">
-              {language === 'en'
-                ? 'No transcript available.'
-                : 'Tiada transkrip tersedia.'}
+              {t('empty.noTranscript', language)}
             </p>
           </div>
         ) : (
@@ -153,11 +144,11 @@ export function TranscriptModal({
         {!loading && !error && (
           <div className="border-t border-[var(--bg-border)] pt-3 mt-2">
             <p className="text-xs text-[var(--text-muted)] mb-2">
-              {language === 'en' ? 'Rate this interaction:' : 'Nilai interaksi ini:'}
+              {t('transcript.rateInteraction', language)}
             </p>
             {csatSubmitted ? (
               <p className="text-xs text-[var(--status-green)]">
-                {language === 'en' ? `Rating submitted (${csatScore}/5)` : `Penilaian dihantar (${csatScore}/5)`}
+                {t('transcript.ratingSubmitted', language).replace('{score}', String(csatScore))}
               </p>
             ) : (
               <div className="flex items-center gap-1" role="group" aria-label="CSAT rating">

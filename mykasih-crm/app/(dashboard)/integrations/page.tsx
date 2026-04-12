@@ -159,7 +159,7 @@ export default function IntegrationsPage() {
       case 'pending':
         // n8n uses "Not Configured" to distinguish from Meta WA "Pending Approval" (external action required)
         return service === 'n8n'
-          ? (language === 'bm' ? 'Tidak Dikonfigurasi' : 'Not Configured')
+          ? t('integrations.notConfigured', language)
           : t('integrations.pendingApproval', language)
     }
   }
@@ -278,7 +278,7 @@ export default function IntegrationsPage() {
           <div className="flex items-center gap-3 mb-3">
             <Plug className="w-5 h-5 text-[var(--accent-primary)]" />
             <h2 className="text-sm font-semibold text-[var(--text-primary)]">
-              {language === 'en' ? 'Merchant Data' : 'Data Saudagar'}
+              {t('integrations.merchantData', language)}
             </h2>
           </div>
 
@@ -291,12 +291,10 @@ export default function IntegrationsPage() {
               {seeding ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  {language === 'en' ? 'Seeding...' : 'Menyemai...'}
+                  {t('integrations.seeding', language)}
                 </>
-              ) : language === 'en' ? (
-                'Seed Merchants'
               ) : (
-                'Semai Saudagar'
+                t('integrations.seedMerchants', language)
               )}
             </Button>
           )}

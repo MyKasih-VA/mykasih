@@ -108,6 +108,8 @@ export const translations = {
   'beneficiaries.noResultsBody': { en: 'Try a different WA number or name.', bm: 'Cuba nombor WA atau nama yang berbeza.' },
   'beneficiaries.interactionHistory': { en: 'Interaction History', bm: 'Sejarah Interaksi' },
   'beneficiaries.ticketHistory': { en: 'Ticket History', bm: 'Sejarah Tiket' },
+  'beneficiaries.lastSeen': { en: 'Last seen', bm: 'Terakhir dilihat' },
+  'beneficiaries.noInteractions': { en: 'No interactions', bm: 'Tiada interaksi' },
 
   // Empty states
   'empty.noVoiceCalls.heading': { en: 'No voice calls yet', bm: 'Tiada panggilan suara lagi' },
@@ -117,6 +119,16 @@ export const translations = {
   'empty.noInteractionsFiltered.heading': { en: 'No interactions found', bm: 'Tiada interaksi ditemui' },
   'empty.noInteractionsFiltered.body': { en: 'Try adjusting your filters or check back later.', bm: 'Cuba laraskan penapis anda atau semak semula kemudian.' },
   'empty.noTickets': { en: 'No tickets', bm: 'Tiada tiket' },
+
+  // Transcript modal
+  'modal.transcript': { en: 'Transcript', bm: 'Transkrip' },
+  'error.loadTranscript': { en: 'Unable to load transcript.', bm: 'Tidak dapat memuatkan transkrip.' },
+  'empty.noTranscript': { en: 'No transcript available.', bm: 'Tiada transkrip tersedia.' },
+  'transcript.rateInteraction': { en: 'Rate this interaction:', bm: 'Nilai interaksi ini:' },
+  'transcript.ratingSubmitted': { en: 'Rating submitted ({score}/5)', bm: 'Penilaian dihantar ({score}/5)' },
+  'transcript.speaker.user': { en: 'User', bm: 'Pengguna' },
+  'transcript.speaker.bot': { en: 'Bot', bm: 'Bot' },
+  'transcript.speaker.agent': { en: 'Agent', bm: 'Ejen' },
 
   // Errors
   'error.loadCalls': { en: 'Unable to load calls. Check your connection and try again.', bm: 'Tidak dapat memuatkan panggilan. Semak sambungan anda dan cuba lagi.' },
@@ -226,6 +238,10 @@ export const translations = {
   'integrations.error': { en: 'Error', bm: 'Ralat' },
   'integrations.pendingApproval': { en: 'Pending Approval', bm: 'Menunggu Kelulusan' },
   'integrations.ready': { en: 'Ready', bm: 'Sedia' },
+  'integrations.notConfigured': { en: 'Not Configured', bm: 'Tidak Dikonfigurasi' },
+  'integrations.merchantData': { en: 'Merchant Data', bm: 'Data Saudagar' },
+  'integrations.seeding': { en: 'Seeding...', bm: 'Menyemai...' },
+  'integrations.seedMerchants': { en: 'Seed Merchants', bm: 'Semai Saudagar' },
 
   // Live Monitor page
   'liveMonitor.title': { en: 'Live Monitor', bm: 'Monitor Langsung' },
@@ -245,6 +261,9 @@ export const translations = {
 
   // Common
   'common.tryAgain': { en: 'Try again', bm: 'Cuba lagi' },
+  'common.unknown': { en: 'Unknown', bm: 'Tidak diketahui' },
+  'common.notifications': { en: 'Notifications', bm: 'Pemberitahuan' },
+  'common.locale': { en: 'en-GB', bm: 'ms-MY' },
 
   // Testing Console (Phase 6)
   'testing.title': { en: 'Testing Console', bm: 'Konsol Ujian' },

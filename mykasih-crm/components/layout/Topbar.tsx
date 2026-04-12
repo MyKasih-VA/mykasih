@@ -37,7 +37,7 @@ function getPageTitle(pathname: string, language: Language): string {
 }
 
 function getFormattedDate(language: Language): string {
-  const locale = language === 'en' ? 'en-GB' : 'ms-MY'
+  const locale = t('common.locale', language)
   return new Intl.DateTimeFormat(locale, {
     weekday: 'long',
     day: 'numeric',
@@ -89,7 +89,7 @@ export function Topbar({ language, onToggleLanguage }: TopbarProps) {
         {/* Notification bell */}
         <button
           type="button"
-          aria-label={language === 'en' ? 'Notifications' : 'Pemberitahuan'}
+          aria-label={t('common.notifications', language)}
           className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
         >
           <Bell className="w-5 h-5" />
