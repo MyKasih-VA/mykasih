@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 05-03-PLAN.md
-last_updated: "2026-04-12T07:36:16.780Z"
+stopped_at: Completed 05-04-PLAN.md
+last_updated: "2026-04-12T07:40:18.345Z"
 last_activity: 2026-04-12
 progress:
   total_phases: 7
   completed_phases: 4
   total_plans: 33
-  completed_plans: 31
-  percent: 94
+  completed_plans: 32
+  percent: 97
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-04-11)
 ## Current Position
 
 Phase: 05 (intelligence-system-pages) — EXECUTING
-Plan: 4 of 5
+Plan: 5 of 5
 Status: Ready to execute
 Last activity: 2026-04-12
 
@@ -70,6 +70,7 @@ Progress: [██░░░░░░░░] 29%
 | Phase 05 P01 | 4 | 2 tasks | 12 files |
 | Phase 05 P02 | 15 | 2 tasks | 6 files |
 | Phase 05 P03 | 3 | 2 tasks | 7 files |
+| Phase 05 P04 | 8 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -117,6 +118,8 @@ Recent decisions affecting current work:
 - [Phase 05]: ElevenLabs sync formats active entries as Q/A bilingual text pairs in knowledge_base field of PATCH agent API
 - [Phase 05]: Supabase Admin listUsers + find-by-email for auth deletion — no deleteByEmail API available
 - [Phase 05]: active/pending status derived from last_login null check at API response time — no DB column needed
+- [Phase 05]: n8n_url included in status API response — N8N_BASE_URL is server-side only; passing URL through API avoids exposing it as NEXT_PUBLIC_
+- [Phase 05]: Promise.allSettled used for parallel integration health checks — all 5 checks run concurrently, no single failure blocks others
 
 ### Pending Todos
 
@@ -129,6 +132,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-04-12T07:36:16.776Z
-Stopped at: Completed 05-03-PLAN.md
+Last session: 2026-04-12T07:40:18.341Z
+Stopped at: Completed 05-04-PLAN.md
 Resume file: None
