@@ -57,14 +57,23 @@ Exceptions:
 
 All sizes reference the existing system. MFA screens must match login/page.tsx exactly.
 
+**Declared Phase 7 type scale — 3 sizes, 2 weights:**
+
 | Role | Size | Weight | Line Height | Usage |
 |------|------|--------|-------------|-------|
 | Body | 14px (text-sm) | 400 (Regular) | 1.5 | Input placeholders, helper text, error messages |
 | Label | 12px (text-xs) | 400 (Regular) | 1.5 | Captions, muted metadata (subtitle below app name) |
 | Heading | 16px (text-base) | 600 (SemiBold) | 1.2 | App name, card section headings |
-| Display | 20px (text-xl) | 700 (Bold) | 1.2 | Not used in Phase 7 auth screens |
+
+**Declared weights: Regular 400 and SemiBold 600 only.**
 
 Font family: Inter for all roles. JetBrains Mono only for code/monospace display (TOTP secret manual-entry fallback — use `font-mono`).
+
+> **Full System Reference — Not Phase 7 scope**
+> The full design system includes a Display role (20px / text-xl / Bold 700 / line-height 1.2)
+> used for large feature headings on dashboard pages. This weight and size are NOT declared
+> for Phase 7 auth screens, which have no display-size headings. Do not implement Bold 700
+> on any Phase 7 surface.
 
 Source: CLAUDE.md Typography section + login/page.tsx class inspection.
 
@@ -112,7 +121,7 @@ Phase 7 adds exactly two new pages and modifies one existing page. All are auth-
 1. Section heading: "Set Up Two-Factor Authentication" — text-base font-semibold, `--text-primary`
 2. Body copy: "Scan the QR code below with your authenticator app (Google Authenticator or Authy), then enter the 6-digit code to confirm." — text-sm, `--text-muted`, line-height 1.5
 3. QR code image: rendered as `<img src={qrCodeDataUrl} />` from `qrcode` npm package output. Size: 180x180px, centered. Background: white (`#FFFFFF`) — QR codes require high contrast; the QR image itself is white-background, contained within the dark card.
-4. Secret fallback: "Can't scan? Enter this code manually:" label (text-xs, `--text-muted`) + secret string in `font-mono text-sm --text-primary` with copy-to-clipboard icon (Lucide `Copy` 14px).
+4. Secret fallback: "Can't scan? Enter this code manually:" label (text-xs, `--text-muted`) + secret string in `font-mono text-sm --text-primary` with copy-to-clipboard icon (Lucide `Copy` 14px). The copy button MUST carry `aria-label="Copy secret to clipboard"`.
 5. TOTP code input: 6-digit numeric input, `h-11 text-center text-lg tracking-widest`, same style as login inputs (`--bg-primary` fill, `--bg-border` border, `--accent-teal` focus ring). Placeholder: "000000". `inputMode="numeric"` `maxLength={6}` `pattern="[0-9]{6}"`.
 6. Submit button: "Verify & Enable MFA" — full width, `h-11`, `--accent-primary` background, `--text-primary` text, font-semibold. Shows `<Loader2 size={16} className="animate-spin" />` during in-flight verification.
 7. Error display: below button, text-xs, `--status-red`, `role="alert"`.
@@ -227,6 +236,7 @@ MFA screens must meet the following accessibility requirements (consistent with 
 | Loading state announced | Button `aria-busy="true"` when `loading === true` |
 | TOTP input labelled | `<label htmlFor="totp-code">` paired with input `id="totp-code"` |
 | QR code described | `<img alt="Scan this QR code with your authenticator app" />` |
+| Copy button labelled | `aria-label="Copy secret to clipboard"` on the Lucide `Copy` icon button (Surface 1, TOTP secret fallback row) |
 | Input type | `type="text" inputMode="numeric"` (not `type="number"` — avoids spinners) |
 | Focus management | Auto-focus TOTP input on page load for both enroll and challenge screens |
 | Keyboard navigation | All interactive elements reachable via Tab key — native HTML elements, no custom components needed |
