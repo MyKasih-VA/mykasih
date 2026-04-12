@@ -587,22 +587,22 @@ The following keys must be added to `lib/translations.ts` before any new page st
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Beneficiaries unique profile identity**
    - What we know: Search queries `calls.wa_number` and `calls.caller_name`
    - What's unclear: If one WA number has multiple `caller_name` values (e.g. same number, different name given), the profile view may show ambiguous results
-   - Recommendation: Group by `wa_number` in the profile — treat `wa_number` as the canonical beneficiary identity; show the most recent `caller_name`
+   - RESOLVED: Group by `wa_number` in the profile — treat `wa_number` as the canonical beneficiary identity; show the most recent `caller_name`
 
 2. **Chat Messages page — is `category` the intent field?**
    - What we know: `calls.category` stores `eligibility | faq | registration | complaint | merchant_lookup | balance_check`
    - What's unclear: The chatbot classifies intent as `faq | balance_check | merchant_lookup | complaint | unknown` — these partially overlap with the category enum but `unknown` and `eligibility/registration` don't match
-   - Recommendation: Use `category` for the intent badge; map `unknown` to a neutral style; note that chatbot may write `null` for category if no intent matched [ASSUMED]
+   - RESOLVED: Use `category` for the intent badge; map `unknown` to a neutral style; note that chatbot may write `null` for category if no intent matched [ASSUMED]
 
 3. **Date range picker dark theme**
    - What we know: Native `<input type="date">` uses browser default calendar widget
    - What's unclear: Browser calendar popup may render in light mode on some platforms
-   - Recommendation: Two text inputs with `type="date"` are sufficient for v1 CRM use; style with `bg-[var(--bg-surface)]` border to match the dark theme
+   - RESOLVED: Two text inputs with `type="date"` are sufficient for v1 CRM use; style with `bg-[var(--bg-surface)]` border to match the dark theme
 
 ---
 
