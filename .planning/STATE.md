@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 06-04-PLAN.md
-last_updated: "2026-04-12T11:19:38.722Z"
+stopped_at: Completed 06-03-PLAN.md
+last_updated: "2026-04-12T11:25:13.055Z"
 last_activity: 2026-04-12
 progress:
   total_phases: 7
   completed_phases: 5
   total_plans: 38
-  completed_plans: 36
-  percent: 95
+  completed_plans: 37
+  percent: 97
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-04-11)
 ## Current Position
 
 Phase: 06 (testing-console-ai-demo-settings-polish) — EXECUTING
-Plan: 4 of 5
+Plan: 5 of 5
 Status: Ready to execute
 Last activity: 2026-04-12
 
@@ -76,6 +76,7 @@ Progress: [██░░░░░░░░] 29%
 | Phase 06 P01 | 109 | 3 tasks | 9 files |
 | Phase 06 P02 | 420 | 2 tasks | 3 files |
 | Phase 06 P04 | 420 | 2 tasks | 4 files |
+| Phase 06 P03 | 540 | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -138,6 +139,10 @@ Recent decisions affecting current work:
 - [Phase 06]: DEFAULTS spread merge in GET /api/settings: seeded DB values override defaults, missing keys fall back cleanly without conditional checks per key
 - [Phase 06]: ALLOWED_KEYS Set in PATCH /api/settings: rejects unknown keys with 400 before upsert — defense-in-depth above DB schema constraint
 - [Phase 06]: SSR-safe webhook URL: NEXT_PUBLIC_APP_URL primary, window.location.origin fallback inside useEffect only — prevents hydration errors
+- [Phase 06]: React.JSX namespace augmentation in global.d.ts — Next.js 16 react-jsx transform requires JSX types in React.JSX not global JSX namespace
+- [Phase 06]: React.JSX namespace augmentation in global.d.ts — Next.js 16 react-jsx transform requires JSX types in React.JSX not global JSX namespace
+- [Phase 06]: Script injection guard not removed on unmount — custom element registry is global; duplicate registration would throw DOMException
+- [Phase 06]: Dashboard demo stub deleted to allow Next.js to route /demo to standalone app/demo/page.tsx outside dashboard layout group
 
 ### Pending Todos
 
@@ -150,6 +155,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-04-12T11:19:38.719Z
-Stopped at: Completed 06-04-PLAN.md
+Last session: 2026-04-12T11:25:13.051Z
+Stopped at: Completed 06-03-PLAN.md
 Resume file: None
