@@ -132,7 +132,13 @@ Plans:
   3. Admin can view the Anam AI persona in Tab 3 of the Testing Console and on the standalone /demo page (no sidebar)
   4. Admin can save agent hours, view webhook URLs, and set notification preferences on the Settings page
   5. Switching the language toggle on any page instantly relabels all sidebar items, page titles, status labels, and table headers to the selected language
-**Plans**: [To be planned]
+**Plans**: 5 plans
+Plans:
+- [ ] 06-01-PLAN.md — Wave 0: install @elevenlabs/react, translations, proxy patch, global.d.ts, settings migration
+- [ ] 06-02-PLAN.md — Testing Console: VoiceAgentTab + ChatbotSimTab + 3-tab page shell
+- [ ] 06-03-PLAN.md — AnamAITab + standalone /demo page + delete dashboard demo stub
+- [ ] 06-04-PLAN.md — Settings API (GET/PATCH) + SettingsForm + Settings page
+- [ ] 06-05-PLAN.md — Language polish sweep + full Phase 6 visual verification
 **UI hint**: yes
 
 ### Phase 7: UAT Fixes, PDPA Audit & Final QA
@@ -159,5 +165,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 3. Kasih WhatsApp Chatbot | 8/8 | Complete   | 2026-04-11 |
 | 4. Core Dashboard Pages | 3/4 | In Progress|  |
 | 5. Intelligence & System Pages | 5/5 | Complete   | 2026-04-12 |
-| 6. Testing Console, AI Demo, Settings & Polish | 0/? | Not started | - |
+| 6. Testing Console, AI Demo, Settings & Polish | 0/5 | Not started | - |
 | 7. UAT Fixes, PDPA Audit & Final QA | 0/? | Not started | - |
