@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 06-02-PLAN.md
-last_updated: "2026-04-12T11:15:44.691Z"
+stopped_at: Completed 06-04-PLAN.md
+last_updated: "2026-04-12T11:19:38.722Z"
 last_activity: 2026-04-12
 progress:
   total_phases: 7
   completed_phases: 5
   total_plans: 38
-  completed_plans: 35
-  percent: 92
+  completed_plans: 36
+  percent: 95
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-04-11)
 ## Current Position
 
 Phase: 06 (testing-console-ai-demo-settings-polish) — EXECUTING
-Plan: 3 of 5
+Plan: 4 of 5
 Status: Ready to execute
 Last activity: 2026-04-12
 
@@ -75,6 +75,7 @@ Progress: [██░░░░░░░░] 29%
 | Phase 05 P05 | 116 | 2 tasks | 4 files |
 | Phase 06 P01 | 109 | 3 tasks | 9 files |
 | Phase 06 P02 | 420 | 2 tasks | 3 files |
+| Phase 06 P04 | 420 | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -134,6 +135,9 @@ Recent decisions affecting current work:
 - [Phase 06]: Dual is_test tagging: dynamicVariables.is_test passed to startSession AND fallback POST to /api/calls in onDisconnect — guarantees is_test reaches Supabase unconditionally
 - [Phase 06]: AnamAITab inline placeholder in testing/page.tsx — Plan 03 replaces in-place with real AnamAITab component
 - [Phase 06]: ConversationProvider/VoiceAgentInner split pattern — exported VoiceAgentTab provides provider boundary, inner component consumes useConversation hook
+- [Phase 06]: DEFAULTS spread merge in GET /api/settings: seeded DB values override defaults, missing keys fall back cleanly without conditional checks per key
+- [Phase 06]: ALLOWED_KEYS Set in PATCH /api/settings: rejects unknown keys with 400 before upsert — defense-in-depth above DB schema constraint
+- [Phase 06]: SSR-safe webhook URL: NEXT_PUBLIC_APP_URL primary, window.location.origin fallback inside useEffect only — prevents hydration errors
 
 ### Pending Todos
 
@@ -146,6 +150,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-04-12T11:15:44.688Z
-Stopped at: Completed 06-02-PLAN.md
+Last session: 2026-04-12T11:19:38.719Z
+Stopped at: Completed 06-04-PLAN.md
 Resume file: None
