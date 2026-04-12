@@ -142,7 +142,7 @@ export function TicketCard({ ticket, onStatusChange, language }: TicketCardProps
           <SelectTrigger className="w-full text-xs h-8">
             <SelectValue />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-[var(--bg-surface)] border border-[var(--bg-border)]">
             <SelectItem value="open">{t('kanban.open', language)}</SelectItem>
             <SelectItem value="in_progress">{t('kanban.inProgress', language)}</SelectItem>
             <SelectItem value="resolved">{t('kanban.resolved', language)}</SelectItem>
