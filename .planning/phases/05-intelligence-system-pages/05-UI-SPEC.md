@@ -66,7 +66,7 @@ All text uses `var(--font-sans)` (Inter). Monospace (`var(--font-mono)`, JetBrai
 |------|------|--------|-------------|-------------------|-------|
 | Caption / Label | 12px (text-xs) | 400 Regular | 1.5 | `text-xs text-[var(--text-muted)]` | Table column headers, stat card labels, badge text, form field hints |
 | Body | 14px (text-sm) | 400 Regular | 1.5 | `text-sm text-[var(--text-primary)]` | Table cell content, modal body, KB entry text, form input values |
-| Subheading | 16px (text-base) | 600 Semibold | 1.4 | `text-base font-semibold text-[var(--text-primary)]` | Card titles, section headings within pages, modal titles |
+| Card title / Section heading | 14px (text-sm) | 600 Semibold | 1.4 | `text-sm font-semibold text-[var(--text-primary)]` | Card titles, section headings within pages, modal titles — standard shadcn card title pattern |
 | Page heading | 20px (text-xl) | 600 Semibold | 1.2 | `text-xl font-semibold text-[var(--text-primary)]` | Page-level headings (managed by Topbar — do not re-render on page) |
 | Stat display | 28px | 600 Semibold | 1.0 (leading-none) | `text-[28px] font-semibold leading-none` | KPI numbers on Analytics stat cards — matches existing StatCard pattern |
 
@@ -105,6 +105,8 @@ Accent usage rules:
 ### Analytics Page (`/analytics`)
 
 **Layout:** Full-width page with sticky period selector bar at top, then 2×2 chart grid, then category breakdown table below.
+
+**Primary focal point:** The Volume Bar Chart (top-left of the 2×2 grid) is the primary visual anchor; stat cards above serve as supporting context.
 
 **Period Selector:**
 - Shadcn `Tabs` for preset options: "Today" | "This Week" | "This Month" | "Last 3 Months"
@@ -153,10 +155,10 @@ Accent usage rules:
 - Trigger: "Add Entry" button (header) or "Edit" row action
 - Title: "Add KB Entry" / "Edit KB Entry"
 - Fields in order: Category (Shadcn `Select` — options from kb categories), Question (BM) `Textarea`, Answer (BM) `Textarea`, Question (EN) `Textarea`, Answer (EN) `Textarea`, Active toggle (Shadcn `Switch` with label)
-- CTA: "Save Entry" (`var(--accent-primary)`) | "Cancel" (ghost)
+- CTA: "Save Entry" (`var(--accent-primary)`) | "Discard changes" (ghost)
 - On save: POST `/api/kb` (add) or PATCH `/api/kb/[id]` (edit), close modal, refresh table
 
-**Delete flow:** Inline "Delete" button → inline `AlertDialog` confirmation: "Delete this KB entry? This cannot be undone." with "Delete" (destructive red) and "Cancel" buttons → DELETE `/api/kb/[id]`
+**Delete flow:** Inline "Delete" button → inline `AlertDialog` confirmation: "Delete this KB entry? This cannot be undone." with "Delete" (destructive red) and "Keep entry" buttons → DELETE `/api/kb/[id]`
 
 **Pagination:** 25 rows per page, Shadcn pagination controls at table bottom
 
@@ -179,15 +181,15 @@ Accent usage rules:
 - Trigger: "Invite Staff" button (header)
 - Title: "Invite Staff Member"
 - Fields: Name (`Input`), Email (`Input`, type=email), Role (`Select` — options: admin, mykasih, qmedia, supervisor)
-- CTA: "Send Invite" (`var(--accent-primary)`) | "Cancel" (ghost)
+- CTA: "Send Invite" (`var(--accent-primary)`) | "Discard" (ghost)
 - On submit: POST `/api/staff/invite` → Supabase `inviteUserByEmail()` server-side; success toast "Invite sent to {email}"; error toast "Failed to send invite. Try again."
 
 **Edit Role Modal:** Shadcn `Dialog` (minimal — role change only)
 - Title: "Change Role — {name}"
 - Fields: Role (`Select`)
-- CTA: "Update Role" | "Cancel"
+- CTA: "Update Role" (`var(--accent-primary)`) | "Keep current role" (ghost)
 
-**Remove Staff flow:** "Remove" row action → `AlertDialog` confirmation: "Remove {name}? They will lose access immediately." → "Remove" (destructive red) + "Cancel" → DELETE `/api/staff/[id]`; success toast "Staff member removed."
+**Remove Staff flow:** "Remove" row action → `AlertDialog` confirmation: "Remove {name}? They will lose access immediately." → "Remove" (destructive red) + "Keep member" → DELETE `/api/staff/[id]`; success toast "Staff member removed."
 
 **Pagination:** 25 rows per page
 
@@ -202,7 +204,7 @@ Accent usage rules:
 **Layout:** Page header (title + "Refresh Status" button), then 3-column grid of status cards on desktop (2-column on tablet, 1-column on mobile), then Database section below (existing merchant seed card preserved here — not moved to Settings).
 
 **Integration Status Card structure (per card):**
-- Icon (service logo via Lucide or text badge) + Service name (text-base semibold)
+- Icon (service logo via Lucide or text badge) + Service name (text-sm semibold)
 - Status badge: "ok" → green badge (`--status-green`); "error" → red badge (`--status-red`); "pending" → yellow badge (`--status-yellow`); "ready" → green badge
 - Status label text: "Connected" | "Error" | "Pending Approval" | "Ready"
 - Description line (text-xs muted): one-line description of what this integration does
@@ -219,7 +221,7 @@ Accent usage rules:
 **Refresh Status button (page header):** Triggers GET `/api/integrations/status` for all cards; spinner on button while loading; updates all card badges on response
 
 **Database section (below integration cards):**
-- Section heading "Database" (text-base semibold, `--text-muted`)
+- Section heading "Database" (text-sm semibold, `--text-muted`)
 - Existing merchant seed card preserved as-is from Phase 1 implementation
 
 **Loading state (initial page load):** All 5 cards show `Skeleton` at card height (120px)
@@ -254,7 +256,7 @@ Accent usage rules:
 
 **Loading state (initial fetch):** 3 skeleton cards per column at h-24
 
-**Error state (fetch failed):** Single error banner across full width: "Could not load live sessions. Check your connection and try again." with "Retry" button
+**Error state (fetch failed):** Single error banner across full width: "Could not load live sessions. Check your connection and try again." with "Try again" button
 
 ---
 
@@ -274,8 +276,13 @@ All copy follows the `t(key, language)` pattern from `lib/translations.ts`. Add 
 | KB — delete confirmation | "Delete this KB entry? This cannot be undone." | "Padam entri KB ini? Tindakan ini tidak boleh dibatalkan." |
 | KB — sync success toast | "Knowledge base synced to ElevenLabs" | "Pangkalan pengetahuan disegerakkan ke ElevenLabs" |
 | KB — sync error toast | "Sync failed: {error}. Try again." | "Segerak gagal: {error}. Cuba lagi." |
+| KB — modal dismiss | "Discard changes" | "Buang perubahan" |
+| KB — delete AlertDialog dismiss | "Keep entry" | "Simpan entri" |
 | Staff — primary CTA | "Invite Staff" | "Jemput Kakitangan" |
 | Staff — invite CTA in modal | "Send Invite" | "Hantar Jemputan" |
+| Staff — invite modal dismiss | "Discard" | "Buang" |
+| Staff — edit role modal dismiss | "Keep current role" | "Kekalkan peranan semasa" |
+| Staff — remove AlertDialog dismiss | "Keep member" | "Kekalkan ahli" |
 | Staff — empty state | "No staff members" / "Invite your first team member to get started." | "Tiada ahli kakitangan" / "Jemput ahli pasukan pertama anda untuk bermula." |
 | Staff — remove confirmation | "Remove {name}? They will lose access immediately." | "Buang {name}? Mereka akan kehilangan akses serta-merta." |
 | Staff — remove CTA (destructive) | "Remove" | "Buang" |
@@ -285,14 +292,13 @@ All copy follows the `t(key, language)` pattern from `lib/translations.ts`. Add 
 | Live Monitor — empty voice | "No active voice sessions" / "Live sessions appear here when calls are in progress." | "Tiada sesi suara aktif" / "Sesi langsung dipaparkan di sini apabila panggilan sedang berlangsung." |
 | Live Monitor — empty chat | "No active chat sessions" / "Live sessions appear here when WhatsApp conversations are in progress." | "Tiada sesi sembang aktif" / "Sesi langsung dipaparkan di sini apabila perbualan WhatsApp sedang berlangsung." |
 | Live Monitor — error state | "Could not load live sessions. Check your connection and try again." | "Tidak dapat memuatkan sesi langsung. Semak sambungan anda dan cuba lagi." |
-| Common — "Retry" button | "Retry" | "Cuba lagi" |
-| Common — "Cancel" button | "Cancel" | "Batal" |
+| Common — "Try again" button | "Try again" | "Cuba lagi" |
 | Common — "Save" button | "Save Entry" | "Simpan Entri" |
 | Common — unknown caller | "Unknown Caller" | "Pemanggil Tidak Diketahui" |
 
 Destructive actions in Phase 5:
-1. Delete KB Entry — confirmed via `AlertDialog` ("Delete" / "Cancel") — delete button uses `var(--status-red)` background
-2. Remove Staff Member — confirmed via `AlertDialog` ("Remove {name}..." / "Cancel") — remove button uses `var(--status-red)` background
+1. Delete KB Entry — confirmed via `AlertDialog` ("Delete" / "Keep entry") — delete button uses `var(--status-red)` background
+2. Remove Staff Member — confirmed via `AlertDialog` ("Remove {name}..." / "Keep member") — remove button uses `var(--status-red)` background
 
 ---
 
@@ -360,7 +366,7 @@ Every interactive element must implement all applicable states:
 - Heatmap cells: `aria-label="{day} {hour} — {count} interactions"` on each cell
 - Live Monitor auto-refresh: `aria-live="polite"` region wrapping session counts so screen readers announce count changes
 - Color is never the sole indicator of status — all status badges include text label alongside color
-- Destructive `AlertDialog` buttons: focus lands on "Cancel" by default (safer default), not "Delete"/"Remove"
+- Destructive `AlertDialog` buttons: focus lands on dismiss button by default (safer default), not "Delete"/"Remove"
 
 ---
 
