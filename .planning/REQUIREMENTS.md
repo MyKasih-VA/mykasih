@@ -70,9 +70,9 @@
 
 ### Dashboard Pages (Session 4)
 
-- [ ] **PAGE-01**: Voice Calls page — filterable table (date, language, category, outcome, search), transcript modal, Excel export, channel badge
-- [ ] **PAGE-02**: Chat Messages page — WA thread view, message count column, intent badge, linked ticket
-- [ ] **PAGE-03**: All Interactions page — combined table with channel toggle filter [All | 📞 Voice | 💬 Chat]
+- [x] **PAGE-01**: Voice Calls page — filterable table (date, language, category, outcome, search), transcript modal, Excel export, channel badge
+- [x] **PAGE-02**: Chat Messages page — WA thread view, message count column, intent badge, linked ticket
+- [x] **PAGE-03**: All Interactions page — combined table with channel toggle filter [All | 📞 Voice | 💬 Chat]
 - [ ] **PAGE-04**: Tickets page — kanban board (open/in-progress/resolved), reference no, masked IC, linked transcript, status update
 - [x] **PAGE-05**: Beneficiaries page — search by WA number or name, interaction history, ticket history
 
@@ -179,9 +179,9 @@
 | CHAT-08 | Phase 3 — Kasih WhatsApp Chatbot | Complete |
 | CHAT-09 | Phase 3 — Kasih WhatsApp Chatbot | Complete |
 | CHAT-10 | Phase 3 — Kasih WhatsApp Chatbot | Complete |
-| PAGE-01 | Phase 4 — Core Dashboard Pages | Pending |
-| PAGE-02 | Phase 4 — Core Dashboard Pages | Pending |
-| PAGE-03 | Phase 4 — Core Dashboard Pages | Pending |
+| PAGE-01 | Phase 4 — Core Dashboard Pages | Complete |
+| PAGE-02 | Phase 4 — Core Dashboard Pages | Complete |
+| PAGE-03 | Phase 4 — Core Dashboard Pages | Complete |
 | PAGE-04 | Phase 4 — Core Dashboard Pages | Pending |
 | PAGE-05 | Phase 4 — Core Dashboard Pages | Complete |
 | PAGE-06 | Phase 5 — Intelligence & System Pages | Pending |

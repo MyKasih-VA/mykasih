@@ -98,7 +98,7 @@ Plans:
 **Plans**: 4 plans
 Plans:
 - [x] 04-01-PLAN.md — Shared foundation: translations, TranscriptModal wired, FilterBar, CallsTable, IntentBadge, beneficiaries API + test
-- [ ] 04-02-PLAN.md — Voice Calls + Chat Messages + All Interactions pages
+- [x] 04-02-PLAN.md — Voice Calls + Chat Messages + All Interactions pages
 - [ ] 04-03-PLAN.md — Tickets kanban page (TicketCard + TicketKanban + page)
 - [ ] 04-04-PLAN.md — Beneficiaries search-first page (BeneficiaryProfile + page)
 **UI hint**: yes
@@ -151,7 +151,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 1. Scaffold, DB, Auth & Dashboard Shell | 9/9 | Complete | 2026-04-11 |
 | 2. Voice Webhook, Ticket System & Excel Export | 7/7 | Complete | 2026-04-11 |
 | 3. Kasih WhatsApp Chatbot | 8/8 | Complete   | 2026-04-11 |
-| 4. Core Dashboard Pages | 1/4 | In Progress|  |
+| 4. Core Dashboard Pages | 2/4 | In Progress|  |
 | 5. Intelligence & System Pages | 0/? | Not started | - |
 | 6. Testing Console, AI Demo, Settings & Polish | 0/? | Not started | - |
 | 7. UAT Fixes, PDPA Audit & Final QA | 0/? | Not started | - |
