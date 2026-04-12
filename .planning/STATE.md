@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 04-02-PLAN.md
-last_updated: "2026-04-12T05:56:22.918Z"
+stopped_at: Completed 04-03-PLAN.md
+last_updated: "2026-04-12T05:59:08.910Z"
 last_activity: 2026-04-12
 progress:
   total_phases: 7
   completed_phases: 3
   total_plans: 28
-  completed_plans: 26
-  percent: 93
+  completed_plans: 27
+  percent: 96
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-04-11)
 ## Current Position
 
 Phase: 04 (core-dashboard-pages) — EXECUTING
-Plan: 3 of 4
+Plan: 4 of 4
 Status: Ready to execute
 Last activity: 2026-04-12
 
@@ -64,6 +64,7 @@ Progress: [██░░░░░░░░] 29%
 | Phase 03 P07 | 12 | 2 tasks | 5 files |
 | Phase 04 P01 | 25 | 2 tasks | 7 files |
 | Phase 04 P02 | 5 | 2 tasks | 3 files |
+| Phase 04 P03 | 2 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -100,6 +101,8 @@ Recent decisions affecting current work:
 - [Phase 04]: getOutcomeBadgeStyle, formatCategory, formatRelativeTime exported from CallsTable.tsx as shared helpers for page components
 - [Phase 04]: ticketRefMap fetched via /api/tickets?limit=100 and filtered client-side — avoids adding call_id IN filter to tickets API; acceptable at current ticket volume
 - [Phase 04]: All Interactions uses Tabs for visual toggle only with no TabsContent — single table re-renders with new channel param, avoids duplicate state/fetch
+- [Phase 04]: TicketCard exports Ticket interface so TicketKanban can import type alongside component — avoids duplicating interface
+- [Phase 04]: COLUMNS array typed with labelKey as union of literal translation keys — ensures type safety without casting in t() call
 
 ### Pending Todos
 
@@ -112,6 +115,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-04-12T05:56:22.914Z
-Stopped at: Completed 04-02-PLAN.md
+Last session: 2026-04-12T05:59:08.907Z
+Stopped at: Completed 04-03-PLAN.md
 Resume file: None
