@@ -47,14 +47,16 @@ function IntentPill({ intent }: { intent: string | null }) {
   )
 }
 
-const GREETING_MESSAGE: SimMessage = {
-  id: 'greeting-001',
-  role: 'bot',
-  content:
-    'Selamat datang ke MyKasih! \u{1F44B}\n\nSaya Kasih, pembantu digital anda. Saya boleh membantu anda dengan:\n\u2022 Semak baki kad\n\u2022 Cari kedai berdekatan\n\u2022 Panduan pendaftaran\n\u2022 Hantar aduan\n\nBagaimana saya boleh membantu anda hari ini?',
-  intent: null,
-  timestamp: new Date(),
-  showChips: true,
+function makeGreetingMessage(): SimMessage {
+  return {
+    id: 'greeting-001',
+    role: 'bot',
+    content:
+      'Selamat datang ke MyKasih! \u{1F44B}\n\nSaya Kasih, pembantu digital anda. Saya boleh membantu anda dengan:\n\u2022 Semak baki kad\n\u2022 Cari kedai berdekatan\n\u2022 Panduan pendaftaran\n\u2022 Hantar aduan\n\nBagaimana saya boleh membantu anda hari ini?',
+    intent: null,
+    timestamp: new Date(),
+    showChips: true,
+  }
 }
 
 const QUICK_CHIPS = ['Semak Baki', 'Kedai Berdekatan', 'Daftar Program', 'Aduan']
@@ -75,7 +77,7 @@ export function ChatbotSimTab() {
 
   // Bot-initiated greeting on mount
   useEffect(() => {
-    setMessages([{ ...GREETING_MESSAGE, timestamp: new Date() }])
+    setMessages([makeGreetingMessage()])
   }, [])
 
   // Auto-scroll on new message
@@ -133,7 +135,9 @@ export function ChatbotSimTab() {
       const errorMsg: SimMessage = {
         id: `bot-${msgIdRef.current}`,
         role: 'bot',
-        content: 'Error connecting to chatbot. Please try again.',
+        content: language === 'bm'
+          ? 'Ralat menyambung ke chatbot. Sila cuba lagi.'
+          : 'Error connecting to chatbot. Please try again.',
         intent: 'unknown',
         timestamp: new Date(),
       }
@@ -151,7 +155,7 @@ export function ChatbotSimTab() {
   }
 
   const handleClear = () => {
-    setMessages([{ ...GREETING_MESSAGE, timestamp: new Date() }])
+    setMessages([makeGreetingMessage()])
     setChipsVisible(true)
     setInputValue('')
     msgIdRef.current = 0

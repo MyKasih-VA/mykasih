@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, useCallback } from 'react'
 import { ConversationProvider, useConversation } from '@elevenlabs/react'
 import { toast } from 'sonner'
 import { useLanguage } from '@/hooks/useLanguage'
@@ -31,22 +31,15 @@ function VoiceAgentInner() {
   const conversationIdRef = useRef<string | undefined>(undefined)
   const sessionStartRef = useRef<number>(0)
 
-  const agentId = process.env.NEXT_PUBLIC_ELEVENLABS_AGENT_ID
-
   const { startSession, endSession, status } = useConversation({
     onConnect: () => {
       sessionStartRef.current = Date.now()
       setDisplayStatus('active')
     },
     onDisconnect: async () => {
-      // Check if session was too short — likely a connection failure
       const elapsed = Date.now() - sessionStartRef.current
       if (sessionStartRef.current > 0 && elapsed < 3000) {
-        toast.error(
-          language === 'bm'
-            ? 'Tidak dapat menyambung ke ejen suara. Semak kebenaran mikrofon dan cuba lagi.'
-            : 'Could not connect to voice agent. Check microphone permissions and try again.'
-        )
+        toast.error(t('testing.voice.error', language))
       }
 
       // Fallback POST to guarantee is_test=true reaches Supabase
@@ -61,7 +54,7 @@ function VoiceAgentInner() {
           }),
         })
       } catch {
-        // Best-effort fallback — do not surface to user
+        // Best-effort fallback
       }
       setDisplayStatus('ended')
     },
@@ -89,39 +82,37 @@ function VoiceAgentInner() {
   const isConnecting = status === 'connecting'
   const isConnected = status === 'connected'
 
-  const handleStartSession = async () => {
+  const handleStartSession = useCallback(async () => {
     setDisplayStatus('connecting')
     setTranscript([])
     sessionStartRef.current = 0
     try {
-      await startSession({
-        agentId: agentId ?? '',
-        connectionType: 'webrtc',
-        dynamicVariables: {
-          is_test: 'true',
-        },
-      })
+      // Request microphone permission explicitly
+      await navigator.mediaDevices.getUserMedia({ audio: true })
+
+      // Fetch signed URL from backend (never expose API key to client)
+      const res = await fetch('/api/elevenlabs/signed-url')
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({ error: 'Unknown' }))
+        throw new Error(`signed_url_failed: ${(data as { error?: string }).error ?? 'Unknown'}`)
+      }
+      const { signedUrl } = (await res.json()) as { signedUrl: string }
+      if (!signedUrl) throw new Error('signed_url_empty')
+
+      // Start session with signed URL
+      await startSession({ signedUrl })
     } catch {
-      toast.error(
-        language === 'bm'
-          ? 'Tidak dapat menyambung ke ejen suara. Semak kebenaran mikrofon dan cuba lagi.'
-          : 'Could not connect to voice agent. Check microphone permissions and try again.'
-      )
+      toast.error(t('testing.voice.error', language))
       setDisplayStatus('ready')
     }
-  }
+  }, [startSession, language])
 
   const handleEndSession = () => {
     endSession()
   }
 
-  // Derive bilingual status label
-  const statusLabels: Record<DisplayStatus, string> = {
-    ready: 'SEDIA / READY',
-    connecting: 'MENYAMBUNG... / CONNECTING',
-    active: 'AKTIF / ACTIVE',
-    ended: 'TAMAT / ENDED',
-  }
+  // Status label + color from translation system
+  const statusLabel = t(`testing.voice.status.${displayStatus}` as Parameters<typeof t>[0], language)
 
   const statusDotColors: Record<DisplayStatus, string> = {
     ready: 'var(--status-green)',
@@ -132,11 +123,11 @@ function VoiceAgentInner() {
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Orb keyframe animations */}
+      {/* Orb keyframe animations — using CSS custom properties for theming */}
       <style>{`
         @keyframes orbGlow {
-          0%, 100% { box-shadow: 0 0 40px 8px rgba(255, 213, 79, 0.25); }
-          50% { box-shadow: 0 0 50px 12px rgba(255, 213, 79, 0.35); }
+          0%, 100% { box-shadow: 0 0 40px 8px color-mix(in srgb, var(--accent-primary) 25%, transparent); }
+          50% { box-shadow: 0 0 50px 12px color-mix(in srgb, var(--accent-primary) 35%, transparent); }
         }
         @keyframes orbPulseConnect {
           0%, 100% { transform: scale(1); opacity: 0.3; }
@@ -159,28 +150,10 @@ function VoiceAgentInner() {
           75%, 100% { transform: scale(2.1); opacity: 0; }
         }
         @keyframes audioLevelDash {
-          0%, 100% { border-color: rgba(255, 213, 79, 0.2); }
-          50% { border-color: rgba(255, 213, 79, 0.5); }
-        }
-        @keyframes audioLevelDashActive {
-          0%, 100% { border-color: color-mix(in srgb, var(--accent-primary) 30%, transparent); }
-          50% { border-color: color-mix(in srgb, var(--accent-primary) 70%, transparent); }
+          0%, 100% { border-color: color-mix(in srgb, var(--accent-primary) 20%, transparent); }
+          50% { border-color: color-mix(in srgb, var(--accent-primary) 50%, transparent); }
         }
       `}</style>
-
-      {/* Agent ID missing warning */}
-      {!agentId && (
-        <div
-          className="w-full rounded-md px-4 py-3 text-sm font-medium text-center"
-          style={{
-            backgroundColor: 'color-mix(in srgb, var(--status-yellow) 15%, transparent)',
-            color: 'var(--status-yellow)',
-            border: '1px solid color-mix(in srgb, var(--status-yellow) 30%, transparent)',
-          }}
-        >
-          Voice agent not configured — NEXT_PUBLIC_ELEVENLABS_AGENT_ID missing
-        </div>
-      )}
 
       {/* Split panel layout */}
       <div className="flex flex-col lg:flex-row gap-4" style={{ minHeight: '520px' }}>
@@ -218,7 +191,7 @@ function VoiceAgentInner() {
               className="text-xs font-semibold tracking-wider uppercase"
               style={{ color: statusDotColors[displayStatus] }}
             >
-              {statusLabels[displayStatus]}
+              {statusLabel.toUpperCase()}
             </span>
           </div>
 
@@ -265,7 +238,7 @@ function VoiceAgentInner() {
                 </>
               )}
 
-              {/* Connecting state — pulsing amber ring */}
+              {/* Connecting state — pulsing ring */}
               {displayStatus === 'connecting' && (
                 <span
                   className="absolute rounded-full"
@@ -274,15 +247,15 @@ function VoiceAgentInner() {
                     height: 150,
                     left: 15,
                     top: 15,
-                    backgroundColor: '#FF8F00',
+                    backgroundColor: 'var(--status-yellow)',
                     animation: 'orbPulseConnect 1.5s ease-in-out infinite',
                   }}
                 />
               )}
 
-              {/* Orb core — amber/golden gradient */}
+              {/* Orb core — clean gradient, no mic icon */}
               <div
-                className="relative z-10 rounded-full flex items-center justify-center"
+                className="relative z-10 rounded-full"
                 style={{
                   width: 150,
                   height: 150,
@@ -291,13 +264,13 @@ function VoiceAgentInner() {
                       ? 'var(--bg-border)'
                       : displayStatus === 'active'
                         ? 'radial-gradient(circle at 40% 35%, var(--accent-primary), var(--accent-teal))'
-                        : 'radial-gradient(circle at 40% 35%, #FFD54F, #FF8F00)',
+                        : 'radial-gradient(circle at 40% 35%, var(--status-green), var(--accent-primary))',
                   boxShadow:
                     displayStatus === 'ended'
                       ? 'none'
                       : displayStatus === 'active'
                         ? '0 0 40px 10px color-mix(in srgb, var(--accent-primary) 40%, transparent)'
-                        : '0 0 40px 8px rgba(255, 213, 79, 0.25)',
+                        : '0 0 40px 8px color-mix(in srgb, var(--accent-primary) 25%, transparent)',
                   animation:
                     displayStatus === 'active'
                       ? 'orbBreathe 3s ease-in-out infinite'
@@ -307,26 +280,7 @@ function VoiceAgentInner() {
                   opacity: displayStatus === 'ended' ? 0.4 : 1,
                   transition: 'opacity 0.5s ease',
                 }}
-              >
-                {/* Mic icon */}
-                <svg
-                  width="40"
-                  height="40"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  style={{
-                    color: displayStatus === 'ended' ? 'var(--text-muted)' : '#1A1A1A',
-                  }}
-                >
-                  <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
-                  <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-                  <line x1="12" x2="12" y1="19" y2="22" />
-                </svg>
-              </div>
+              />
             </div>
 
             {/* Dashed audio level indicator ring */}
@@ -336,16 +290,11 @@ function VoiceAgentInner() {
                 width: 80,
                 height: 4,
                 border: '1px dashed',
-                borderColor:
-                  displayStatus === 'active'
-                    ? 'color-mix(in srgb, var(--accent-primary) 50%, transparent)'
-                    : 'rgba(255, 213, 79, 0.25)',
+                borderColor: 'color-mix(in srgb, var(--accent-primary) 25%, transparent)',
                 animation:
-                  displayStatus === 'active'
-                    ? 'audioLevelDashActive 1.5s ease-in-out infinite'
-                    : displayStatus === 'connecting'
-                      ? 'audioLevelDash 1.5s ease-in-out infinite'
-                      : undefined,
+                  displayStatus === 'active' || displayStatus === 'connecting'
+                    ? 'audioLevelDash 1.5s ease-in-out infinite'
+                    : undefined,
               }}
             />
           </div>
@@ -355,11 +304,11 @@ function VoiceAgentInner() {
             {/* Start / End button */}
             <button
               onClick={isConnected ? handleEndSession : () => void handleStartSession()}
-              disabled={isConnecting || !agentId}
+              disabled={isConnecting}
               className="flex items-center gap-2 px-8 py-3 rounded-full text-sm font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer hover:brightness-110 active:scale-95"
               style={{
-                backgroundColor: isConnected ? 'var(--status-red)' : '#FFD54F',
-                color: isConnected ? '#fff' : '#1A1A1A',
+                backgroundColor: isConnected ? 'var(--status-red)' : 'var(--accent-primary)',
+                color: 'var(--text-primary)',
               }}
             >
               {/* Mic / Stop icon */}
@@ -384,15 +333,17 @@ function VoiceAgentInner() {
                 </svg>
               )}
               {isConnected
-                ? 'Tamatkan / End Session'
+                ? t('testing.voice.endSession', language)
                 : displayStatus === 'ended'
-                  ? 'Mula Semula / Restart'
-                  : 'Mula Perbualan / Start Conversation'}
+                  ? (language === 'bm' ? 'Mula Semula' : 'Restart')
+                  : t('testing.voice.startSession', language)}
             </button>
 
             {/* Language hint */}
             <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
-              Bercakap dalam BM atau EN / Speak in BM or English
+              {language === 'bm'
+                ? 'Bercakap dalam BM atau EN'
+                : 'Speak in BM or English'}
             </p>
 
             {/* Test tag caption */}
@@ -426,7 +377,7 @@ function VoiceAgentInner() {
               className="text-xs font-semibold tracking-wider uppercase"
               style={{ color: 'var(--text-muted)' }}
             >
-              TRANSCRIPT
+              {t('testing.voice.liveTranscript', language)}
             </h3>
           </div>
 
@@ -438,9 +389,7 @@ function VoiceAgentInner() {
                   className="text-sm text-center leading-relaxed"
                   style={{ color: 'var(--text-muted)' }}
                 >
-                  {language === 'bm'
-                    ? 'Mulakan perbualan untuk mendapatkan bantuan perkhidmatan MyKasih.'
-                    : 'Start a conversation to get help with MyKasih services.'}
+                  {t('testing.voice.transcriptEmpty', language)}
                 </p>
               </div>
             ) : (

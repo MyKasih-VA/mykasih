@@ -43,7 +43,7 @@ let merchantsCache: Merchant[] | null = null
 function loadMerchants(): Merchant[] {
   if (merchantsCache) return merchantsCache
   try {
-    const filePath = join(process.cwd(), '..', 'merchants.json')
+    const filePath = join(process.cwd(), 'data', 'merchants.json')
     const raw = readFileSync(filePath, 'utf-8')
     merchantsCache = JSON.parse(raw) as Merchant[]
     return merchantsCache
@@ -58,23 +58,38 @@ function loadMerchants(): Merchant[] {
 function classifyIntent(message: string, history?: SimulateRequest['history']): Intent {
   const lower = message.toLowerCase().trim()
 
-  // Check if we're mid-flow (history has a locked intent)
-  if (history && history.length > 0) {
+  // 1. Keyword matching on the current message FIRST — most reliable
+  if (/\b(baki|balance|kredit|credit|semak baki)\b/i.test(lower)) return 'balance_check'
+  if (/\b(kedai|merchant|shop|store|speedmart|econsave|kedai berdekatan)\b/i.test(lower)) return 'merchant_lookup'
+  if (/\b(aduan|complaint|masalah|problem)\b/i.test(lower)) return 'complaint'
+  if (/\b(daftar|register|pendaftaran|daftar program)\b/i.test(lower)) return 'registration'
+  if (/\b(layak|eligible|kelayakan|eligibility|syarat)\b/i.test(lower)) return 'eligibility'
+
+  // 2. Check if we're mid-flow (history has a locked intent from a bot prompt)
+  //    Only check the LAST bot message — skip the greeting
+  if (history && history.length > 1) {
     const lastBotMsg = [...history].reverse().find((m) => m.role === 'bot')
     if (lastBotMsg) {
       const botLower = lastBotMsg.content.toLowerCase()
-      if (botLower.includes('nombor ic') || botLower.includes('semakan baki')) return 'balance_check'
-      if (botLower.includes('poskod') || botLower.includes('kedai berdekatan')) return 'merchant_lookup'
-      if (botLower.includes('aduan') || botLower.includes('nama penuh')) return 'complaint'
+      // Only match specific prompts, not the greeting message
+      if (
+        (botLower.includes('nombor ic') || botLower.includes('semakan baki')) &&
+        !botLower.includes('semak baki kad')
+      ) return 'balance_check'
+      if (
+        botLower.includes('poskod kawasan') ||
+        botLower.includes('poskod lain')
+      ) return 'merchant_lookup'
+      if (
+        (botLower.includes('nama penuh') || botLower.includes('merekod aduan')) &&
+        !botLower.includes('hantar aduan')
+      ) return 'complaint'
     }
   }
 
-  // Keyword matching
-  if (/\b(baki|balance|kredit|credit)\b/i.test(lower)) return 'balance_check'
-  if (/\b(kedai|merchant|shop|store|speedmart|econsave)\b/i.test(lower)) return 'merchant_lookup'
-  if (/\b(aduan|complaint|masalah|problem)\b/i.test(lower)) return 'complaint'
-  if (/\b(daftar|register|pendaftaran)\b/i.test(lower)) return 'registration'
-  if (/\b(layak|eligible|kelayakan|eligibility|syarat)\b/i.test(lower)) return 'eligibility'
+  // 3. Check if user input looks like data for an active flow
+  if (looksLikeIC(message)) return 'balance_check'
+  if (looksLikePostcode(message)) return 'merchant_lookup'
 
   return 'faq'
 }
@@ -172,14 +187,21 @@ function handleMerchantLookup(
 }
 
 function handleComplaint(
-  _message: string,
+  message: string,
   history: SimulateRequest['history']
 ): string {
-  // Count user messages that were part of the complaint flow
-  const complaintMessages =
-    history?.filter((m) => m.role === 'user').length ?? 0
+  // Check if user has provided complaint details (name + IC + description)
+  // Look for previous bot prompt asking for details AND user responses after it
+  const complaintBotPromptIdx = history?.findIndex(
+    (m) => m.role === 'bot' && m.content.toLowerCase().includes('nama penuh')
+  ) ?? -1
+  const userMsgsAfterPrompt = complaintBotPromptIdx >= 0
+    ? history?.slice(complaintBotPromptIdx + 1).filter((m) => m.role === 'user').length ?? 0
+    : 0
 
-  if (complaintMessages >= 2) {
+  // Generate ticket after user provides at least one response to the complaint prompt
+  // (the current message counts as the second piece of info)
+  if (complaintBotPromptIdx >= 0 && (userMsgsAfterPrompt >= 1 || looksLikeIC(message))) {
     const refNum = String(Math.floor(10000 + Math.random() * 90000))
     return (
       `Terima kasih. Aduan anda telah direkodkan.\n\n` +

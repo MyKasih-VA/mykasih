@@ -54,16 +54,16 @@ export function CategoryDonut({ data, title, language, loading }: CategoryDonutP
         </div>
       ) : (
         <div className="flex items-center gap-4 mt-4">
-          <ResponsiveContainer width="60%" height={240}>
+          <ResponsiveContainer width="55%" height={240}>
             <PieChart>
               <Pie
                 data={data}
                 dataKey="value"
                 nameKey="name"
-                cx="40%"
+                cx="55%"
                 cy="50%"
-                innerRadius={50}
-                outerRadius={80}
+                innerRadius={45}
+                outerRadius={72}
               >
                 {data.map((_, index) => (
                   <Cell

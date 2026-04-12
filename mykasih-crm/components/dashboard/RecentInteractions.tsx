@@ -79,21 +79,37 @@ function formatCategory(raw: string | null, language: Language): string {
   return raw
 }
 
-function formatRelativeTime(timestamp: string): string {
+const OUTCOME_KEYS: Record<string, TranslationKey> = {
+  resolved: 'outcome.resolved',
+  escalated: 'outcome.escalated',
+  callback: 'outcome.callback',
+  abandoned: 'outcome.abandoned',
+}
+
+function formatOutcome(raw: string | null, language: Language): string {
+  if (!raw) return '--'
+  const key = OUTCOME_KEYS[raw]
+  if (key) return t(key, language)
+  return raw
+}
+
+function formatRelativeTime(timestamp: string, language: Language): string {
   const now = Date.now()
   const then = new Date(timestamp).getTime()
   const diffMs = now - then
 
-  if (diffMs < 0) return 'just now'
+  const bm = language === 'bm'
+
+  if (diffMs < 0) return bm ? 'baru sahaja' : 'just now'
 
   const diffMins = Math.floor(diffMs / 60000)
   const diffHours = Math.floor(diffMs / 3600000)
   const diffDays = Math.floor(diffMs / 86400000)
 
-  if (diffMins < 1) return 'just now'
-  if (diffMins < 60) return `${diffMins}m ago`
-  if (diffHours < 24) return `${diffHours}h ago`
-  return `${diffDays}d ago`
+  if (diffMins < 1) return bm ? 'baru sahaja' : 'just now'
+  if (diffMins < 60) return bm ? `${diffMins}m lalu` : `${diffMins}m ago`
+  if (diffHours < 24) return bm ? `${diffHours}j lalu` : `${diffHours}h ago`
+  return bm ? `${diffDays}h lalu` : `${diffDays}d ago`
 }
 
 export function RecentInteractions({ data, language, loading }: RecentInteractionsProps) {
@@ -188,7 +204,7 @@ export function RecentInteractions({ data, language, loading }: RecentInteractio
                   <ChannelBadge channel={row.channel} language={language} />
                 </TableCell>
                 <TableCell className="py-0 text-sm text-[var(--text-primary)]">
-                  {row.caller_name ?? 'Unknown'}
+                  {row.caller_name ?? t('common.unknown', language)}
                 </TableCell>
                 <TableCell className="py-0 text-xs text-[var(--text-muted)]">
                   {formatCategory(row.category, language)}
@@ -199,14 +215,14 @@ export function RecentInteractions({ data, language, loading }: RecentInteractio
                       className="text-xs font-semibold px-2 py-1 rounded"
                       style={getOutcomeBadgeStyle(row.outcome)}
                     >
-                      {row.outcome}
+                      {formatOutcome(row.outcome, language)}
                     </span>
                   ) : (
                     <span className="text-xs text-[var(--text-muted)]">--</span>
                   )}
                 </TableCell>
                 <TableCell className="py-0 text-xs text-[var(--text-muted)]">
-                  {formatRelativeTime(row.timestamp)}
+                  {formatRelativeTime(row.timestamp, language)}
                 </TableCell>
                 <TableCell className="py-0 text-xs text-[var(--text-primary)]">
                   {row.channel === 'voice'
@@ -214,7 +230,7 @@ export function RecentInteractions({ data, language, loading }: RecentInteractio
                       ? `${row.duration}s`
                       : '--'
                     : row.message_count != null
-                    ? `${row.message_count} msgs`
+                    ? `${row.message_count} ${language === 'bm' ? 'mesej' : 'msgs'}`
                     : '--'}
                 </TableCell>
               </TableRow>

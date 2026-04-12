@@ -263,7 +263,7 @@ export function SettingsForm() {
           disabled={saving}
           className="w-full bg-[var(--accent-primary)] hover:bg-[var(--accent-primary)]/90 text-white"
         >
-          {saving ? 'Saving...' : t('settings.saveChanges', language)}
+          {saving ? t('settings.saving', language) : t('settings.saveChanges', language)}
         </Button>
       </div>
     </div>

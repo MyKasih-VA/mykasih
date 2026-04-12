@@ -43,9 +43,14 @@ export default function DashboardPage() {
 
   useEffect(() => {
     fetch('/api/analytics/summary')
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        return res.json()
+      })
       .then(setData)
-      .catch(console.error)
+      .catch(() => {
+        // Data stays null — stat cards show 0, charts show empty
+      })
       .finally(() => setLoading(false))
   }, [])
 

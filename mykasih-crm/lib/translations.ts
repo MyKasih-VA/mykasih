@@ -314,6 +314,12 @@ export const translations = {
   'testing.chat.firstContact.en': { en: 'Welcome to MyKasih. Please select a service: Semak baki | Kedai berdekatan | Bantuan SARA | Status aduan', bm: 'Welcome to MyKasih. Please select a service: Semak baki | Kedai berdekatan | Bantuan SARA | Status aduan' },
   'testing.chat.firstContact.bm': { en: 'Selamat datang ke MyKasih. Sila pilih perkhidmatan: Semak baki | Kedai berdekatan | Bantuan SARA | Status aduan', bm: 'Selamat datang ke MyKasih. Sila pilih perkhidmatan: Semak baki | Kedai berdekatan | Bantuan SARA | Status aduan' },
 
+  // Outcome labels
+  'outcome.resolved': { en: 'Resolved', bm: 'Selesai' },
+  'outcome.escalated': { en: 'Escalated', bm: 'Dinaik Taraf' },
+  'outcome.callback': { en: 'Callback', bm: 'Panggil Balik' },
+  'outcome.abandoned': { en: 'Abandoned', bm: 'Ditinggalkan' },
+
   // Settings page (Phase 6)
   'settings.title': { en: 'Settings', bm: 'Tetapan' },
   'settings.agentHours': { en: 'Agent Hours', bm: 'Waktu Ejen' },
@@ -328,6 +334,7 @@ export const translations = {
   'settings.chatWebhookUrl': { en: 'Chat Webhook URL', bm: 'URL Webhook Chat' },
   'settings.copyUrl': { en: 'Copy', bm: 'Salin' },
   'settings.saveChanges': { en: 'Save Changes', bm: 'Simpan Perubahan' },
+  'settings.saving': { en: 'Saving...', bm: 'Menyimpan...' },
   'settings.saveSuccess': { en: 'Settings saved', bm: 'Tetapan disimpan' },
   'settings.saveError': { en: 'Failed to save settings. Try again.', bm: 'Gagal menyimpan tetapan. Cuba lagi.' },
   'settings.loadError': { en: 'Failed to load settings. Try refreshing.', bm: 'Gagal memuatkan tetapan. Cuba muat semula.' },
