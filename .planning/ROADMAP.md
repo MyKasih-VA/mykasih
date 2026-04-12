@@ -100,7 +100,7 @@ Plans:
 - [x] 04-01-PLAN.md — Shared foundation: translations, TranscriptModal wired, FilterBar, CallsTable, IntentBadge, beneficiaries API + test
 - [x] 04-02-PLAN.md — Voice Calls + Chat Messages + All Interactions pages
 - [x] 04-03-PLAN.md — Tickets kanban page (TicketCard + TicketKanban + page)
-- [ ] 04-04-PLAN.md — Beneficiaries search-first page (BeneficiaryProfile + page)
+- [x] 04-04-PLAN.md — Beneficiaries search-first page (BeneficiaryProfile + page)
 **UI hint**: yes
 
 ### Phase 5: Intelligence & System Pages
