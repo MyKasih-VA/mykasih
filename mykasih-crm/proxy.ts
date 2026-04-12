@@ -21,6 +21,6 @@ export function proxy(request: NextRequest) {
 export const config = {
   // Protect dashboard routes — exclude login, api, and _next
   matcher: [
-    "/((?!_next/static|_next/image|favicon\\.ico|login|api/).*)",
+    "/((?!_next/static|_next/image|favicon\\.ico|login|api/|demo).*)",
   ],
 }

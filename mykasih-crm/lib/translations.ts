@@ -245,6 +245,47 @@ export const translations = {
 
   // Common
   'common.tryAgain': { en: 'Try again', bm: 'Cuba lagi' },
+
+  // Testing Console (Phase 6)
+  'testing.title': { en: 'Testing Console', bm: 'Konsol Ujian' },
+  'testing.tab.voiceAgent': { en: 'Voice Agent', bm: 'Ejen Suara' },
+  'testing.tab.kasihChatbot': { en: 'Kasih Chatbot', bm: 'Chatbot Kasih' },
+  'testing.tab.anamAI': { en: 'Anam AI', bm: 'Anam AI' },
+  'testing.voice.startSession': { en: 'Start Session', bm: 'Mulakan Sesi' },
+  'testing.voice.endSession': { en: 'End Session', bm: 'Tamatkan Sesi' },
+  'testing.voice.status.ready': { en: 'Ready', bm: 'Sedia' },
+  'testing.voice.status.connecting': { en: 'Connecting...', bm: 'Menyambung...' },
+  'testing.voice.status.active': { en: 'Active', bm: 'Aktif' },
+  'testing.voice.status.ended': { en: 'Ended', bm: 'Tamat' },
+  'testing.voice.liveTranscript': { en: 'Live Transcript', bm: 'Transkrip Langsung' },
+  'testing.voice.testTagged': { en: 'All sessions tagged is_test=true', bm: 'Semua sesi ditanda is_test=true' },
+  'testing.voice.transcriptEmpty': { en: 'Transcript will appear here when a session is active.', bm: 'Transkrip akan dipaparkan di sini apabila sesi aktif.' },
+  'testing.voice.error': { en: 'Connection failed. Check your ElevenLabs agent configuration.', bm: 'Sambungan gagal. Semak konfigurasi ejen ElevenLabs anda.' },
+  'testing.chat.inputPlaceholder': { en: 'Type a message as a beneficiary...', bm: 'Taip mesej sebagai penerima manfaat...' },
+  'testing.chat.send': { en: 'Send', bm: 'Hantar' },
+  'testing.chat.clearConversation': { en: 'Clear Conversation', bm: 'Kosongkan Perbualan' },
+  'testing.chat.anamLabel': { en: 'Anam AI Persona — client-facing demo', bm: 'Persona Anam AI — demo untuk pelanggan' },
+  'testing.chat.emptyState': { en: 'Start a conversation to test the Kasih chatbot.', bm: 'Mulakan perbualan untuk menguji chatbot Kasih.' },
+  'testing.chat.firstContact.en': { en: 'Welcome to MyKasih. Please select a service: Semak baki | Kedai berdekatan | Bantuan SARA | Status aduan', bm: 'Welcome to MyKasih. Please select a service: Semak baki | Kedai berdekatan | Bantuan SARA | Status aduan' },
+  'testing.chat.firstContact.bm': { en: 'Selamat datang ke MyKasih. Sila pilih perkhidmatan: Semak baki | Kedai berdekatan | Bantuan SARA | Status aduan', bm: 'Selamat datang ke MyKasih. Sila pilih perkhidmatan: Semak baki | Kedai berdekatan | Bantuan SARA | Status aduan' },
+
+  // Settings page (Phase 6)
+  'settings.title': { en: 'Settings', bm: 'Tetapan' },
+  'settings.agentHours': { en: 'Agent Hours', bm: 'Waktu Ejen' },
+  'settings.agentHoursStart': { en: 'Start Time', bm: 'Masa Mula' },
+  'settings.agentHoursEnd': { en: 'End Time', bm: 'Masa Tamat' },
+  'settings.notifications': { en: 'Notifications', bm: 'Pemberitahuan' },
+  'settings.notificationEmail': { en: 'Notification Email', bm: 'E-mel Pemberitahuan' },
+  'settings.dataRetention': { en: 'Data Retention', bm: 'Pengekalan Data' },
+  'settings.dataRetentionDays': { en: 'Retention Period (days)', bm: 'Tempoh Pengekalan (hari)' },
+  'settings.webhookUrls': { en: 'Webhook URLs', bm: 'URL Webhook' },
+  'settings.voiceWebhookUrl': { en: 'Voice Webhook URL', bm: 'URL Webhook Suara' },
+  'settings.chatWebhookUrl': { en: 'Chat Webhook URL', bm: 'URL Webhook Chat' },
+  'settings.copyUrl': { en: 'Copy', bm: 'Salin' },
+  'settings.saveChanges': { en: 'Save Changes', bm: 'Simpan Perubahan' },
+  'settings.saveSuccess': { en: 'Settings saved', bm: 'Tetapan disimpan' },
+  'settings.saveError': { en: 'Failed to save settings. Try again.', bm: 'Gagal menyimpan tetapan. Cuba lagi.' },
+  'settings.loadError': { en: 'Failed to load settings. Try refreshing.', bm: 'Gagal memuatkan tetapan. Cuba muat semula.' },
 } as const
 
 export type TranslationKey = keyof typeof translations
