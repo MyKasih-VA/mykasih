@@ -79,7 +79,7 @@
 ### Intelligence & System Pages (Session 5)
 
 - [x] **PAGE-06**: Analytics page — period selector, 4 charts (volume bar, CSAT trend, language pie, peak heatmap), category breakdown table
-- [ ] **PAGE-07**: Knowledge Base page — CRUD table, BM/EN toggle, active/inactive switch, Sync to ElevenLabs button
+- [x] **PAGE-07**: Knowledge Base page — CRUD table, BM/EN toggle, active/inactive switch, Sync to ElevenLabs button
 - [ ] **PAGE-08**: Staff Management page — user table, add/edit/remove, role select, last login display
 - [ ] **PAGE-09**: Integrations page — 5 status cards (ElevenLabs, Meta WA, n8n, Supabase, Anam AI) with live status and action buttons
 - [ ] **PAGE-10**: Live Monitor page — active voice sessions (ElevenLabs API), active WA chats, auto-refresh every 10s
@@ -185,7 +185,7 @@
 | PAGE-04 | Phase 4 — Core Dashboard Pages | Complete |
 | PAGE-05 | Phase 4 — Core Dashboard Pages | Complete |
 | PAGE-06 | Phase 5 — Intelligence & System Pages | Complete |
-| PAGE-07 | Phase 5 — Intelligence & System Pages | Pending |
+| PAGE-07 | Phase 5 — Intelligence & System Pages | Complete |
 | PAGE-08 | Phase 5 — Intelligence & System Pages | Pending |
 | PAGE-09 | Phase 5 — Intelligence & System Pages | Pending |
 | PAGE-10 | Phase 5 — Intelligence & System Pages | Pending |

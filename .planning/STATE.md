@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 05-01-PLAN.md
-last_updated: "2026-04-12T07:26:31.937Z"
+stopped_at: Completed 05-02-PLAN.md
+last_updated: "2026-04-12T07:31:39.239Z"
 last_activity: 2026-04-12
 progress:
   total_phases: 7
   completed_phases: 4
   total_plans: 33
-  completed_plans: 29
-  percent: 88
+  completed_plans: 30
+  percent: 91
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-04-11)
 ## Current Position
 
 Phase: 05 (intelligence-system-pages) — EXECUTING
-Plan: 2 of 5
+Plan: 3 of 5
 Status: Ready to execute
 Last activity: 2026-04-12
 
@@ -68,6 +68,7 @@ Progress: [██░░░░░░░░] 29%
 | Phase 04 P03 | 2 | 2 tasks | 3 files |
 | Phase 04 P04 | 8 | 1 tasks | 2 files |
 | Phase 05 P01 | 4 | 2 tasks | 12 files |
+| Phase 05 P02 | 15 | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -110,6 +111,9 @@ Recent decisions affecting current work:
 - [Phase 05]: CSS grid (not Recharts) for PeakHeatmap — per UI-SPEC; enables color-mix intensity per cell
 - [Phase 05]: Single Supabase query fetching all calls in range, then JS-side grouping — avoids N+1 queries for 6 aggregations
 - [Phase 05]: avgCsat returns null when no ratings — StatCard shows em-dash, avoids misleading 0
+- [Phase 05]: Next.js 16 await params pattern in PATCH/DELETE dynamic routes — consistent with existing calls/[id]/transcript/route.ts pattern
+- [Phase 05]: KbEntry interface exported from KbEntryModal.tsx — avoids duplication, single source of truth for KB data shape
+- [Phase 05]: ElevenLabs sync formats active entries as Q/A bilingual text pairs in knowledge_base field of PATCH agent API
 
 ### Pending Todos
 
@@ -122,6 +126,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-04-12T07:26:31.933Z
-Stopped at: Completed 05-01-PLAN.md
+Last session: 2026-04-12T07:31:39.234Z
+Stopped at: Completed 05-02-PLAN.md
 Resume file: None
