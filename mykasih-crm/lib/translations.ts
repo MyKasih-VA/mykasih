@@ -64,6 +64,69 @@ export const translations = {
 
   // Common
   'common.search': { en: 'Search...', bm: 'Cari...' },
+
+  // Page titles
+  'page.voiceCalls': { en: 'Voice Calls', bm: 'Panggilan Suara' },
+  'page.chatMessages': { en: 'Chat Messages', bm: 'Mesej Chat' },
+  'page.allInteractions': { en: 'All Interactions', bm: 'Semua Interaksi' },
+  'page.tickets': { en: 'Tickets', bm: 'Tiket' },
+  'page.beneficiaries': { en: 'Beneficiaries', bm: 'Penerima Manfaat' },
+
+  // Table columns
+  'table.waNumber': { en: 'WA Number', bm: 'No. WA' },
+  'table.intent': { en: 'Intent', bm: 'Niat' },
+  'table.messages': { en: 'Messages', bm: 'Mesej' },
+  'table.refNo': { en: 'Ref No.', bm: 'No. Ruj.' },
+  'table.maskedIc': { en: 'IC (masked)', bm: 'IC (tersembunyi)' },
+  'table.status': { en: 'Status', bm: 'Status' },
+  'table.durationMsgs': { en: 'Dur / Msgs', bm: 'Tempoh / Mesej' },
+
+  // Filter labels
+  'filter.today': { en: 'Today', bm: 'Hari Ini' },
+  'filter.thisWeek': { en: 'This week', bm: 'Minggu ini' },
+  'filter.thisMonth': { en: 'This month', bm: 'Bulan ini' },
+  'filter.custom': { en: 'Custom', bm: 'Tersuai' },
+  'filter.allTime': { en: 'All time', bm: 'Semua masa' },
+  'filter.allCategories': { en: 'All categories', bm: 'Semua kategori' },
+  'filter.allOutcomes': { en: 'All outcomes', bm: 'Semua hasil' },
+  'filter.allLanguages': { en: 'All languages', bm: 'Semua bahasa' },
+  'filter.allChannels': { en: 'All', bm: 'Semua' },
+  'filter.searchPlaceholder': { en: 'Search by name or WA number...', bm: 'Cari mengikut nama atau no. WA...' },
+
+  // Kanban
+  'kanban.open': { en: 'Open', bm: 'Terbuka' },
+  'kanban.inProgress': { en: 'In Progress', bm: 'Dalam Proses' },
+  'kanban.resolved': { en: 'Resolved', bm: 'Selesai' },
+
+  // Actions
+  'action.export': { en: 'Export to Excel', bm: 'Eksport ke Excel' },
+
+  // Beneficiaries
+  'beneficiaries.searchHeading': { en: 'Find a Beneficiary', bm: 'Cari Penerima Manfaat' },
+  'beneficiaries.searchSubtext': { en: 'Search by WhatsApp number or name', bm: 'Cari mengikut nombor WA atau nama' },
+  'beneficiaries.noResultsHeading': { en: 'No beneficiary found', bm: 'Tiada penerima manfaat ditemui' },
+  'beneficiaries.noResultsBody': { en: 'Try a different WA number or name.', bm: 'Cuba nombor WA atau nama yang berbeza.' },
+  'beneficiaries.interactionHistory': { en: 'Interaction History', bm: 'Sejarah Interaksi' },
+  'beneficiaries.ticketHistory': { en: 'Ticket History', bm: 'Sejarah Tiket' },
+
+  // Empty states
+  'empty.noVoiceCalls.heading': { en: 'No voice calls yet', bm: 'Tiada panggilan suara lagi' },
+  'empty.noVoiceCalls.body': { en: 'Voice calls will appear here once SARA receives calls via WhatsApp.', bm: 'Panggilan suara akan muncul di sini setelah SARA menerima panggilan melalui WhatsApp.' },
+  'empty.noChatMessages.heading': { en: 'No chat messages yet', bm: 'Tiada mesej chat lagi' },
+  'empty.noChatMessages.body': { en: 'WhatsApp conversations will appear here once the chatbot goes live.', bm: 'Perbualan WhatsApp akan muncul di sini setelah chatbot aktif.' },
+  'empty.noInteractionsFiltered.heading': { en: 'No interactions found', bm: 'Tiada interaksi ditemui' },
+  'empty.noInteractionsFiltered.body': { en: 'Try adjusting your filters or check back later.', bm: 'Cuba laraskan penapis anda atau semak semula kemudian.' },
+  'empty.noTickets': { en: 'No tickets', bm: 'Tiada tiket' },
+
+  // Errors
+  'error.loadCalls': { en: 'Unable to load calls. Check your connection and try again.', bm: 'Tidak dapat memuatkan panggilan. Semak sambungan anda dan cuba lagi.' },
+  'error.loadChat': { en: 'Unable to load chat messages. Check your connection and try again.', bm: 'Tidak dapat memuatkan mesej chat. Semak sambungan anda dan cuba lagi.' },
+  'error.loadTickets': { en: 'Unable to load tickets. Check your connection and try again.', bm: 'Tidak dapat memuatkan tiket. Semak sambungan anda dan cuba lagi.' },
+  'error.statusUpdate': { en: 'Status update failed. Please try again.', bm: 'Kemaskini status gagal. Sila cuba lagi.' },
+
+  // Pagination
+  'pagination.showing': { en: 'Showing', bm: 'Menunjukkan' },
+  'pagination.of': { en: 'of', bm: 'daripada' },
 } as const
 
 export type TranslationKey = keyof typeof translations
