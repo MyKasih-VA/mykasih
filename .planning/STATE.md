@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 5 UI-SPEC approved
-last_updated: "2026-04-12T07:19:21.420Z"
-last_activity: 2026-04-12 -- Phase 5 planning complete
+stopped_at: Completed 05-01-PLAN.md
+last_updated: "2026-04-12T07:26:31.937Z"
+last_activity: 2026-04-12
 progress:
   total_phases: 7
   completed_phases: 4
   total_plans: 33
-  completed_plans: 28
-  percent: 85
+  completed_plans: 29
+  percent: 88
 ---
 
 # Project State
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-11)
 
 **Core value:** Beneficiaries can get SARA help at any hour via voice or WhatsApp, and every interaction is captured and visible to MyKasih staff in real time.
-**Current focus:** Phase 04 — core-dashboard-pages
+**Current focus:** Phase 05 — intelligence-system-pages
 
 ## Current Position
 
-Phase: 5
-Plan: Not started
+Phase: 05 (intelligence-system-pages) — EXECUTING
+Plan: 2 of 5
 Status: Ready to execute
-Last activity: 2026-04-12 -- Phase 5 planning complete
+Last activity: 2026-04-12
 
 Progress: [██░░░░░░░░] 29%
 
@@ -67,6 +67,7 @@ Progress: [██░░░░░░░░] 29%
 | Phase 04 P02 | 5 | 2 tasks | 3 files |
 | Phase 04 P03 | 2 | 2 tasks | 3 files |
 | Phase 04 P04 | 8 | 1 tasks | 2 files |
+| Phase 05 P01 | 4 | 2 tasks | 12 files |
 
 ## Accumulated Context
 
@@ -106,6 +107,9 @@ Recent decisions affecting current work:
 - [Phase 04]: TicketCard exports Ticket interface so TicketKanban can import type alongside component — avoids duplicating interface
 - [Phase 04]: COLUMNS array typed with labelKey as union of literal translation keys — ensures type safety without casting in t() call
 - [Phase 04]: BeneficiaryProfile imports shared helpers (getOutcomeBadgeStyle/formatCategory/formatRelativeTime) from CallsTable.tsx — avoids duplication, consistent with Phase 04 pattern
+- [Phase 05]: CSS grid (not Recharts) for PeakHeatmap — per UI-SPEC; enables color-mix intensity per cell
+- [Phase 05]: Single Supabase query fetching all calls in range, then JS-side grouping — avoids N+1 queries for 6 aggregations
+- [Phase 05]: avgCsat returns null when no ratings — StatCard shows em-dash, avoids misleading 0
 
 ### Pending Todos
 
@@ -118,6 +122,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-04-12T06:55:38.491Z
-Stopped at: Phase 5 UI-SPEC approved
-Resume file: .planning/phases/05-intelligence-system-pages/05-UI-SPEC.md
+Last session: 2026-04-12T07:26:31.933Z
+Stopped at: Completed 05-01-PLAN.md
+Resume file: None
