@@ -3,20 +3,9 @@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { VoiceAgentTab } from '@/components/testing/VoiceAgentTab'
 import { ChatbotSimTab } from '@/components/testing/ChatbotSimTab'
+import { AnamAITab } from '@/components/testing/AnamAITab'
 import { useLanguage } from '@/hooks/useLanguage'
 import { t } from '@/lib/translations'
-
-// AnamAITab is built in Plan 03 — inline placeholder for now
-function AnamAIPlaceholder() {
-  const { language } = useLanguage()
-  return (
-    <div className="flex items-center justify-center py-12">
-      <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
-        {t('testing.chat.anamLabel', language)}
-      </p>
-    </div>
-  )
-}
 
 export default function Page() {
   const { language } = useLanguage()
@@ -49,7 +38,7 @@ export default function Page() {
         </TabsContent>
 
         <TabsContent value="anam">
-          <AnamAIPlaceholder />
+          <AnamAITab />
         </TabsContent>
       </Tabs>
     </div>
