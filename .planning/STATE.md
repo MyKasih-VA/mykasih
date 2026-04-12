@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
-stopped_at: Phase 6 context gathered
-last_updated: "2026-04-12T09:59:44.210Z"
+status: executing
+stopped_at: Completed 06-01-PLAN.md
+last_updated: "2026-04-12T11:11:48.659Z"
 last_activity: 2026-04-12
 progress:
   total_phases: 7
   completed_phases: 5
-  total_plans: 33
-  completed_plans: 33
-  percent: 100
+  total_plans: 38
+  completed_plans: 34
+  percent: 89
 ---
 
 # Project State
@@ -21,13 +21,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-11)
 
 **Core value:** Beneficiaries can get SARA help at any hour via voice or WhatsApp, and every interaction is captured and visible to MyKasih staff in real time.
-**Current focus:** Phase 05 — intelligence-system-pages
+**Current focus:** Phase 06 — testing-console-ai-demo-settings-polish
 
 ## Current Position
 
-Phase: 6
-Plan: Not started
-Status: Phase complete — ready for verification
+Phase: 06 (testing-console-ai-demo-settings-polish) — EXECUTING
+Plan: 2 of 5
+Status: Ready to execute
 Last activity: 2026-04-12
 
 Progress: [██░░░░░░░░] 29%
@@ -73,6 +73,7 @@ Progress: [██░░░░░░░░] 29%
 | Phase 05 P03 | 3 | 2 tasks | 7 files |
 | Phase 05 P04 | 8 | 2 tasks | 3 files |
 | Phase 05 P05 | 116 | 2 tasks | 4 files |
+| Phase 06 P01 | 109 | 3 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -125,6 +126,10 @@ Recent decisions affecting current work:
 - [Phase 05]: Promise.allSettled for parallel ElevenLabs + Supabase fetch in live-monitor status API — no single failure blocks other
 - [Phase 05]: AbortSignal.timeout(5000) on ElevenLabs Conversations API call — degrades gracefully to empty array if EL unreachable
 - [Phase 05]: visibilitychange event pauses 10s polling interval when tab hidden, resumes + refetches on focus
+- [Phase 06]: global.d.ts JSX IntrinsicElement declaration for anam-agent web component — TypeScript strict requires this before any .tsx uses the custom element
+- [Phase 06]: proxy.ts demo exclusion uses api/|demo pattern in negative lookahead — /demo and sub-paths are public; no trailing slash needed since demo has no sub-routes
+- [Phase 06]: settings table uses key-value schema (key text PRIMARY KEY, value text NOT NULL) — no migration needed to add new settings; service_role RLS locks direct client access
+- [Phase 06]: Wave 0 test stubs use expect(true).toBe(true) not test.todo() — stubs show as green in Jest output; Plans 02-04 replace stub bodies in-place
 
 ### Pending Todos
 
@@ -137,6 +142,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-04-12T09:59:44.207Z
-Stopped at: Phase 6 context gathered
-Resume file: .planning/phases/06-testing-console-ai-demo-settings-polish/06-CONTEXT.md
+Last session: 2026-04-12T11:11:48.656Z
+Stopped at: Completed 06-01-PLAN.md
+Resume file: None

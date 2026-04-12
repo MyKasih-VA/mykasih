@@ -91,7 +91,7 @@
 - [ ] **TEST-03**: Testing Console Tab 3 — Anam AI persona embed (anam-agent web component)
 - [ ] **TEST-04**: AI Demo page (/demo) — standalone Anam AI persona embed, no sidebar, client-facing design
 - [ ] **TEST-05**: Settings page — agent hours config, webhook URL display, notification preferences, data retention
-- [ ] **TEST-06**: Language toggle fully applied to all sidebar labels, page titles, status labels, table headers
+- [x] **TEST-06**: Language toggle fully applied to all sidebar labels, page titles, status labels, table headers
 
 ### Excel Export
 
@@ -194,7 +194,7 @@
 | TEST-03 | Phase 6 — Testing Console, AI Demo, Settings & Polish | Pending |
 | TEST-04 | Phase 6 — Testing Console, AI Demo, Settings & Polish | Pending |
 | TEST-05 | Phase 6 — Testing Console, AI Demo, Settings & Polish | Pending |
-| TEST-06 | Phase 6 — Testing Console, AI Demo, Settings & Polish | Pending |
+| TEST-06 | Phase 6 — Testing Console, AI Demo, Settings & Polish | Complete |
 | SEC-01 | Phase 7 — UAT Fixes, PDPA Audit & Final QA | Pending |
 | SEC-02 | Phase 7 — UAT Fixes, PDPA Audit & Final QA | Pending |
 | SEC-03 | Phase 7 — UAT Fixes, PDPA Audit & Final QA | Pending |
