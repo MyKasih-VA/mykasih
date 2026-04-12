@@ -113,7 +113,13 @@ Plans:
   3. Admin can add, edit, or remove staff users and assign roles from the Staff Management page
   4. The Integrations page shows live status for ElevenLabs, Meta WA, n8n, Supabase, and Anam AI with action buttons
   5. The Live Monitor page auto-refreshes every 10 seconds and shows all currently active voice sessions and active WA chats
-**Plans**: [To be planned]
+**Plans**: 5 plans
+Plans:
+- [ ] 05-01-PLAN.md — Foundation + Analytics page (shadcn installs, all translations, charts API, 6 chart components)
+- [ ] 05-02-PLAN.md — Knowledge Base page (CRUD API, table with BM/EN toggle, add/edit modal, ElevenLabs sync)
+- [ ] 05-03-PLAN.md — Staff Management page (invite API, role edit, remove, admin-only enforcement)
+- [ ] 05-04-PLAN.md — Integrations page (health check API, 5 status cards, action buttons, merchant seed preserved)
+- [ ] 05-05-PLAN.md — Live Monitor page (ElevenLabs + sessions API, auto-refresh 10s, visibility-aware polling)
 **UI hint**: yes
 
 ### Phase 6: Testing Console, AI Demo, Settings & Polish
@@ -152,6 +158,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 2. Voice Webhook, Ticket System & Excel Export | 7/7 | Complete | 2026-04-11 |
 | 3. Kasih WhatsApp Chatbot | 8/8 | Complete   | 2026-04-11 |
 | 4. Core Dashboard Pages | 3/4 | In Progress|  |
-| 5. Intelligence & System Pages | 0/? | Not started | - |
+| 5. Intelligence & System Pages | 0/5 | Planned | - |
 | 6. Testing Console, AI Demo, Settings & Polish | 0/? | Not started | - |
 | 7. UAT Fixes, PDPA Audit & Final QA | 0/? | Not started | - |
