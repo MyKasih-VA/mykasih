@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 4 UI-SPEC approved
-last_updated: "2026-04-12T05:46:25.755Z"
-last_activity: 2026-04-12 -- Phase 4 planning complete
+stopped_at: Completed 04-01-PLAN.md
+last_updated: "2026-04-12T05:52:49.588Z"
+last_activity: 2026-04-12
 progress:
   total_phases: 7
   completed_phases: 3
   total_plans: 28
-  completed_plans: 24
-  percent: 86
+  completed_plans: 25
+  percent: 89
 ---
 
 # Project State
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-11)
 
 **Core value:** Beneficiaries can get SARA help at any hour via voice or WhatsApp, and every interaction is captured and visible to MyKasih staff in real time.
-**Current focus:** Phase 03 — kasih-whatsapp-chatbot
+**Current focus:** Phase 04 — core-dashboard-pages
 
 ## Current Position
 
-Phase: 4
-Plan: Not started
+Phase: 04 (core-dashboard-pages) — EXECUTING
+Plan: 2 of 4
 Status: Ready to execute
-Last activity: 2026-04-12 -- Phase 4 planning complete
+Last activity: 2026-04-12
 
 Progress: [██░░░░░░░░] 29%
 
@@ -62,6 +62,7 @@ Progress: [██░░░░░░░░] 29%
 | Phase 03 P05 | 4 | 1 tasks | 3 files |
 | Phase 03 P06 | 4 | 1 tasks | 2 files |
 | Phase 03 P07 | 12 | 2 tasks | 5 files |
+| Phase 04 P01 | 25 | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -93,6 +94,9 @@ Recent decisions affecting current work:
 - [Phase 03]: ticket insert failure only logs in complaint handler — call record is primary audit trail; ticket is secondary
 - [Phase 03]: jest.mock() factories must be self-contained — TDZ causes ReferenceError; fix is to create fn inside factory and expose via side-channel property on exported value
 - [Phase 03]: @jest-environment node required for API route test files — Next.js route handlers need Web Fetch API globals not present in jsdom; Node 18+ provides natively
+- [Phase 04]: mutable _cfg object pattern in jest.mock factory avoids TDZ when outer const variables are undefined at hoist time
+- [Phase 04]: Radix Select requires non-empty string values — use __all__ sentinel, convert to empty string in onFilterChange handler
+- [Phase 04]: getOutcomeBadgeStyle, formatCategory, formatRelativeTime exported from CallsTable.tsx as shared helpers for page components
 
 ### Pending Todos
 
@@ -105,6 +109,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-04-12T05:30:53.295Z
-Stopped at: Phase 4 UI-SPEC approved
-Resume file: .planning/phases/04-core-dashboard-pages/04-UI-SPEC.md
+Last session: 2026-04-12T05:52:49.584Z
+Stopped at: Completed 04-01-PLAN.md
+Resume file: None

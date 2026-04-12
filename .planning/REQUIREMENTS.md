@@ -74,7 +74,7 @@
 - [ ] **PAGE-02**: Chat Messages page — WA thread view, message count column, intent badge, linked ticket
 - [ ] **PAGE-03**: All Interactions page — combined table with channel toggle filter [All | 📞 Voice | 💬 Chat]
 - [ ] **PAGE-04**: Tickets page — kanban board (open/in-progress/resolved), reference no, masked IC, linked transcript, status update
-- [ ] **PAGE-05**: Beneficiaries page — search by WA number or name, interaction history, ticket history
+- [x] **PAGE-05**: Beneficiaries page — search by WA number or name, interaction history, ticket history
 
 ### Intelligence & System Pages (Session 5)
 
@@ -183,7 +183,7 @@
 | PAGE-02 | Phase 4 — Core Dashboard Pages | Pending |
 | PAGE-03 | Phase 4 — Core Dashboard Pages | Pending |
 | PAGE-04 | Phase 4 — Core Dashboard Pages | Pending |
-| PAGE-05 | Phase 4 — Core Dashboard Pages | Pending |
+| PAGE-05 | Phase 4 — Core Dashboard Pages | Complete |
 | PAGE-06 | Phase 5 — Intelligence & System Pages | Pending |
 | PAGE-07 | Phase 5 — Intelligence & System Pages | Pending |
 | PAGE-08 | Phase 5 — Intelligence & System Pages | Pending |
