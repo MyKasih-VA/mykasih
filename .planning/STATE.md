@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 06-01-PLAN.md
-last_updated: "2026-04-12T11:11:48.659Z"
+stopped_at: Completed 06-02-PLAN.md
+last_updated: "2026-04-12T11:15:44.691Z"
 last_activity: 2026-04-12
 progress:
   total_phases: 7
   completed_phases: 5
   total_plans: 38
-  completed_plans: 34
-  percent: 89
+  completed_plans: 35
+  percent: 92
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-04-11)
 ## Current Position
 
 Phase: 06 (testing-console-ai-demo-settings-polish) — EXECUTING
-Plan: 2 of 5
+Plan: 3 of 5
 Status: Ready to execute
 Last activity: 2026-04-12
 
@@ -74,6 +74,7 @@ Progress: [██░░░░░░░░] 29%
 | Phase 05 P04 | 8 | 2 tasks | 3 files |
 | Phase 05 P05 | 116 | 2 tasks | 4 files |
 | Phase 06 P01 | 109 | 3 tasks | 9 files |
+| Phase 06 P02 | 420 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -130,6 +131,9 @@ Recent decisions affecting current work:
 - [Phase 06]: proxy.ts demo exclusion uses api/|demo pattern in negative lookahead — /demo and sub-paths are public; no trailing slash needed since demo has no sub-routes
 - [Phase 06]: settings table uses key-value schema (key text PRIMARY KEY, value text NOT NULL) — no migration needed to add new settings; service_role RLS locks direct client access
 - [Phase 06]: Wave 0 test stubs use expect(true).toBe(true) not test.todo() — stubs show as green in Jest output; Plans 02-04 replace stub bodies in-place
+- [Phase 06]: Dual is_test tagging: dynamicVariables.is_test passed to startSession AND fallback POST to /api/calls in onDisconnect — guarantees is_test reaches Supabase unconditionally
+- [Phase 06]: AnamAITab inline placeholder in testing/page.tsx — Plan 03 replaces in-place with real AnamAITab component
+- [Phase 06]: ConversationProvider/VoiceAgentInner split pattern — exported VoiceAgentTab provides provider boundary, inner component consumes useConversation hook
 
 ### Pending Todos
 
@@ -142,6 +146,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-04-12T11:11:48.656Z
-Stopped at: Completed 06-01-PLAN.md
+Last session: 2026-04-12T11:15:44.688Z
+Stopped at: Completed 06-02-PLAN.md
 Resume file: None

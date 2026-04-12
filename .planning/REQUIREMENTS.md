@@ -86,8 +86,8 @@
 
 ### Testing & Demo (Session 6)
 
-- [ ] **TEST-01**: Testing Console Tab 1 — ElevenLabs voice agent embed (@elevenlabs/react), all test calls tagged is_test=true
-- [ ] **TEST-02**: Testing Console Tab 2 — Kasih chatbot simulator, dark WhatsApp-style UI, intent badge on bot responses
+- [x] **TEST-01**: Testing Console Tab 1 — ElevenLabs voice agent embed (@elevenlabs/react), all test calls tagged is_test=true
+- [x] **TEST-02**: Testing Console Tab 2 — Kasih chatbot simulator, dark WhatsApp-style UI, intent badge on bot responses
 - [ ] **TEST-03**: Testing Console Tab 3 — Anam AI persona embed (anam-agent web component)
 - [ ] **TEST-04**: AI Demo page (/demo) — standalone Anam AI persona embed, no sidebar, client-facing design
 - [ ] **TEST-05**: Settings page — agent hours config, webhook URL display, notification preferences, data retention
@@ -189,8 +189,8 @@
 | PAGE-08 | Phase 5 — Intelligence & System Pages | Complete |
 | PAGE-09 | Phase 5 — Intelligence & System Pages | Complete |
 | PAGE-10 | Phase 5 — Intelligence & System Pages | Complete |
-| TEST-01 | Phase 6 — Testing Console, AI Demo, Settings & Polish | Pending |
-| TEST-02 | Phase 6 — Testing Console, AI Demo, Settings & Polish | Pending |
+| TEST-01 | Phase 6 — Testing Console, AI Demo, Settings & Polish | Complete |
+| TEST-02 | Phase 6 — Testing Console, AI Demo, Settings & Polish | Complete |
 | TEST-03 | Phase 6 — Testing Console, AI Demo, Settings & Polish | Pending |
 | TEST-04 | Phase 6 — Testing Console, AI Demo, Settings & Polish | Pending |
 | TEST-05 | Phase 6 — Testing Console, AI Demo, Settings & Polish | Pending |
