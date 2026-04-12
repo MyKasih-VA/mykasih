@@ -119,6 +119,9 @@ export function KbTable({
                     checked={entry.is_active}
                     onCheckedChange={(checked) => onToggleActive(entry.id, checked)}
                     aria-label={`Toggle active state for ${langToggle === 'bm' ? entry.question_bm : entry.question_en}`}
+                    style={{
+                      backgroundColor: entry.is_active ? 'var(--accent-primary)' : 'var(--bg-border)',
+                    }}
                   />
                 </TableCell>
 

@@ -19,6 +19,8 @@ interface ChatSession {
   message_count: number
 }
 
+const TWO_HOURS_MS = 2 * 60 * 60 * 1000
+
 async function getActiveVoiceSessions(): Promise<VoiceSession[]> {
   const apiKey = process.env.ELEVENLABS_API_KEY
   const agentId = process.env.ELEVENLABS_AGENT_ID
@@ -34,13 +36,31 @@ async function getActiveVoiceSessions(): Promise<VoiceSession[]> {
     )
     if (!res.ok) return []
     const data = await res.json() as { conversations?: Record<string, unknown>[] }
-    return (data.conversations || []).map((conv) => ({
-      id: conv.conversation_id as string,
-      caller_name: (conv.metadata as Record<string, unknown> | undefined)?.caller_name as string | null ?? null,
-      wa_number: (conv.metadata as Record<string, unknown> | undefined)?.phone as string | null ?? null,
-      language: (conv.metadata as Record<string, unknown> | undefined)?.language as string | null ?? null,
-      started_at: conv.start_time as string || new Date().toISOString(),
-    }))
+    const now = Date.now()
+    return (data.conversations || [])
+      // Only include conversations for this agent
+      .filter((conv) => !conv.agent_id || conv.agent_id === agentId)
+      // Only include conversations explicitly marked active (if field present)
+      .filter((conv) => !conv.status || conv.status === 'active')
+      // Only include sessions started within the last 2 hours
+      .filter((conv) => {
+        const startTime = conv.start_time as string | number | undefined
+        if (!startTime) return true
+        const startMs = typeof startTime === 'number' ? startTime * 1000 : new Date(startTime).getTime()
+        return now - startMs <= TWO_HOURS_MS
+      })
+      .map((conv) => {
+        const meta = (conv.metadata as Record<string, unknown> | undefined) ?? {}
+        const waNumber = meta.phone as string | null ?? meta.wa_number as string | null ?? null
+        const callerName = meta.caller_name as string | null ?? (waNumber ? waNumber : null)
+        return {
+          id: conv.conversation_id as string,
+          caller_name: callerName,
+          wa_number: waNumber,
+          language: meta.language as string | null ?? null,
+          started_at: conv.start_time as string || new Date().toISOString(),
+        }
+      })
   } catch {
     return []
   }

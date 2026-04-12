@@ -96,20 +96,22 @@ export async function GET(request: NextRequest) {
     const resolutionRate =
       totalInteractions > 0 ? Math.round((resolvedCount / totalInteractions) * 100) : 0
 
-    // Peak hour — count calls per hour, find max
+    // Peak hour — count calls per hour in MYT (UTC+8), find max
     const hourCounts: number[] = Array(24).fill(0)
     for (const call of allCalls) {
-      const hour = new Date(call.timestamp).getHours()
+      const hour = (new Date(call.timestamp).getUTCHours() + 8) % 24
       hourCounts[hour]++
     }
     const maxHourCount = Math.max(...hourCounts)
     const peakHourIndex = maxHourCount > 0 ? hourCounts.indexOf(maxHourCount) : 9 // default 09:00
     const peakHour = `${String(peakHourIndex).padStart(2, '0')}:00`
 
-    // Volume by day — group by YYYY-MM-DD
+    // Volume by day — group by MYT (UTC+8) date string YYYY-MM-DD
     const volumeMap: Record<string, { voice: number; chat: number }> = {}
     for (const call of allCalls) {
-      const date = call.timestamp.slice(0, 10) // YYYY-MM-DD
+      const date = new Date(new Date(call.timestamp).getTime() + 8 * 60 * 60 * 1000)
+        .toISOString()
+        .slice(0, 10)
       if (!volumeMap[date]) volumeMap[date] = { voice: 0, chat: 0 }
       if (call.channel === 'voice') volumeMap[date].voice++
       else if (call.channel === 'chat') volumeMap[date].chat++
@@ -118,11 +120,13 @@ export async function GET(request: NextRequest) {
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([date, counts]) => ({ date, ...counts }))
 
-    // CSAT by day
+    // CSAT by day (MYT date)
     const csatDayMap: Record<string, number[]> = {}
     for (const call of allCalls) {
       if (call.csat_rating !== null && call.csat_rating !== undefined) {
-        const date = call.timestamp.slice(0, 10)
+        const date = new Date(new Date(call.timestamp).getTime() + 8 * 60 * 60 * 1000)
+          .toISOString()
+          .slice(0, 10)
         if (!csatDayMap[date]) csatDayMap[date] = []
         csatDayMap[date].push(call.csat_rating)
       }
@@ -142,13 +146,13 @@ export async function GET(request: NextRequest) {
     }
     const languageDistribution = Object.entries(langMap).map(([name, value]) => ({ name, value }))
 
-    // Heatmap — day 0=Mon..6=Sun, hour 0-23
+    // Heatmap — day 0=Mon..6=Sun, hour 0-23 (all in MYT UTC+8)
     const heatmapMap: Record<string, number> = {}
     for (const call of allCalls) {
-      const d = new Date(call.timestamp)
-      const jsDay = d.getDay() // 0=Sun, 1=Mon, ..., 6=Sat
+      const myt = new Date(new Date(call.timestamp).getTime() + 8 * 60 * 60 * 1000)
+      const jsDay = myt.getUTCDay() // 0=Sun, 1=Mon, ..., 6=Sat
       const monBasedDay = jsDay === 0 ? 6 : jsDay - 1 // Convert to Mon=0..Sun=6
-      const hour = d.getHours()
+      const hour = (new Date(call.timestamp).getUTCHours() + 8) % 24
       const key = `${monBasedDay}-${hour}`
       heatmapMap[key] = (heatmapMap[key] ?? 0) + 1
     }

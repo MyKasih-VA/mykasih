@@ -8,6 +8,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Star } from 'lucide-react'
 import { type Language } from '@/lib/translations'
 
 interface TranscriptModalProps {
@@ -52,11 +53,17 @@ export function TranscriptModal({
   const [turns, setTurns] = useState<TranscriptTurn[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
+  const [csatScore, setCsatScore] = useState<number | null>(null)
+  const [csatHover, setCsatHover] = useState<number | null>(null)
+  const [csatSubmitting, setCsatSubmitting] = useState(false)
+  const [csatSubmitted, setCsatSubmitted] = useState(false)
 
   useEffect(() => {
     if (!open || !callId) return
     setLoading(true)
     setError(false)
+    setCsatScore(null)
+    setCsatSubmitted(false)
     fetch(`/api/calls/${callId}/transcript`)
       .then(r => { if (!r.ok) throw new Error(); return r.json() })
       .then((json: { transcript?: TranscriptTurn[] }) => {
@@ -68,6 +75,22 @@ export function TranscriptModal({
         setLoading(false)
       })
   }, [open, callId])
+
+  async function handleCsatSubmit(score: number) {
+    if (!callId || csatSubmitting || csatSubmitted) return
+    setCsatScore(score)
+    setCsatSubmitting(true)
+    try {
+      await fetch(`/api/calls/${callId}/csat`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ score }),
+      })
+      setCsatSubmitted(true)
+    } finally {
+      setCsatSubmitting(false)
+    }
+  }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -123,6 +146,46 @@ export function TranscriptModal({
                 </p>
               </div>
             ))}
+          </div>
+        )}
+
+        {/* CSAT star rating — shown after transcript loads */}
+        {!loading && !error && (
+          <div className="border-t border-[var(--bg-border)] pt-3 mt-2">
+            <p className="text-xs text-[var(--text-muted)] mb-2">
+              {language === 'en' ? 'Rate this interaction:' : 'Nilai interaksi ini:'}
+            </p>
+            {csatSubmitted ? (
+              <p className="text-xs text-[var(--status-green)]">
+                {language === 'en' ? `Rating submitted (${csatScore}/5)` : `Penilaian dihantar (${csatScore}/5)`}
+              </p>
+            ) : (
+              <div className="flex items-center gap-1" role="group" aria-label="CSAT rating">
+                {[1, 2, 3, 4, 5].map((star) => {
+                  const filled = star <= (csatHover ?? csatScore ?? 0)
+                  return (
+                    <button
+                      key={star}
+                      type="button"
+                      disabled={csatSubmitting}
+                      onClick={() => void handleCsatSubmit(star)}
+                      onMouseEnter={() => setCsatHover(star)}
+                      onMouseLeave={() => setCsatHover(null)}
+                      aria-label={`${star} star`}
+                      className="disabled:opacity-40 transition-colors"
+                    >
+                      <Star
+                        className="w-5 h-5"
+                        style={{
+                          color: filled ? 'var(--status-yellow)' : 'var(--text-muted)',
+                          fill: filled ? 'var(--status-yellow)' : 'transparent',
+                        }}
+                      />
+                    </button>
+                  )
+                })}
+              </div>
+            )}
           </div>
         )}
       </DialogContent>

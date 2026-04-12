@@ -69,6 +69,30 @@ function detectCategoryFromTranscript(
   return null // per D-03: store null if fallback also fails
 }
 
+// --- Language Detection Fallback ---
+
+const BM_KEYWORDS = ['saya', 'nak', 'boleh', 'tidak', 'ada', 'baki', 'kedai', 'daftar', 'bantuan', 'terima kasih', 'bagaimana', 'tolong']
+const EN_KEYWORDS = ['hello', 'please', 'thank you', 'how', 'what', 'help', 'balance', 'register', 'merchant', 'eligible']
+
+function detectLanguageFromTranscript(
+  transcript: { role: string; message: string | null }[]
+): 'bm' | 'en' | 'mixed' | null {
+  const userMessages = transcript
+    .filter((t) => t.role === 'user' && t.message)
+    .map((t) => (t.message as string).toLowerCase())
+    .join(' ')
+
+  if (!userMessages) return null
+
+  const hasBm = BM_KEYWORDS.some((kw) => userMessages.includes(kw))
+  const hasEn = EN_KEYWORDS.some((kw) => userMessages.includes(kw))
+
+  if (hasBm && hasEn) return 'mixed'
+  if (hasBm) return 'bm'
+  if (hasEn) return 'en'
+  return null
+}
+
 // --- Outcome Mapping ---
 
 function mapOutcome(
@@ -156,7 +180,7 @@ export async function POST(request: NextRequest) {
     }
     // Step 6: If still null, store null (per D-03) — no action needed
 
-    // Step 7: Extract language from data_collection if available
+    // Step 7: Extract language from data_collection if available, else detect from transcript
     let language: string | null = null
     if (dcResults) {
       const langResult = dcResults['language'] ?? dcResults['call_language']
@@ -164,6 +188,9 @@ export async function POST(request: NextRequest) {
         const validLanguages = ['bm', 'en', 'mixed']
         language = validLanguages.includes(langResult.value) ? langResult.value : null
       }
+    }
+    if (!language) {
+      language = detectLanguageFromTranscript(payload.data.transcript)
     }
 
     // Step 8: Map outcome

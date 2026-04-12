@@ -36,27 +36,51 @@ export async function POST() {
 
     const entries = (data ?? []) as KbEntry[]
 
-    // Format entries into a knowledge document string
-    const knowledgeDocument = entries
+    // Format entries as a structured FAQ section to append to agent system prompt
+    const kbSection = entries
       .map((entry) =>
-        `Q (BM): ${entry.question_bm}\nA (BM): ${entry.answer_bm}\nQ (EN): ${entry.question_en}\nA (EN): ${entry.answer_en}`
+        `[${entry.category.toUpperCase()}]\nQ (BM): ${entry.question_bm}\nA (BM): ${entry.answer_bm}\nQ (EN): ${entry.question_en}\nA (EN): ${entry.answer_en}`
       )
       .join('\n\n')
 
-    // Push to ElevenLabs Agent API
+    // Fetch current agent to get existing system prompt
+    const agentId = process.env.ELEVENLABS_AGENT_ID
+    const apiKey = process.env.ELEVENLABS_API_KEY!
+    const getRes = await fetch(
+      `https://api.elevenlabs.io/v1/convai/agents/${agentId}`,
+      { headers: { 'xi-api-key': apiKey } }
+    )
+    let basePrompt = ''
+    if (getRes.ok) {
+      const agentData = await getRes.json() as {
+        conversation_config?: { agent?: { prompt?: { prompt?: string } } }
+      }
+      const existing = agentData.conversation_config?.agent?.prompt?.prompt ?? ''
+      // Strip any previously synced KB section to avoid duplication
+      const kbMarker = '\n\n--- KNOWLEDGE BASE ---'
+      basePrompt = existing.includes(kbMarker)
+        ? existing.substring(0, existing.indexOf(kbMarker))
+        : existing
+    }
+
+    const updatedPrompt = entries.length > 0
+      ? `${basePrompt}\n\n--- KNOWLEDGE BASE ---\n${kbSection}`
+      : basePrompt
+
+    // Push updated system prompt to ElevenLabs Agent API
     const elevenLabsResponse = await fetch(
-      `https://api.elevenlabs.io/v1/convai/agents/${process.env.ELEVENLABS_AGENT_ID}`,
+      `https://api.elevenlabs.io/v1/convai/agents/${agentId}`,
       {
         method: 'PATCH',
         headers: {
-          'xi-api-key': process.env.ELEVENLABS_API_KEY!,
+          'xi-api-key': apiKey,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           conversation_config: {
             agent: {
               prompt: {
-                knowledge_base: knowledgeDocument,
+                prompt: updatedPrompt,
               },
             },
           },

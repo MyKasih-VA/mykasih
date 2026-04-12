@@ -157,7 +157,10 @@ export default function IntegrationsPage() {
       case 'error':
         return t('integrations.error', language)
       case 'pending':
-        return t('integrations.pendingApproval', language)
+        // n8n uses "Not Configured" to distinguish from Meta WA "Pending Approval" (external action required)
+        return service === 'n8n'
+          ? (language === 'bm' ? 'Tidak Dikonfigurasi' : 'Not Configured')
+          : t('integrations.pendingApproval', language)
     }
   }
 

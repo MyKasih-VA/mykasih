@@ -64,8 +64,8 @@ export async function POST(request: Request) {
       )
     }
 
-    // Step 2: Insert into users table
-    const { data, error: insertError } = await supabase
+    // Step 2: Insert into users table (service role — users table RLS blocks regular client inserts)
+    const { data, error: insertError } = await adminClient
       .from('users')
       .insert({ email, name: name.trim(), role })
       .select()
