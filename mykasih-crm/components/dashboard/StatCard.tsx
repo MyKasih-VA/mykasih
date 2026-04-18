@@ -1,6 +1,7 @@
 'use client'
 
-import { type LucideIcon } from 'lucide-react'
+import { useState } from 'react'
+import { type LucideIcon, Info } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton'
 
 interface StatCardProps {
@@ -8,10 +9,13 @@ interface StatCardProps {
   value: string | number
   subInfo?: string
   icon?: LucideIcon
+  tooltip?: string
   loading?: boolean
 }
 
-export function StatCard({ label, value, subInfo, icon: Icon, loading }: StatCardProps) {
+export function StatCard({ label, value, subInfo, icon: Icon, tooltip, loading }: StatCardProps) {
+  const [showTooltip, setShowTooltip] = useState(false)
+
   return (
     <div
       role="region"
@@ -28,7 +32,32 @@ export function StatCard({ label, value, subInfo, icon: Icon, loading }: StatCar
       ) : (
         <>
           <div className="flex items-center justify-between mb-2">
-            <p className="text-xs text-[var(--text-muted)]">{label}</p>
+            <div className="flex items-center gap-1.5">
+              <p className="text-xs text-[var(--text-muted)]">{label}</p>
+              {tooltip && (
+                <div className="relative">
+                  <button
+                    type="button"
+                    aria-label="More info"
+                    className="text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
+                    onMouseEnter={() => setShowTooltip(true)}
+                    onMouseLeave={() => setShowTooltip(false)}
+                    onFocus={() => setShowTooltip(true)}
+                    onBlur={() => setShowTooltip(false)}
+                  >
+                    <Info className="w-3.5 h-3.5" />
+                  </button>
+                  {showTooltip && (
+                    <div
+                      role="tooltip"
+                      className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 max-w-[280px] bg-[var(--bg-border)] text-xs text-[var(--text-primary)] rounded-md p-2 shadow-lg z-50 whitespace-normal"
+                    >
+                      {tooltip}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
             {Icon && (
               <Icon className="w-4 h-4 text-[var(--text-muted)] shrink-0" />
             )}

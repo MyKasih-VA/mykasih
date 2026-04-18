@@ -76,6 +76,7 @@ export default function DashboardPage() {
         <StatCard
           label={t('dashboard.resolutionRate', language)}
           value={stats ? `${stats.resolutionRate}%` : '—'}
+          tooltip={t('dashboard.resolutionRateTooltip', language)}
           icon={Percent}
           loading={loading}
         />

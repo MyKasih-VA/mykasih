@@ -88,8 +88,79 @@ export const translations = {
   'channel.voice': { en: 'Voice', bm: 'Suara' },
   'channel.chat': { en: 'Chat', bm: 'Chat' },
 
-  // Common
+  // Topbar
+  'topbar.search': { en: 'Search...', bm: 'Cari...' },
+  'topbar.notifications': { en: 'Notifications', bm: 'Pemberitahuan' },
+
+  // Dashboard stat sub-labels (additional)
+  'dashboard.vsYesterday': { en: 'vs yesterday', bm: 'vs semalam' },
+  'dashboard.voiceCount': { en: 'voice', bm: 'suara' },
+  'dashboard.chatCount': { en: 'chat', bm: 'chat' },
+  'dashboard.inProgress': { en: 'in progress', bm: 'dalam proses' },
+  'dashboard.seconds': { en: 'sec avg', bm: 'saat purata' },
+
+  // Recent interactions table
+  'interactions.title': { en: 'Recent Interactions', bm: 'Interaksi Terkini' },
+  'interactions.caller': { en: 'Caller', bm: 'Pemanggil' },
+  'interactions.channel': { en: 'Channel', bm: 'Saluran' },
+  'interactions.category': { en: 'Category', bm: 'Kategori' },
+  'interactions.outcome': { en: 'Outcome', bm: 'Hasil' },
+  'interactions.duration': { en: 'Duration', bm: 'Tempoh' },
+  'interactions.time': { en: 'Time', bm: 'Masa' },
+  'interactions.empty': { en: 'No interactions yet', bm: 'Tiada interaksi lagi' },
+  'interactions.emptySubtext': { en: 'Interactions will appear here after calls or chats are received.', bm: 'Interaksi akan dipaparkan selepas panggilan atau sembang diterima.' },
+
+  // Tickets page
+  'tickets.title': { en: 'Tickets', bm: 'Tiket' },
+  'tickets.open': { en: 'Open', bm: 'Terbuka' },
+  'tickets.inProgress': { en: 'In Progress', bm: 'Dalam Proses' },
+  'tickets.resolved': { en: 'Resolved', bm: 'Diselesaikan' },
+  'tickets.refNo': { en: 'Ref No.', bm: 'No. Rujukan' },
+  'tickets.description': { en: 'Description', bm: 'Perihal' },
+  'tickets.assignedTo': { en: 'Assigned To', bm: 'Diperuntukkan Kepada' },
+  'tickets.flagAsTicket': { en: 'Flag as Ticket', bm: 'Tandai sebagai Tiket' },
+  'tickets.addNote': { en: 'Add Note', bm: 'Tambah Nota' },
+  'tickets.notes': { en: 'Notes', bm: 'Nota' },
+  'tickets.saveNote': { en: 'Save Note', bm: 'Simpan Nota' },
+  'tickets.noTickets': { en: 'No tickets yet', bm: 'Tiada tiket lagi' },
+  'tickets.flagSuccess': { en: 'Ticket created successfully', bm: 'Tiket berjaya dicipta' },
+  'tickets.flagError': { en: 'Failed to create ticket', bm: 'Gagal mencipta tiket' },
+  'tickets.noteSuccess': { en: 'Note added', bm: 'Nota ditambah' },
+  'tickets.noteError': { en: 'Failed to add note', bm: 'Gagal menambah nota' },
+  'tickets.selectCategory': { en: 'Select category', bm: 'Pilih kategori' },
+
+  // Status tags
+  'status.open': { en: 'Open', bm: 'Terbuka' },
+  'status.inProgress': { en: 'In Progress', bm: 'Dalam Proses' },
+  'status.resolved': { en: 'Resolved', bm: 'Diselesaikan' },
+
+  // Common actions
+  'common.save': { en: 'Save', bm: 'Simpan' },
+  'common.cancel': { en: 'Cancel', bm: 'Batal' },
+  'common.delete': { en: 'Delete', bm: 'Padam' },
+  'common.edit': { en: 'Edit', bm: 'Edit' },
+  'common.close': { en: 'Close', bm: 'Tutup' },
+  'common.loading': { en: 'Loading...', bm: 'Memuatkan...' },
+  'common.error': { en: 'Something went wrong', bm: 'Ralat berlaku' },
+  'common.retry': { en: 'Retry', bm: 'Cuba semula' },
+  'common.viewAll': { en: 'View All', bm: 'Lihat Semua' },
+  'common.filter': { en: 'Filter', bm: 'Tapis' },
+  'common.export': { en: 'Export', bm: 'Eksport' },
+  'common.refresh': { en: 'Refresh', bm: 'Muat semula' },
+  'common.noData': { en: 'No data available', bm: 'Tiada data tersedia' },
   'common.search': { en: 'Search...', bm: 'Cari...' },
+
+  // Date/time
+  'date.today': { en: 'Today', bm: 'Hari Ini' },
+  'date.yesterday': { en: 'Yesterday', bm: 'Semalam' },
+  'date.thisWeek': { en: 'This Week', bm: 'Minggu Ini' },
+  'date.thisMonth': { en: 'This Month', bm: 'Bulan Ini' },
+
+  // Resolution Rate formula tooltip (ADM-002)
+  'dashboard.resolutionRateTooltip': {
+    en: 'Resolved tickets \u00f7 total closed tickets in the selected period. Excludes open and in-progress tickets.',
+    bm: 'Tiket diselesaikan \u00f7 jumlah tiket tertutup dalam tempoh yang dipilih. Tidak termasuk tiket terbuka dan dalam proses.',
+  },
 
   // Page titles
   'page.voiceCalls': { en: 'Voice Calls', bm: 'Panggilan Suara' },

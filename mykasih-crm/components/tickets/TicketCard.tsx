@@ -1,6 +1,7 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
+import { MessageSquarePlus } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import {
   Select,
@@ -10,6 +11,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { t, type Language } from '@/lib/translations'
+import { TicketNotes } from '@/components/tickets/TicketNotes'
 
 export interface Ticket {
   id: string
@@ -97,6 +99,8 @@ function formatRelativeTime(timestamp: string): string {
 }
 
 export function TicketCard({ ticket, onStatusChange, language }: TicketCardProps) {
+  const [showNotes, setShowNotes] = useState(false)
+
   return (
     <Card className="bg-[var(--bg-surface)] border border-[var(--bg-border)] rounded-lg shadow-none">
       <CardContent className="p-4 flex flex-col gap-2">
@@ -134,20 +138,39 @@ export function TicketCard({ ticket, onStatusChange, language }: TicketCardProps
         {/* Separator */}
         <hr className="border-[var(--bg-border)]" />
 
-        {/* Row 4: Status Select */}
-        <Select
-          value={ticket.status}
-          onValueChange={(v) => onStatusChange(ticket.id, v as TicketStatus)}
-        >
-          <SelectTrigger className="w-full text-xs h-8">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent className="bg-[var(--bg-surface)] border border-[var(--bg-border)]">
-            <SelectItem value="open">{t('kanban.open', language)}</SelectItem>
-            <SelectItem value="in_progress">{t('kanban.inProgress', language)}</SelectItem>
-            <SelectItem value="resolved">{t('kanban.resolved', language)}</SelectItem>
-          </SelectContent>
-        </Select>
+        {/* Row 4: Status Select + Notes toggle */}
+        <div className="flex items-center gap-2">
+          <Select
+            value={ticket.status}
+            onValueChange={(v) => onStatusChange(ticket.id, v as TicketStatus)}
+          >
+            <SelectTrigger className="w-full text-xs h-8">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent className="bg-[var(--bg-surface)] border border-[var(--bg-border)]">
+              <SelectItem value="open">{t('kanban.open', language)}</SelectItem>
+              <SelectItem value="in_progress">{t('kanban.inProgress', language)}</SelectItem>
+              <SelectItem value="resolved">{t('kanban.resolved', language)}</SelectItem>
+            </SelectContent>
+          </Select>
+          <button
+            type="button"
+            onClick={() => setShowNotes((prev) => !prev)}
+            className="shrink-0 p-1.5 text-[var(--text-muted)] hover:text-[var(--accent-primary)] transition-colors rounded hover:bg-[var(--bg-border)]/60"
+            aria-label={t('tickets.notes', language)}
+            title={t('tickets.notes', language)}
+          >
+            <MessageSquarePlus className="w-4 h-4" />
+          </button>
+        </div>
+
+        {/* Notes panel */}
+        {showNotes && (
+          <>
+            <hr className="border-[var(--bg-border)]" />
+            <TicketNotes ticketId={ticket.id} language={language} />
+          </>
+        )}
       </CardContent>
     </Card>
   )

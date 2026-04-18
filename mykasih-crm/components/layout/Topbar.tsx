@@ -1,7 +1,8 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { Bell } from 'lucide-react'
+// Bell import reserved for v1.1 notification bell
+// import { Bell } from 'lucide-react'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import {
   DropdownMenu,
@@ -79,14 +80,15 @@ export function Topbar({ language, onToggleLanguage }: TopbarProps) {
         {/* Language toggle */}
         <LanguageToggle language={language} onToggle={onToggleLanguage} />
 
-        {/* Search input */}
+        {/* TODO v1.1: Global search — re-enable once search index is live
         <input
           type="search"
           placeholder={t('common.search', language)}
           className="w-[220px] h-9 bg-[var(--bg-primary)] border border-[var(--bg-border)] text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)] rounded-md px-3 focus:outline-2 focus:outline-[var(--accent-teal)] focus:outline-offset-2"
         />
+        */}
 
-        {/* Notification bell */}
+        {/* TODO v1.1: Notification bell — re-enable once notification service is live
         <button
           type="button"
           aria-label={t('common.notifications', language)}
@@ -94,6 +96,7 @@ export function Topbar({ language, onToggleLanguage }: TopbarProps) {
         >
           <Bell className="w-5 h-5" />
         </button>
+        */}
 
         {/* User avatar with dropdown */}
         <DropdownMenu>

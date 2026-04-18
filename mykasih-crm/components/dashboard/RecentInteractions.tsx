@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Inbox } from 'lucide-react'
+import { Inbox, Flag } from 'lucide-react'
 import {
   Table,
   TableBody,
@@ -13,6 +13,7 @@ import {
 import { Skeleton } from '@/components/ui/skeleton'
 import { ChannelBadge } from '@/components/calls/ChannelBadge'
 import { TranscriptModal } from '@/components/calls/TranscriptModal'
+import { FlagTicketModal } from '@/components/tickets/FlagTicketModal'
 import { t, type Language, type TranslationKey } from '@/lib/translations'
 
 interface RecentInteraction {
@@ -24,6 +25,7 @@ interface RecentInteraction {
   timestamp: string
   duration: number | null
   message_count: number | null
+  ticket_id?: string | null
 }
 
 interface RecentInteractionsProps {
@@ -115,10 +117,25 @@ function formatRelativeTime(timestamp: string, language: Language): string {
 export function RecentInteractions({ data, language, loading }: RecentInteractionsProps) {
   const [selectedCallId, setSelectedCallId] = useState<string | null>(null)
   const [modalOpen, setModalOpen] = useState(false)
+  const [flagCallId, setFlagCallId] = useState<string | null>(null)
+  const [flagChannel, setFlagChannel] = useState<'voice' | 'chat'>('voice')
+  const [flaggedIds, setFlaggedIds] = useState<Set<string>>(new Set())
 
   function handleRowClick(id: string) {
     setSelectedCallId(id)
     setModalOpen(true)
+  }
+
+  function handleFlagClick(e: React.MouseEvent, row: RecentInteraction) {
+    e.stopPropagation()
+    setFlagCallId(row.id)
+    setFlagChannel(row.channel)
+  }
+
+  function handleFlagSuccess() {
+    if (flagCallId) {
+      setFlaggedIds((prev) => new Set(prev).add(flagCallId))
+    }
   }
 
   const title = t('dashboard.recentInteractions', language)
@@ -183,6 +200,11 @@ export function RecentInteractions({ data, language, loading }: RecentInteractio
               >
                 {t('table.durationMsgs', language)}
               </TableHead>
+              <TableHead
+                scope="col"
+                className="w-[100px] text-xs text-[var(--text-muted)]"
+              >
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -233,6 +255,18 @@ export function RecentInteractions({ data, language, loading }: RecentInteractio
                     ? `${row.message_count} ${language === 'bm' ? 'mesej' : 'msgs'}`
                     : '--'}
                 </TableCell>
+                <TableCell className="py-0">
+                  {!row.ticket_id && !flaggedIds.has(row.id) && (
+                    <button
+                      type="button"
+                      onClick={(e) => handleFlagClick(e, row)}
+                      className="flex items-center gap-1 text-xs text-[var(--text-muted)] hover:text-[var(--accent-primary)] transition-colors px-2 py-1 rounded hover:bg-[var(--bg-border)]/60"
+                    >
+                      <Flag className="w-3.5 h-3.5" />
+                      {t('tickets.flagAsTicket', language)}
+                    </button>
+                  )}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -245,6 +279,16 @@ export function RecentInteractions({ data, language, loading }: RecentInteractio
         onOpenChange={setModalOpen}
         language={language}
       />
+
+      {flagCallId && (
+        <FlagTicketModal
+          callId={flagCallId}
+          channel={flagChannel}
+          onSuccess={handleFlagSuccess}
+          onClose={() => setFlagCallId(null)}
+          language={language}
+        />
+      )}
     </div>
   )
 }

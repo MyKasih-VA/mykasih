@@ -1,3 +1,9 @@
+// Resolution Rate = resolved_tickets / (resolved_tickets + escalated_calls)
+// Numerator: tickets with status='resolved' in time window
+// Denominator: resolved + escalated outcomes (excludes open, in_progress, abandoned, callback)
+// Time window: defaults to current calendar day (UTC+8)
+// Reopened tickets: not yet implemented — planned for v1.1
+
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 
