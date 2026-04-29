@@ -3,6 +3,7 @@ import { createHmac, timingSafeEqual } from 'crypto'
 import { createClient as createServiceClient } from '@supabase/supabase-js'
 import { generateTicketRef } from '@/lib/ticket-ref'
 import type { ElevenLabsWebhookPayload } from '@/lib/elevenlabs-types'
+import { extractNameFromTranscript } from '@/lib/name-extraction'
 
 // --- HMAC Signature Validation (per D-14) ---
 
@@ -210,7 +211,10 @@ export async function POST(request: NextRequest) {
       .from('calls')
       .insert({
         channel: 'voice',
-        caller_name: null, // per D-04: voice calls don't collect caller info
+        caller_name:
+          dcResults?.['caller_name']?.value?.trim() ||
+          extractNameFromTranscript(payload.data.transcript) ||
+          null,
         wa_number: null, // per D-04: voice calls have no WA number
         location: null,
         postcode: null,
