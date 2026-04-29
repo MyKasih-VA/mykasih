@@ -157,7 +157,7 @@ Plans:
 - [x] 07-01-PLAN.md — PDPA IC audit script + compliance report (SEC-01)
 - [x] 07-02-PLAN.md — Role-based RLS migration + [BLOCKING] schema push (SEC-02)
 - [x] 07-03-PLAN.md — Webhook hardening verification + test data exclusion audit (SEC-03, SEC-04)
-- [ ] 07-04-PLAN.md — Admin TOTP MFA enrollment + challenge flow + AAL enforcement (SEC-05)
+- [x] 07-04-PLAN.md — Admin TOTP MFA enrollment + challenge flow + AAL enforcement (SEC-05)
 
 ## Progress
 
@@ -172,4 +172,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 4. Core Dashboard Pages | 4/4 | Complete | 2026-04-11 |
 | 5. Intelligence & System Pages | 5/5 | Complete   | 2026-04-12 |
 | 6. Testing Console, AI Demo, Settings & Polish | 5/5 | Complete | 2026-04-13 |
-| 7. UAT Fixes, PDPA Audit & Final QA | 4/6 | In Progress|  |
+| 7. UAT Fixes, PDPA Audit & Final QA | 5/6 | In Progress|  |
