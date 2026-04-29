@@ -144,7 +144,7 @@ async function scanTable(
       }
     }
 
-    const rows = (data ?? []) as Record<string, unknown>[]
+    const rows = (data ?? []) as unknown as Record<string, unknown>[]
 
     for (const row of rows) {
       const rowId = String(row['id'] ?? 'unknown')
@@ -528,7 +528,7 @@ async function main(): Promise<void> {
             .single()
 
           if (data) {
-            const currentValue = String(data[finding.column] ?? '')
+            const currentValue = String((data as unknown as Record<string, unknown>)[finding.column] ?? '')
             const record = await remediateRow(supabase, finding, currentValue)
             if (record) {
               remediations.push(record)
