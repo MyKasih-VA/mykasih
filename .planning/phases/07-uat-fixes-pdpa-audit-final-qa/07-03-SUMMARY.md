@@ -71,7 +71,7 @@ Each task was committed atomically:
 
 1. **Task 1 + Task 2: Webhook SEC-03 audit + SEC-04 audit** - `89ba8b1` (fix)
 
-**Plan metadata:** _(docs commit follows)_
+**Plan metadata:** `bd77514` (docs: complete plan)
 
 ## Files Created/Modified
 
@@ -143,3 +143,11 @@ None — no external service configuration required.
 ---
 *Phase: 07-uat-fixes-pdpa-audit-final-qa*
 *Completed: 2026-04-29*
+
+## Self-Check: PASSED
+
+- FOUND: 07-03-SUMMARY.md
+- FOUND: webhook/voice/route.ts
+- FOUND: webhook/chat/route.ts
+- FOUND: VoiceAgentTab.tsx
+- FOUND commit: 89ba8b1

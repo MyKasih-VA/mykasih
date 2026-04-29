@@ -49,7 +49,19 @@
       "Bash(grep -n \"TODO\\\\|FIXME\\\\|placeholder\\\\|coming soon\\\\|not available\\\\|= \\\\[\\\\]\\\\|= {}\\\\|= null\\\\|= \\\\\"\\\\\"\" /c/Users/navie/MyKasih/mykasih-crm/lib/chatbot/intent-classifier.ts /c/Users/navie/MyKasih/mykasih-crm/app/api/chatbot/message/route.ts 2>/dev/null || echo \"No stubs found\")",
       "Bash(for PLAN_ID in 03-00 03-01 03-02 03-03 03-04 03-05 03-06 03-07; do\n  node \"$HOME/.claude/get-shit-done/bin/gsd-tools.cjs\" roadmap update-plan-progress \"03\" \"$PLAN_ID\" completed 2>/dev/null\n  echo \"Updated $PLAN_ID\"\ndone)",
       "Bash(cd \"C:/Users/navie/MyKasih/mykasih-crm\" && npx jest --passWithNoTests 2>&1 | tail -15)",
-      "Bash(cd \"C:\\\\Users\\\\navie\\\\MyKasih\\\\mykasih-crm\" && echo \"1. use client in layout.tsx:\" && grep -n \"'use client'\" \"app/\\(dashboard\\)/layout.tsx\" || echo \"PASS: none found\" && echo \"2. DashboardShell file:\" && test -f components/layout/DashboardShell.tsx && echo \"PASS\" || echo \"FAIL\" && echo \"3. ml-[260px] in DashboardShell:\" && grep -n \"ml-\\\\[260px\\\\]\" components/layout/DashboardShell.tsx && echo \"4. border-r-2 in Sidebar:\" && grep -n \"border-r-2\" components/layout/Sidebar.tsx || echo \"PASS: none found\")"
+      "Bash(cd \"C:\\\\Users\\\\navie\\\\MyKasih\\\\mykasih-crm\" && echo \"1. use client in layout.tsx:\" && grep -n \"'use client'\" \"app/\\(dashboard\\)/layout.tsx\" || echo \"PASS: none found\" && echo \"2. DashboardShell file:\" && test -f components/layout/DashboardShell.tsx && echo \"PASS\" || echo \"FAIL\" && echo \"3. ml-[260px] in DashboardShell:\" && grep -n \"ml-\\\\[260px\\\\]\" components/layout/DashboardShell.tsx && echo \"4. border-r-2 in Sidebar:\" && grep -n \"border-r-2\" components/layout/Sidebar.tsx || echo \"PASS: none found\")",
+      "Skill(gsd-ui-review)",
+      "Bash(cd mykasih-crm:*)",
+      "Bash(vercel --prod --yes 2>&1 | tail -25)",
+      "Bash(vercel --prod --yes 2>&1)",
+      "Skill(gsd-ui-phase)",
+      "Bash(cd /c/Users/navie/MyKasih/mykasih-crm && grep -rn \"#[0-9A-Fa-f]\\\\{3,6\\\\}\" components/testing/ components/dashboard/ components/settings/ app/\\\\\\(dashboard\\\\\\)/page.tsx app/demo/page.tsx app/api/chatbot/simulate/route.ts --include=\"*.tsx\" --include=\"*.ts\" | grep -v \"var\\(--\" | grep -v \"//.*#\" | grep -v \"color-mix\")",
+      "Bash(cd /c/Users/navie/MyKasih/mykasih-crm && grep -rn \"#[0-9A-Fa-f]\\\\{3,6\\\\}\" components/testing/VoiceAgentTab.tsx | grep -v \"var\\(--\")",
+      "Bash(cd /c/Users/navie/MyKasih/mykasih-crm && grep -rn \"#[0-9A-Fa-f]\\\\{3,6\\\\}\" components/testing/VoiceAgentTab.tsx | head -30)",
+      "Bash(cd /c/Users/navie/MyKasih/mykasih-crm && grep -n \"'Saving\\\\|'Copied\\\\|'Error\\\\|'Online\\\\|'Unknown\\\\|'just now\\\\|'TRANSCRIPT'\" components/testing/VoiceAgentTab.tsx components/testing/ChatbotSimTab.tsx components/testing/AnamAITab.tsx components/dashboard/RecentInteractions.tsx app/demo/page.tsx)",
+      "Bash(git add:*)",
+      "Bash(cat >> \"/c/Users/navie/MyKasih/.planning/phases/07-uat-fixes-pdpa-audit-final-qa/07-03-SUMMARY.md\" << 'EOF'\n\n## Self-Check: PASSED\n\n- FOUND: 07-03-SUMMARY.md\n- FOUND: webhook/voice/route.ts\n- FOUND: webhook/chat/route.ts\n- FOUND: VoiceAgentTab.tsx\n- FOUND commit: 89ba8b1\nEOF)",
+      "Bash(cd C:/Users/navie/MyKasih/mykasih-crm && node -e \"require\\('qrcode'\\)\" && echo \"qrcode OK\" && grep -c \"mfa.enrollHeading\\\\|mfa.challengeHeading\" lib/translations.ts)"
     ]
   }
 }
