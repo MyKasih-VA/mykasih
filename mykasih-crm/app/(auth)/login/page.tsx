@@ -49,6 +49,26 @@ export default function LoginPage() {
 
       const role = userData?.role ?? null
 
+      // Admin MFA gate (SEC-05, per D-16, D-17)
+      if (role === 'admin') {
+        const { data: aalData } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
+        const { currentLevel, nextLevel } = aalData ?? { currentLevel: undefined, nextLevel: undefined }
+
+        if (nextLevel === 'aal2' && currentLevel !== 'aal2') {
+          // MFA enrolled but not yet verified this session -- show challenge
+          router.push('/login/mfa-challenge')
+          return
+        }
+
+        if (nextLevel === 'aal1' || !nextLevel) {
+          // MFA not yet enrolled -- force enrollment
+          router.push('/login/mfa-enroll')
+          return
+        }
+        // If currentLevel === 'aal2' -- MFA already verified, proceed to redirect
+      }
+
+      // Non-admin users and admin with aal2 proceed to role-based redirect
       if (role === 'qmedia') {
         router.push('/analytics')
       } else if (role === 'supervisor') {
