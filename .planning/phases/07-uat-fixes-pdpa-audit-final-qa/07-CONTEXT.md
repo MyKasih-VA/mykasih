@@ -133,6 +133,7 @@ The system passes user acceptance testing, every PDPA obligation is confirmed me
 <deferred>
 ## Deferred Ideas
 
+- **D-18 (Recovery codes)** — Deferred to v2. Supabase MFA does not support native recovery codes. Admin recovery handled via Supabase Dashboard admin access. Caveat notice displayed to admins at MFA enrollment. User confirmed deferral 2026-04-29.
 - is_test toggle on analytics page UI — may be too much scope for Phase 7; note for backlog if not included
 - IP allowlisting for webhooks — unnecessary complexity for v1
 - Rate limiting on webhook endpoints — defer to v2 when traffic is higher
