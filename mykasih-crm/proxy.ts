@@ -3,6 +3,8 @@ import { NextResponse, type NextRequest } from "next/server"
 // Next.js 16: Middleware is renamed to Proxy (proxy.ts). Runs on Node.js runtime.
 // https://nextjs.org/docs/app/api-reference/file-conventions/proxy
 
+// MFA enforcement for admin users is handled in app/(dashboard)/layout.tsx
+// via server-side AAL check. Proxy cannot determine user role from JWT alone.
 export function proxy(request: NextRequest) {
   // Check for Supabase session cookie (format: sb-<project-ref>-auth-token)
   const hasSession = request.cookies.getAll().some(
