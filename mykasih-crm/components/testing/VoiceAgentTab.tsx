@@ -99,8 +99,8 @@ function VoiceAgentInner() {
       const { signedUrl } = (await res.json()) as { signedUrl: string }
       if (!signedUrl) throw new Error('signed_url_empty')
 
-      // Start session with signed URL
-      await startSession({ signedUrl })
+      // Start session with signed URL + is_test flag via dynamicVariables
+      await startSession({ signedUrl, dynamicVariables: { is_test: true } })
     } catch {
       toast.error(t('testing.voice.error', language))
       setDisplayStatus('ready')

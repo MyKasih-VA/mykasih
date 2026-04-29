@@ -66,7 +66,9 @@ export async function POST(request: Request): Promise<Response> {
   try {
     // Validate n8n webhook secret (if configured)
     const n8nSecret = process.env.N8N_WEBHOOK_SECRET
-    if (n8nSecret) {
+    if (!n8nSecret) {
+      console.warn('[webhook/chat] N8N_WEBHOOK_SECRET not set — secret validation skipped')
+    } else {
       const headerSecret = request.headers.get('x-n8n-webhook-secret')
       if (headerSecret !== n8nSecret) {
         return Response.json({ error: 'Unauthorized' }, { status: 401 })

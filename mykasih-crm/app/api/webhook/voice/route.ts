@@ -109,17 +109,16 @@ function mapOutcome(
 
 export async function POST(request: NextRequest) {
   const webhookSecret = process.env.ELEVENLABS_WEBHOOK_SECRET
-  if (!webhookSecret) {
-    console.error('[webhook/voice] ELEVENLABS_WEBHOOK_SECRET not configured')
-    return Response.json({ error: 'Server misconfigured' }, { status: 500 })
-  }
 
   // Step 1: Read raw body as text FIRST (before JSON parsing)
   const rawBody = await request.text()
   const signatureHeader = request.headers.get('elevenlabs-signature') ?? ''
 
   // Step 2: Validate HMAC-SHA256 (per D-14 — only 401 case)
-  if (!validateElevenLabsSignature(rawBody, signatureHeader, webhookSecret)) {
+  // Dev mode: skip validation when secret is not configured (per D-12)
+  if (!webhookSecret) {
+    console.warn('[webhook/voice] ELEVENLABS_WEBHOOK_SECRET not set — signature validation skipped')
+  } else if (!validateElevenLabsSignature(rawBody, signatureHeader, webhookSecret)) {
     return Response.json({ error: 'Invalid signature' }, { status: 401 })
   }
 
