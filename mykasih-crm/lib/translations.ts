@@ -391,6 +391,23 @@ export const translations = {
   'outcome.callback': { en: 'Callback', bm: 'Panggil Balik' },
   'outcome.abandoned': { en: 'Abandoned', bm: 'Ditinggalkan' },
 
+  // MFA pages (Phase 7, Plan 04)
+  'mfa.enrollHeading': { en: 'Set Up Two-Factor Authentication', bm: 'Sediakan Pengesahan Dua Faktor' },
+  'mfa.enrollInstruction': { en: 'Scan the QR code below with your authenticator app (Google Authenticator or Authy), then enter the 6-digit code to confirm.', bm: 'Imbas kod QR di bawah dengan aplikasi pengesah anda (Google Authenticator atau Authy), kemudian masukkan kod 6 digit untuk mengesahkan.' },
+  'mfa.secretLabel': { en: "Can't scan? Enter this code manually:", bm: 'Tidak boleh imbas? Masukkan kod ini secara manual:' },
+  'mfa.codePlaceholder': { en: '000000', bm: '000000' },
+  'mfa.enrollButton': { en: 'Verify & Enable MFA', bm: 'Sahkan & Aktifkan MFA' },
+  'mfa.enrollVerifying': { en: 'Verifying...', bm: 'Mengesahkan...' },
+  'mfa.enrollErrorCode': { en: 'Invalid code. Please try again.', bm: 'Kod tidak sah. Sila cuba lagi.' },
+  'mfa.enrollErrorStart': { en: 'Unable to start enrollment. Please refresh and try again.', bm: 'Tidak dapat memulakan pendaftaran. Sila muat semula dan cuba lagi.' },
+  'mfa.challengeHeading': { en: 'Two-Factor Authentication', bm: 'Pengesahan Dua Faktor' },
+  'mfa.challengeInstruction': { en: 'Enter the 6-digit code from your authenticator app.', bm: 'Masukkan kod 6 digit dari aplikasi pengesah anda.' },
+  'mfa.challengeButton': { en: 'Verify Code', bm: 'Sahkan Kod' },
+  'mfa.challengeVerifying': { en: 'Verifying...', bm: 'Mengesahkan...' },
+  'mfa.challengeErrorCode': { en: 'Invalid code. Please check your authenticator app and try again.', bm: 'Kod tidak sah. Sila semak aplikasi pengesah anda dan cuba lagi.' },
+  'mfa.recoveryCaveat': { en: 'Recovery codes are not available in this version. If you lose access to your authenticator app, contact your system administrator to reset MFA via the Supabase dashboard.', bm: 'Kod pemulihan tidak tersedia dalam versi ini. Jika anda kehilangan akses kepada aplikasi pengesah, hubungi pentadbir sistem untuk menetapkan semula MFA melalui papan pemuka Supabase.' },
+  'mfa.copySecret': { en: 'Copy secret to clipboard', bm: 'Salin rahsia ke papan keratan' },
+
   // Settings page (Phase 6)
   'settings.title': { en: 'Settings', bm: 'Tetapan' },
   'settings.agentHours': { en: 'Agent Hours', bm: 'Waktu Ejen' },
