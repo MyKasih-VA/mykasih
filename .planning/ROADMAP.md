@@ -153,7 +153,7 @@ Plans:
   5. Admin MFA is enforced at Supabase Auth level and cannot be bypassed on the login flow
 **Plans**: 5 plans
 Plans:
-- [ ] 07-00-PLAN.md — Wave 0: analytics summary test stub (ic-mask tests already exist)
+- [x] 07-00-PLAN.md — Wave 0: analytics summary test stub (ic-mask tests already exist)
 - [ ] 07-01-PLAN.md — PDPA IC audit script + compliance report (SEC-01)
 - [ ] 07-02-PLAN.md — Role-based RLS migration + [BLOCKING] schema push (SEC-02)
 - [ ] 07-03-PLAN.md — Webhook hardening verification + test data exclusion audit (SEC-03, SEC-04)
@@ -172,4 +172,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 4. Core Dashboard Pages | 4/4 | Complete | 2026-04-11 |
 | 5. Intelligence & System Pages | 5/5 | Complete   | 2026-04-12 |
 | 6. Testing Console, AI Demo, Settings & Polish | 5/5 | Complete | 2026-04-13 |
-| 7. UAT Fixes, PDPA Audit & Final QA | 0/5 | Not started | - |
+| 7. UAT Fixes, PDPA Audit & Final QA | 1/6 | In Progress|  |

@@ -103,7 +103,7 @@
 - [ ] **SEC-01**: Zero plain-text IC numbers stored in any DB field — maskIC() applied before every write
 - [ ] **SEC-02**: RLS policies enforced on all 6 tables — each role sees only permitted data
 - [ ] **SEC-03**: All incoming webhooks validate secret before processing
-- [ ] **SEC-04**: All test calls tagged is_test=true and excluded from analytics
+- [x] **SEC-04**: All test calls tagged is_test=true and excluded from analytics
 - [ ] **SEC-05**: Admin MFA enforced via Supabase Auth settings
 
 ## v2 Requirements
@@ -198,7 +198,7 @@
 | SEC-01 | Phase 7 — UAT Fixes, PDPA Audit & Final QA | Pending |
 | SEC-02 | Phase 7 — UAT Fixes, PDPA Audit & Final QA | Pending |
 | SEC-03 | Phase 7 — UAT Fixes, PDPA Audit & Final QA | Pending |
-| SEC-04 | Phase 7 — UAT Fixes, PDPA Audit & Final QA | Pending |
+| SEC-04 | Phase 7 — UAT Fixes, PDPA Audit & Final QA | Complete |
 | SEC-05 | Phase 7 — UAT Fixes, PDPA Audit & Final QA | Pending |
 
 **Coverage:**
