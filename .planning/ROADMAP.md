@@ -138,7 +138,7 @@ Plans:
 - [x] 06-02-PLAN.md — Testing Console: VoiceAgentTab + ChatbotSimTab + 3-tab page shell
 - [x] 06-03-PLAN.md — AnamAITab + standalone /demo page + delete dashboard demo stub
 - [x] 06-04-PLAN.md — Settings API (GET/PATCH) + SettingsForm + Settings page
-- [ ] 06-05-PLAN.md — Language polish sweep + full Phase 6 visual verification
+- [x] 06-05-PLAN.md — Language polish sweep + full Phase 6 visual verification
 **UI hint**: yes
 
 ### Phase 7: UAT Fixes, PDPA Audit & Final QA
@@ -151,7 +151,12 @@ Plans:
   3. All incoming webhooks (ElevenLabs, Meta WA) reject requests with invalid or missing secrets
   4. All calls and chats triggered from the Testing Console carry is_test=true and are excluded from analytics charts
   5. Admin MFA is enforced at Supabase Auth level and cannot be bypassed on the login flow
-**Plans**: [To be planned]
+**Plans**: 4 plans
+Plans:
+- [ ] 07-01-PLAN.md — PDPA IC audit script + compliance report (SEC-01)
+- [ ] 07-02-PLAN.md — Role-based RLS migration + [BLOCKING] schema push (SEC-02)
+- [ ] 07-03-PLAN.md — Webhook hardening verification + test data exclusion audit (SEC-03, SEC-04)
+- [ ] 07-04-PLAN.md — Admin TOTP MFA enrollment + challenge flow (SEC-05)
 
 ## Progress
 
@@ -163,7 +168,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 1. Scaffold, DB, Auth & Dashboard Shell | 9/9 | Complete | 2026-04-11 |
 | 2. Voice Webhook, Ticket System & Excel Export | 7/7 | Complete | 2026-04-11 |
 | 3. Kasih WhatsApp Chatbot | 8/8 | Complete   | 2026-04-11 |
-| 4. Core Dashboard Pages | 3/4 | In Progress|  |
+| 4. Core Dashboard Pages | 4/4 | Complete | 2026-04-11 |
 | 5. Intelligence & System Pages | 5/5 | Complete   | 2026-04-12 |
-| 6. Testing Console, AI Demo, Settings & Polish | 4/5 | In Progress|  |
-| 7. UAT Fixes, PDPA Audit & Final QA | 0/? | Not started | - |
+| 6. Testing Console, AI Demo, Settings & Polish | 5/5 | Complete | 2026-04-13 |
+| 7. UAT Fixes, PDPA Audit & Final QA | 0/4 | Not started | - |
