@@ -199,6 +199,14 @@ export const translations = {
   'action.export': { en: 'Export to Excel', bm: 'Eksport ke Excel' },
 
   // Beneficiaries
+  'beneficiaries.contacts': { en: 'Contacts', bm: 'Kenalan' },
+  'beneficiaries.search': { en: 'Search', bm: 'Carian' },
+  'beneficiaries.allContacts': { en: 'All Contacts', bm: 'Semua Kenalan' },
+  'beneficiaries.unknownCaller': { en: 'Unknown Caller', bm: 'Pemanggil Tidak Dikenali' },
+  'beneficiaries.lastContact': { en: 'Last Contact', bm: 'Hubungan Terkini' },
+  'beneficiaries.interactions': { en: 'Interactions', bm: 'Interaksi' },
+  'beneficiaries.noContacts': { en: 'No contacts yet. Contacts appear here once callers share their name.', bm: 'Tiada kenalan lagi. Kenalan muncul di sini setelah pemanggil berkongsi nama mereka.' },
+  'beneficiaries.channel': { en: 'Channel', bm: 'Saluran' },
   'beneficiaries.searchHeading': { en: 'Find a Beneficiary', bm: 'Cari Penerima Manfaat' },
   'beneficiaries.searchSubtext': { en: 'Search by WhatsApp number or name', bm: 'Cari mengikut nombor WA atau nama' },
   'beneficiaries.noResultsHeading': { en: 'No beneficiary found', bm: 'Tiada penerima manfaat ditemui' },
