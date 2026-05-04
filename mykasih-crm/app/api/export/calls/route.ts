@@ -35,14 +35,14 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams
     const from = searchParams.get('from') // YYYY-MM-DD
     const to = searchParams.get('to')     // YYYY-MM-DD
-    const includeTest = searchParams.get('include_test') === 'true'
+    const excludeTest = searchParams.get('exclude_test') === 'true'
 
     // ---- Query calls ----
     let callsQuery = supabase
       .from('calls')
       .select('*')
 
-    if (!includeTest) {
+    if (excludeTest) {
       callsQuery = callsQuery.eq('is_test', false)
     }
     if (from) {

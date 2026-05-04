@@ -38,18 +38,18 @@ export async function GET() {
       categoryCountsResult,
       recentResult,
     ] = await Promise.all([
-      supabase.from('calls').select('*', { count: 'exact', head: true }).eq('is_test', false).gte('timestamp', todayISO),
-      supabase.from('calls').select('*', { count: 'exact', head: true }).eq('is_test', false).eq('channel', 'voice').gte('timestamp', todayISO),
-      supabase.from('calls').select('*', { count: 'exact', head: true }).eq('is_test', false).eq('channel', 'chat').gte('timestamp', todayISO),
-      supabase.from('calls').select('*', { count: 'exact', head: true }).eq('is_test', false),
-      supabase.from('calls').select('*', { count: 'exact', head: true }).eq('is_test', false).eq('outcome', 'resolved'),
+      supabase.from('calls').select('*', { count: 'exact', head: true }).gte('timestamp', todayISO),
+      supabase.from('calls').select('*', { count: 'exact', head: true }).eq('channel', 'voice').gte('timestamp', todayISO),
+      supabase.from('calls').select('*', { count: 'exact', head: true }).eq('channel', 'chat').gte('timestamp', todayISO),
+      supabase.from('calls').select('*', { count: 'exact', head: true }),
+      supabase.from('calls').select('*', { count: 'exact', head: true }).eq('outcome', 'resolved'),
       supabase.from('tickets').select('*', { count: 'exact', head: true }).eq('status', 'open'),
       supabase.from('tickets').select('*', { count: 'exact', head: true }).eq('status', 'in_progress'),
-      supabase.from('calls').select('duration').eq('is_test', false).eq('channel', 'voice').not('duration', 'is', null),
-      supabase.from('calls').select('message_count').eq('is_test', false).eq('channel', 'chat').not('message_count', 'is', null),
-      supabase.from('calls').select('channel, timestamp').eq('is_test', false).gte('timestamp', sevenDaysAgo.toISOString()).order('timestamp', { ascending: true }),
-      supabase.from('calls').select('category').eq('is_test', false),
-      supabase.from('calls').select('id, channel, caller_name, category, outcome, timestamp, duration, message_count').eq('is_test', false).order('timestamp', { ascending: false }).limit(10),
+      supabase.from('calls').select('duration').eq('channel', 'voice').not('duration', 'is', null),
+      supabase.from('calls').select('message_count').eq('channel', 'chat').not('message_count', 'is', null),
+      supabase.from('calls').select('channel, timestamp').gte('timestamp', sevenDaysAgo.toISOString()).order('timestamp', { ascending: true }),
+      supabase.from('calls').select('category'),
+      supabase.from('calls').select('id, channel, caller_name, category, outcome, timestamp, duration, message_count').order('timestamp', { ascending: false }).limit(10),
     ])
 
     const todayTotal = todayTotalResult.count ?? 0

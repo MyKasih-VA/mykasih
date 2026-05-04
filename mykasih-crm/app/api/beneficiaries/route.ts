@@ -44,7 +44,6 @@ export async function GET(request: NextRequest) {
         .from('calls')
         .select('*')
         .or(`wa_number.ilike.%${q}%,caller_name.ilike.%${q}%`)
-        .eq('is_test', false)
         .order('timestamp', { ascending: false })
         .limit(100)
 
@@ -80,12 +79,11 @@ export async function GET(request: NextRequest) {
     const limit = Math.min(50, parseInt(searchParams.get('limit') ?? '20'))
     const offset = (page - 1) * limit
 
-    // Fetch all non-test calls needed for JS-side aggregation
+    // Fetch all calls needed for JS-side aggregation (including test calls)
     // Safety cap of 5000 rows — at 100 calls/day covers ~50 days (acceptable for POC)
     const { data: calls, error } = await supabase
       .from('calls')
       .select('id, channel, caller_name, wa_number, timestamp')
-      .eq('is_test', false)
       .order('timestamp', { ascending: false })
       .limit(5000)
 

@@ -66,11 +66,10 @@ export async function GET(request: NextRequest) {
 
     const { fromDate, toDate } = getDateRange(period, fromParam, toParam)
 
-    // Fetch all calls in range (non-test)
+    // Fetch all calls in range (including test calls)
     const { data: calls, error: callsError } = await supabase
       .from('calls')
       .select('id, channel, category, outcome, language, csat_rating, timestamp')
-      .eq('is_test', false)
       .gte('timestamp', fromDate)
       .lte('timestamp', toDate)
 

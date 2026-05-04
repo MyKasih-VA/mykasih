@@ -26,14 +26,14 @@ export async function GET(request: NextRequest) {
     const from = searchParams.get('from') // YYYY-MM-DD
     const to = searchParams.get('to')     // YYYY-MM-DD
     const search = searchParams.get('search') // searches caller_name, wa_number
-    const includeTest = searchParams.get('include_test') === 'true'
+    const excludeTest = searchParams.get('exclude_test') === 'true'
 
     let query = supabase
       .from('calls')
       .select('*', { count: 'exact' })
 
     // Apply filters
-    if (!includeTest) {
+    if (excludeTest) {
       query = query.eq('is_test', false)
     }
     if (channel) {
